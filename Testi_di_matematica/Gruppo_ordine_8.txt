@@ -1,0 +1,896 @@
+Si hanno 5 classi di isomorfismo per i gruppi di ordine 8:
+
+1) C8  gruppo ciclico di ordine 8 (simmetrie di un ottagono con chiralita'). Questo gruppo e' abeliano.
+2) Prodotto diretto di C4xC2 (gruppo ciclico di ordine 4 x gruppo ciclico di ordine 2). Essendo C4 e C2 abeliani, il gruppo e' abeliano.
+3) Prodotto diretto di C2xC2xC2 (Ricordiamo che C2xC2=K4 gruppo di Klein). Essendo K4 e C2 abeliani, il gruppo e' abeliano.
+4) Q gruppo dei quaternioni. Questo gruppo NON e' abeliano.
+5) D4 gruppo diedrale di ordine 4 corrispondente alle 8 simmetrie di un quadrato
+   (4 rotazioni + 2 riflessioni aventi per asse le 2 mediane + 2 riflessioni aventi per asse le 2 diagonali).
+   Questo gruppo NON e' abeliano.
+
+Infatti:
+
+Per il teorema di Lagrange i sottogruppi di un gruppo di ordine 8 devono avere un ordine che divide 8, percio' avranno 1,2,4,8 elementi.
+Quindi l'ordine di un elemento potra' essere solo 1,2,4,8.
+
+Ricordiamo che l'ordine di un gruppo e' il numero di elementi del gruppo.
+L'ordine di un elemento a e' il MINIMO valore di n tale che a^n=e (e elemento neutro)
+Poiche' {e,a,a^2,a^3,...,a^n-1} e' un sottogruppo del gruppo originale ed ha un numero di elementi pari all'ordine di a,
+quest'ultimo dovra' necessariamente essere un divisore di 8.
+Il sottogruppo in questione si dice generato dall'elemento a ed ha un numero di elementi pari all'ordine di a.
+Questo sottogruppo e' indicato come <a>. Un sottogruppo puo' avere piu' generatori ad es. <a,b> ; in tal caso un elemento
+generico del sottogruppo sara' del tipo a^n.b^m. E' chiaro che un sottogruppo che ha un solo generatore e' ciclico.
+Infatti per definizione un gruppo e' detto ciclico se esiste un suo elemento (detto generatore) in grado di generare
+(mediante potenze successive) tutti gli elementi del gruppo.
+Si dimostra facilmente che un gruppo ciclico e' abeliano.
+Infatti se a=g^m e b=g^n allora a.b = g^m.g^n = g^(m+n) = g^(n+m) = g^n.g^m = b.a CVD.
+Un gruppo abeliano invece non e' detto che sia ciclico.
+
+Ricordiamo il concetto di sottogruppo normale: dato il gruppo G il sottogruppo H e' un sottogruppo NORMALE di G
+e si scrive H<G se:
+
+1) H e' un sottogruppo di G (ovvero se il sostegno di H e' sottinsieme del sostegno di G
+			     e se presi 2 qualunque elementi di H anche a.(b^-1) appartiene ad H)
+2) Il coniugato di un qualunque elemento di G rispetto un qualunque elemento di H appartiene ad H
+   (Ricordiamo che il coniugato di b rispetto a e' a.b.(a^-1) quindi H e' normale se a.H.(a^-1)=H
+    cioe' se a.H=H.a per qualunque a appartenente a G, cioe' se il coset destro  di a rispetto H e' uguale
+    al coset sinistro di a rispetto ad H per un qualunque elemento a di G)
+
+In un gruppo abeliano tutti i sottogruppi sono normali.
+
+   Ricordiamo che se H<G allora e' possibile fare il quoziente G:H ed esso e' un gruppo di Ord(G):Ord(H) elementi
+   dove l'elemento neutro corrisponde ad H e ogni altro elemento corrisponde ad un coset.
+   Infatti la relazione di coniugo e' una relazione di equivalenza e questo induce in G una partizione i cui elementi
+   saranno H ed i vari coset che saranno quindi disgiunti.
+   Se F = G:H (H sottogruppo normale di G) allora anche H = G:F (cioe' anche F e'sottogruppo normale di G)
+   Allora F x H e' isomorfo a H x F e sono entrambi isomorfi a G. Il segno x indica il prodotto diretto dei 2 gruppi:
+
+   Dati i 2 gruppi G1 e G2 il gruppo G1 x G2 ha per elementi le coppie (g1,g2) dove il primo elemento appartiene a G1
+   e il secondo elemento appartiene a G2. L' operazione in G1 x G2 e' definita come :
+   (g11,g12) . (g21,g22) = (g11.g21,g12.g22) L'elemento neutro e' (e1,e2) e (g1,g2)^-1 = (g1^-1,g2^-1)
+
+E' chiaro che un gruppo G ha sempre almeno 2 sottogruppi normali : {e} e G stesso (G:{e}=G e G:G={e}) detti sottogruppi triviali.
+
+Un gruppo che ha come sottogruppi normali SOLO quelli triviali e' detto GRUPPO SEMPLICE.
+
+Un gruppo di ordine pari ad un numero primo ha molte proprieta':
+
+1) E' l'unico gruppo (a meno di isomorfismi) di quell'ordine
+2) E' un gruppo semplice (per il teorema di Lagrange non avendo l'ordine del gruppo nessun divisore oltre 1 e se' stesso)
+3) E' un gruppo ciclico ed ogni elemento diverso dall'elemento neutro e' generatore.
+   Infatti l'ordine di un elemento deve dividere l'ordine del gruppo.
+   quindi l'ordine di un elemento non potra' che essere 1 (e' l'ordine dell'elemento neutro che genera {e} di un solo elemento)
+   e l'ordine dell'intero gruppo (e in tal caso l'elemento genera l'intero gruppo)
+4) Essenfo ciclico e' anche abeliano
+
+RITORNIAMO A BOMBA:
+
+I sottogruppi di un gruppo di ordine 8 potranno avere solo 1,2,4,8 elementi.
+L'ordine di un elemento potra' essere solo 1,2,4,8.
+
+1) Supponiamo di avere un elemento di ordine 8.
+Allora per definizione il gruppo sara' ciclico. ed essendo ciclico sara' abeliano.
+Viene indicato come C8.
+Esso sara' isomorfo a Z8. Esso ha come elementi gli interi 0,1,2,3,4,5,6,7 e l'operazione e' l'addizione modulo 8.
+Allora 0 e' l'elemento neutro. Gli elementi generatori sono 1,3,5,7 (1 piu' i coprimi con 8)
+Infatti sommando ripetutamente 1,3,5,7 ho:
+1+1=2 1+1+1=3 1+1+1+1=4 1+1+1+1+1=5 1+1+1+1+1+1=6 1+1+1+1+1+1+1=7 1+1+1+1+1+1+1+1=0 1+1+1+1+1+1+1+1+1=1
+3+3=6 3+3+3=1 3+3+3+3=4 3+3+3+3+3=7 3+3+3+3+3+3=2 3+3+3+3+3+3+3=5 3+3+3+3+3+3+3+3=0 3+3+3+3+3+3+3+3+3=3
+5+5=2 5+5+5=7 5+5+5+5=4 5+5+5+5+5=1 5+5+5+5+5+5=6 5+5+5+5+5+5+5=3 5+5+5+5+5+5+5+5=0 5+5+5+5+5+5+5+5+5=5
+7+7=6 7+7+7=5 7+7+7+7=4 7+7+7+7+7=3 7+7+7+7+7+7=2 7+7+7+7+7+7+7=1 7+7+7+7+7+7+7+7=0 7+7+7+7+7+7+7+7+7=7
+
+Come si vede 1,3,5,7 generano (in ordine diverso) tutti gli 8 elementi del gruppo. Hanno percio' ordine 8.
+
+Invece 2,6 hanno ordine 4:
+Infatti sommando ripetutamente 2,6 ho:
+2+2=4 2+2+2=6 2+2+2+2=0 2+2+2+2+2=2
+6+6=4 6+6+6=2 6+6+6+6=0 6+6+6+6+6=6
+
+Come si vede 2,6 generano un sottogruppo {0,2,4,6} di 8/2=4 elementi
+
+4 invece ha ordine 2:
+Infatti sommando ripetutamente 4 ho:
+4+4=0 0+4=4
+
+Come si vede 4 genera un sottogruppo {0,4} di 8/4=2 elementi
+
+Ricapitolando:
+1,3,5,7	hanno ordine 8
+2,6     hanno ordine 4
+4       ha    ordine 2
+
+Ricordiamo che il gruppo ciclico C8 e' isomorfo alle simmetrie senza riflessione di un ottagono regolare piano.
+Qui si avranno 8 simmetrie corrispondenti alle 8 rotazioni successive (orarie o antiorarie)
+
+Quindi ricapitolando C8 e' ciclico,abeliano ma non e' semplice. infatti gli elementi 2,6 generano un sottogruppo di 4 elementi
+e 4 genera un sottogruppo di 2 elementi. e poiche' il gruppo e' abeliano questi sottogruppi sono sicuramente normali.
+
+Quindi G = < a, a^2, a^3, a^4, a^5, a^6, a^7 : a^8 = e >
+
+
+Adesso supponiamo di non avere nel gruppo nessun elemento di ordine 8. Questi gruppi percio' non saranno ciclici.
+Questo significa che i possibili ordini degli elementi diversi da quello neutro saranno 2 o 4.
+
+Vediamo i vari casi:
+
+2) Tutti gli elementi diversi da quello neutro hanno ordine 2.
+
+In tal caso per ogni elemento a diverso da quello neutro sara': a.a=e
+
+Allora (a.b).(a.b)=e ==> (a^-1.a).b.a.b=a^-1 ==> b.a.b=a^-1 ==> b.a.(b.b^-1)=a^-1.b^-1 ==> b.a=a^-1.b^-1 ==> b.a = a.b
+
+Quindi questo gruppo e' abeliano (pur non essendo ciclico)
+
+Adesso supponiamo di scegliere 2 elementi diversi da quello neutro a e b e scegliamo un terzo elemento c diverso da a,b,a.b
+(Ricordiamo che a.b non potra' essere ne' a ne' b perche' ad es. se a.b=a (e quindi b.a=a) allora b dovrebbe essere l'elemento neutro)
+
+Consideriamo l'insieme {e,a,b,a.b,c} di 5 elementi diversi.
+Adesso consideriamo {e,a,b,a.b,c,a.c,b.c,a.b.c}
+Si verifica facilmente che i 3 elementi aggiunti (a.c,b.c,a.b.c) ai 5 gia' presenti (e,a,b,a.b,c) sono tutti diversi tra loro.
+
+Infatti a.c non puo' essere e poiche' sarebbe c=a cosa non vera; a.c non puo' essere a poiche' sarebbe c=e cosa non vera;
+a.c non puo' essere b poiche' altrimenti a.b=a.(a.c)=c cosa non vera; a.c non puo' essere c poiche sarebbe a=e;
+a.c non puo' essere a.b poiche' se a.c=a.b si dedurrebbe b=c cosa non vera.
+
+Infatti b.c non puo' essere e poiche' sarebbe b=c cosa non vera; b.c non puo' essere a poiche' altrimenti a.b=(b.c).b=c cosa non vera;
+b.c non puo' essere b poiche' sarebbe c=e; b.c non puo' essere c poiche sarebbe b=e;
+b.c non puo' essere a.b poiche' se b.c=a.b si dedurrebbe c=a cosa non vera.
+
+Infatti a.b.c non puo' essere e poiche' sarebbe ad es. a=b.c cosa non vera (vedi sopra) ;
+a.b.c non puo' essere a poiche' altrimenti sarebbe b.c=e cosa non vera (vedi sopra) ;
+a.b.c non puo' essere b poiche' altrimenti sarebbe a.c=e; cosa non vera (vedi sopra) ;
+a.b.c non puo' essere c poiche' altrimenti sarebbe a.b=e; cosa non vera (vedi sopra) ;
+a.b.c non puo' essere a.b poiche' si dedurrebbe c=e cosa non vera.
+
+Quindi G = < a, b, c: a^2=e, b^2=e, c^2=e, a.b=b.a, a.c=c.a, b.c=c.b > e' il nostro secondo tipo di gruppo di ordine 8.
+E' abeliano,non ciclico e ogni elemento escluso quello neutro ha ordine 2
+
+Si puo' verificare che questo gruppo e' isomorfo a K4 x C2 (prodotto diretto del gruppo di Klein con il gruppo ciclico di ordine 2)
+ed essendo a sua volta K4 isomorfo a C2 x C2 si avra' che il nostro gruppo e' isomorfo a C2 x C2 x C2.
+
+3) C'e' un elemento di ordine 4.
+
+Allora H = { e, a, a^2, a^3 } e' un sottogruppo di G.
+
+Supponiamo b appartenga a G ma non ad H allora b.H e H.b saranno insiemi disgiunti da H.
+Poiche Ord(G:H) = 8/4 = 2  H avra' un solo coset (costituito dagli altri 4 elementi non appartenenti ad H)
+e quindi sara' per forza b.H=H.b e quindi H e' sicuramente un sottogruppo normale di G.
+
+Quindi potremo scrivere:
+
+G = { e, a, a^2, a^3, b, b.a, b.a^2, b.a^3} quindi G e' l'unione di H e di b.H ciascuno di 4 elementi.
+H e' sottogruppo normale. combinando tra loro 2 elementi di H rimango in H.
+Combinando un elemento esterno ad H (in b.H) con un qualunque elemento di G otterro' un elemento esterno ad H cioe' in b.H
+Infatti H.H=H (b.H).H=b.(H.H)=b.H (b.H).(b.H)=b.(H.H).b=b.H.b=b.H
+
+Consideriamo ora di avere i 2 elementi a e b di cui sopra: il primo generatore di H e il secondo esterno ad H.
+Ora poiche' b non appartiene ad H anche a.b non appartiene ad H e b <> a.b (poiche' per cancellazione sarebbe a=e cosa non vera)
+
+Quindi sara' per esclusione a.b = b.a oppure a.b = b.a^2 oppure a.b = b.a^3
+
+Supponiamo che esista un elemento b di ordine 2
+
+Allora se a.b = b.a^2 ==> a.b.b = b.a^2.b ==> b.a^2.b = a   oppure
+          a.b = b.a^2 ==> b.a^2.b = b.a.a.b = b.a.b.a^2 = b.b.a^2.a^2 = b^2.a^4 = e.e = e
+da cui si deduce a=e che non e' vero.
+
+Percio' se esiste un elemento di ordine 2 non puo' essere a.b = b.a^2 quindi in tal caso puo' essere a.b = b.a o a.b = b.a^3
+
+Vediamo il primo caso:
+
+supponiamo a.b=b.a   In tal caso G e' abeliano ed ha percio' tutti sottogruppi normali.
+
+Chiamiamo con K il sottogruppo normale generato da b:  K = < b >
+
+Allora Ord(K)=2 Ord(H)=4 e H e K per quanto visto prima hanno in comune solo l'elemento neutro e.
+
+Allora Ord(G)=8=(Ord(H)xOrd(K))/Ord(H intersezione K)=Ord(HxK) da cui HxK e' isomorfo con G.
+
+Percio' ricapitolando in tal caso:
+
+G = < a, b : a^4 = b^2 = e, a.b = b.a^3  > ed e' non ciclico e abeliano e non semplice
+
+G e' isomorfo con C5 x C2   e' abeliano e non ciclico
+
+4) Se invece a.b = b.a^3
+
+Avro':
+
+G = < a, b : a^4 = b^2 = e, a.b = b.a^3  > 
+
+ed e' isomorfo al gruppo diedrale di ordine D4 che ricordiamolo
+e' costituito dalle simmetrie di un poligono regolare di 4 lati (cioe' un quadrato) nel piano.
+Le 8 simmetrie sono le 4 di rotazione,
+le 2 di riflessione avente come asse le 2 mediane e le 2 riflessioni avente come asse le 2 diagonali.
+
+D4 e' non e' ne' ciclico ne' abeliano ne' semplice
+
+5) Se invece tutti gli elementi esterni ad H hanno ordine 4 (come a)
+
+Allora b^2 ha ordine 2 quindi b^2 appartiene ad H ma in H solo a^2 ha ordine 2, percio' dovra' essere b^2 = a^2
+
+Ora dimostriamo che il gruppo non puo' essere abeliano.
+
+Infatti a.b = b.a ==> (a^3.b)^2 = a^3.b.a^3.b = a^6.b^4 = a^2.b^2 = a^2.a^2 = a^4 = e
+da cui si deduce che a^3.b avrebbe ordine 2 da cui a^3.b dovrebbe appartenere ad H ma cio' non e' possibile.
+
+Quindi a.b <> b.a ma e' anche a.b <> b.a^2 infatti: se si ha: a.b = b.a^2 = b.b^2 = b^3 ==> a = b^2
+ma cio' non e' possibile poiche' l'ordine di a e' 4 e quello di b^2 e' 2.
+
+Quindi poiche' a.b <> b.a e a.b <> b.a^2 dovra' essere a.b = b.a^3   da cui:
+
+G = < a, b : a^4 = b^4 = e, a^2 = b^2, a.b = b.a^3 >
+
+Questo gruppo detto dei Quaternioni viene indicato come Q8 e non e' ne' ciclico ne' abeliano ne' semplice.
+
+
+Vediamo ora rappresentazioni di questi 5 gruppi mediante matrici 2x2 a elementi reali.
+
+Sia dato uno spazio vettoriale V di dimensione finita n su un campo K;
+
+Consideriamo gli endomorfismi f:V->V. Poiche' V e' isomorfo a K^n, la funzione f
+realizza il prodotto tra un vettore colonna di n elementi di K e una matrice nxn di elementi in K
+Quindi gli endomorfismi sono in corrispondenza biunivoca con le matrici nxn di elementi di K
+
+Ora restringiamo il campo agli automorfismi in V. Questo significa che bisognera' considerare come f solo
+gli isomorfismi cioe' le f dotate di inversa. Questo corrisponde a considerare solo le matrici nxn in K invertibili
+cioe' aventi determinante diverso da zero.
+Ora noi sappiamo che gli automorfismi formano un gruppo con l'operazione di composizione di funzione.
+Poiche' la composizione di 2 funzioni corrisponde al prodotto matriciale,
+avremo un gruppo costituito dalle matrici nxn in K invertibili avendo come operazione il prodotto matriciale.
+Questo gruppo non e' abeliano (la composizione di funzioni non lo e' come non lo e' il prodotto matriciale).
+
+Questo gruppo lo si indica con GL(n,K) ed e' il gruppo generale lineare delle matrici nxn invertibili con elementi in K
+
+Supponiamo sia n=2 e K=R (campo dei numeri reali)
+
+Allora qui i vettori sono i punti del piano (RxR) e l'automorfismo corrisponde ad una trasformazione
+del punto (vettore colonna di 2 numeri reali) che si ottiene premoltiplicando per una matrice 2x2 invertibile di numeri reali.
+
+Questa trasformazione e' detta geometricamente trasformazione generale lineare del piano.
+
+Supponiamo di avere 3 punti allineati con l'origine.
+
+Potremo scrivere: x = [a,b] y = ry.x z = rz.x (dove il . e' l'operazione di moltiplicazione di uno scalare per un vettore)
+
+Applichiamo ora la trasformazione lineare:
+
+xt = [[r11,r12],[r21,r22]] * [a,b] = [r11*a+r12*b,r12*a+r22*b]
+yt = [[r11,r12],[r21,r22]] * [ry*a,ry*b] = [r11*ry*a+r12*ry*b,r12*ry*a+r22*ry*b] = ry.[r11*a+r12*b,r12*a+r22*b]= ry.xt
+zt = [[r11,r12],[r21,r22]] * [rz*a,rz*b] = [r11*rz*a+r12*rz*b,r12*rz*a+r22*rz*b] = rz.[r11*a+r12*b,r12*a+r22*b]= rz.xt
+
+quindi anche i punti trasformati sono allineati con l'origine.
+
+Quindi se K=R^2 o K=R^3 si ha un'interpretazione geometrica di GL(2,R) o GL(3,R) come le trasformazioni
+che mantengono l'allineamento dei punti con l'origine.
+
+
+Azione di un gruppo su un insieme.
+
+L'azione puo' essere a sinistra o a destra (potrebbero anche coincidere)
+
+Noi descriviamo quella a sinistra.
+
+Sia G un gruppo e X un insieme.
+Si dice che G agisce a sinistra su un insieme X se esiste una funzione f : G x X --> X
+per cui ad ogni elemento di G e' associata una funzione di X in se' stesso.
+
+Per essere un'azione devono valere le seguenti proprieta':
+
+1) Compatibilita': g1.(g2.x) = (g1.g2).x per ogni coppia g1,g2 di elementi del gruppo e per ogni elemento x dell'insieme X
+2) 1.x = x per ogni x appartenente a X
+
+Ora si vede facilmente che l'insieme costituito dalle funzioni f (una per ogni elemento di G) costituisce un gruppo con
+l'operazione di composizione di funzione.
+Se G e' abeliano anche questo gruppo sara' abeliano.
+
+Infatti: Chiamiamo f_g1(x) la funzione da X in X corrispondente all'elemento g1 di G.
+
+1) f_g2 . f_g1 = f_g2(f_g1(x)) = g2 . (g1 . x) = (g2 . g1)(x) = f_g2g1(x) = f_g2g1    l'operazione e' interna.
+2) f_1(x) e' l'elemento neutro. Infatti f_g . f_1 = f_g(f_1(x)) = g . (1.x) = (g . 1) . x = g . x = f_g
+                                        f_1 . f_g = f_1(f_g(x)) = 1 . (g.x) = (1 . g) . x = g . x = f_g
+3) dato f_g(x) l'inversa e' f_(g^-1)(x); infatti:
+   f_(g^-1) . f_g = f_(g^-1)((f_g)(x)) = (g^-1) . (g . x) = ((g^-1) . g) . x = 1 . x = f_1(x) da cui f_(g^-1) . f_g = f_1
+e
+   f_g . f_(g^-1) = f_g((f_g(^-1))(x)) = g . ((g^-1) . x) = (g . (g^-1)) . x = 1 . x = f_1(x) da cui f_g . f_(g^-1) = f_1
+
+Quindi f_g(x) con g elemento di G e operazione composizione di funzione e' un gruppo.
+
+g . g1 = g . g2 ==> g1 = g2
+(g . g1) . x = (g . g2) . x ==> g1 . x = g2 . x
+g . (g1 . x) = g . (g2 . x) ==> g1 . x = g2 . x
+g . y1 = g . y2 ==> y1 = y2				avendo posto   y1 = g1 . x   e   y2 = g2 . x
+f_g(y1) = f_g(y2) ==> y1 = y2
+y1 <> y2 ==> f_g(y1) <> f_g(y2)
+
+Quindi la funzione f_g(x) e' iniettiva. Questo significa l'azione del gruppo G (tramite la f_g) induce una permutazione in X
+Quindi ad ogni elemento di G corrisponde una permutazione in X. Ma una permutazione e' un elemento del gruppo simmetrico di
+su un numero di simboli pari al numero degli elementi di X.
+
+Per quanto detto prima l'insieme di queste permutazioni e' un sottogruppo del gruppo simmetrico e sara' abeliano se lo e' G.
+La funzione F : G --> Bij(X) e' un omorfismo di gruppo. Infatti:
+
+F(g1 . g2) = f_g1g2(x) = (g1 . g2) . x = g1 . (g2 . x) = f_g1(f_g2(x)) = F(g1) . F(g2)
+F(g) = F(1 . g) = F(1) . F(g) quindi F(1) deve essere la permutazione identica
+
+Se F e' iniettiva l'azione del gruppo e' detta fedele. In tal caso c'e' isomorfismo tra G e un sottogruppo di Sym(X)
+In tal caso c'e' un embedding di G nel gruppo simmetrico a n simboli dove n e' il numero dei simboli di X
+
+E' possibile che un gruppo agisca su se stesso. In tal caso X coincide con il sostegno di G.
+Esempi f_g(x) = g.x
+       f_g(x) = g^-1 . x . g (coniugazione) (e' significativa solo se G non e' abeliano)
+
+Esiste anche il concetto di azione di un gruppo G su un gruppo H.
+In tal caso viene richiesto che le f_g siano le biiezioni che mantengono la struttura di H (cioe' gli automorfismi di H)
+Percio' in tal caso l'omomorfismo e' tra G e Aut(H)
+
+Ora consideriamo nello spazio vettoriale R^2 il gruppo abeliano (V,+)
+e consideriamo la seguente azione sull'insieme R^2 (il piano reale) :
+
+[t1,t2] . [x,y] = [x+t1,y+t2]
+
+Verifichiamo che sia un'azione:
+
+[t1,t2] . ([t3,t4] . [x,y]) = [t1,t2] . [x+t3,y+t4] = [(x+t3)+t1,(y+t4)+t2] =
+[x+(t3+t1),y+(t4+t2)] = [x+(t1+t3),y+(t2+t4)] = [t1+t3,t2+t4] . [x,y] = ([t1,t2] + [t3.t4]) . [x,y]
+
+[0,0] . [x,y] = [x+0,y+0] = [x,y]
+
+Quindi per ogni [t1,t2] avro' una funzione f:R^2-->R^2 e l'insieme di queste funzioni con l'operazione di composizione
+costituisce un gruppo abeliano. Le funzioni sono dette traslazioni e il gruppo abeliano e' il gruppo delle traslazioni.
+E' detto Tn dove n e' la dimensione.
+
+Se facciamo agire il gruppo GL(2,R) a sinistra sull'insieme R^2 otteniamo la trasformazione generale lineare del piano vista sopra.
+
+La differenza sostanziale e' che la traslazione NON e' un morfismo di (R^2,+)
+Infatti e' una funzione biettiva in R^2 ma non mantiene l'operazione del gruppo:
+[ax,ay] + [bx,by] = [ax + bx,ay + by] mentre data la traslazione [tx,ty] si ha:
+T([ax,ay]+T([bx,by]) = [ax+tx,ay+ty] + [bx+tx,by+ty] = [ax+bx+2*tx,ay+by+2*ty] <>
+T([ax,ay])+T([bx,by]) = T([ax+bx,ay+by]) = [ax+bx+tx,ay+by+ty].
+
+Invece le trasformazioni generali lineari SONO un isomorfismo di (R^2,+):
+Infatti e' una funzione biettiva in R^2 che mantiene l'operazione del gruppo:
+[ax,ay] + [bx,by] = [ax + bx,ay + by] mentre data la trasformazione generale lineare [[a11,a12],[a21,a22]] si ha:
+GL([ax,ay]+GL([bx,by]) = [[a11,a12],[a21,a22]] * [ax,ay] +  [[a11,a12],[a21,a22]] * [bx,by] = (per la proprieta' distributiva)
+[[a11,a12],[a21,a22]] * ([ax,ay] + [bx,by]) = [[a11,a12],[a21,a22]] * [ax+bx,ay+by] = GL([ax,ay]+[bx,by])
+
+Quindi le traslazioni costituiscono gruppo in quanto sono comunque funzioni biettive del piano.
+Mentre le trasformazioni generali lineari costituiscono gruppo in quanto automorfismi del gruppo (R^2,+)
+
+Componendo una trasformazione generale con una traslazione si ha una funzione biettiva del piano (e quindi una automorfismo di R^2)
+che e' detta trasformazione affine che e' quindi anch'essa un'automorfismo del piano.
+
+Questa puo' essere vista come un prodotto semidiretto T(2,R)|xGL(2,R):
+
+Sappiamo che GL(2,R) e' l'insieme delle matrici 2x2 invertibili a elementi in R con l'operazione di prodotto
+mentre T(2,R) e' l'insieme delle matrici 2x1 a elementi in R con l'operazione di somma.
+
+Scegliamo GL(2,R) per effettuare un'azione sinistra su T(2,R).
+
+Poniamo X=[x,y] T=[tx,ty] T1=[tx1,ty1] A=[[a11,a12][a22,a21]] B=[[b11,b12][b22,b21]]
+
+L'azione su T e' la funzione (che dipende a A) f(T)=A.T=[a11.tx+a12.ty,a22.tx+a22.ty]
+Vediamo se e' un'azione sinistra:
+
+I.T=T (per le proprieta' della matrice identita')
+(A.B).T = A.(B.T)  per la proprieta' associativa del prodotto matriciale
+
+Allora il nostro gruppo T|xGL avra' come elementi le coppie ([[a11,a12][a22,a21]],[tx,ty])
+
+L'elemento neutro sara' ([[1,0][0,1]],[0,0])
+
+Allora dato [x,y] in R^2 la trasformazione affine A.X+T (composizione di T con GL)
+
+Componendo 2 trasformazioni affini: A.(B.X+T1)+T = (A.B).X+(A.T1+T)
+
+Alla trasformazione A.X+T facciamo corrispondere l'elemento (T,A) del gruppo T(2,R)|xGL(2,R)
+
+Dalla definizione di prodotto semi-diretto H|xK (h1,k1).(h2,k2) = (h1.f(k1,h2),g(k1,h2).k2)
+Qui H=T K=A
+    h1=T
+    k1=A
+    h2=T1
+    k2=B
+    (h1,k1)     = (T,A)
+    (h2,k2)     = (T1,B)
+    f(k1,h2)    = f(A,T1) = A.T1
+    g(k1,h2)    = g(A,T1) = A
+    h1.f(k1,h2) = T+A.T1
+    g(k1,h2).k2 = A.B
+
+Percio' (T,A).(T1,B) = (T+A.T1,A.B) = (A.T1+T,A.B) che corriponde alla trasformazione (A.B).X+(A.T1+T) che e' proprio la
+composizione di A.X+T e B.X+T1 Infatti A.(B.X+T1)+T=(A.B).X+(A.T1+T))
+
+Cerchiamo ora Z(GL(2,R)) cioe' il centro del gruppo GL(2,R).
+
+Sara' costituito dalle matrici invertibili 2x2 ad elementi in R che commutano con qualunque altra matrice.
+Si vede subito che sono quelle che realizzano una trasformazione scalare.
+Queste sono matrici diagonali con gli elementi sulla diagonale tutti uguali tra loro (e diversi da zero ovviamente).
+Quindi sono della forma l.I dove I e' la matrice identita' di dimensione 2x2 ed l e' numero reale.
+Infatti:
+[[l,0][0,l].[[a,b][c,d]] = [[l.a,l.b][l.c,l.d]] = (l.I).A=l.(I.A)=l.A
+[[a,b][c,d].[[l,0][0,l]] = [[a.l,b.l][c.l,d.l]] = A.(l.I)=(l.I).A=l.A
+
+Il gruppo quoziente GL(2,R):Z(GL(2,R)) e' detto gruppo proiettivo generale lineare
+e si indica con PGL(2,R)
+
+Questo gruppo avra' elementi del tipo l.A con elemento neutro del tipo l.I
+
+Quindi in generale:
+
+PGL(n,K)=GL(n,K)/Z(GL(n,K) 		gruppo proiettivo generale lineare
+PSL(n,K)=SL(n,K)/Z(SL(n,K) 		gruppo proiettivo speciale lineare
+
+
+Consideriamo di nuovo il gruppo GL(2,R)
+
+Ora consideriamo solo le matrici ortogonali.
+Queste sono matrici quadrate che soddisfano la proprieta' A*Trasp(A) = Trasp(A)*A = I dove I e' la matrice identita' 2x2
+mentre Trasp(A) e' la trasposta di A, cioe' la matrice che si ottiene scambiando la generica riga i con la colonna i (o viceversa).
+Quindi in pratica per queste matrici la matrice inversa coincide con la matrice trasposta.
+
+E' facile verificare che queste matrici hanno necessariamente determinante uguale a +1 o -1 .
+
+Infatti: A*Trasp(A)=I ==> det(A*Trasp(A)) = det(I) ==> det(A)*det(Trasp(A)) = 1 ==> det(A)*det(A) = 1
+(poiche' una matrice e la sua trasposta hanno lo stesso determinante) ==> (det(A))^2=1 ==> det(A) = +/- 1
+
+NOTA: l'implicazione e' solo in un verso: la condizione di avere determinante pari a +1 o -1 e' condizione necessaria
+ma non sufficiente all'ortogonalita'. Ci sono controesempi di matrici aventi determinante +1 o -1 che NON sono ortogonali.
+Quindi l'insieme delle matrici ortogonali e' sottinsieme di quello delle matrici a determinante pari a +1 o -1 che a sua volta
+e' sottinsieme dell'insieme delle matrici a determinante non nullo.
+
+Moltiplicando tra loro 2 matrici ortogonali si ottiene ancora una matrice ortogonale:
+
+Infatti:	ricordiamo che Trasp(A*B)=Trasp(B)*Trasp(A) da cui
+		(A*B)*Trasp(A*B)=(A*B)*(Trasp(B)*Trasp(A))=A*(B*Trasp(B))*Trasp(A)=A*I*Trasp(A)=A*Trasp(A)=I
+
+Se A e' ortogonale la matrice inversa e' anch'essa ortogonale. Infatti ricordiamo che Trasp(A^-1)=Trasp(A)^-1 (facile da dimostrare).
+Allora se A e' ortogonale A*Trasp(A)=I ==> (A*Trasp(A))^-1=I^-1 ==> Trasp(A)^-1 * A^-1 = I ==> Trasp(A^-1)*A^-1=I
+
+Anche I e' ortogonale in quanto I*Trasp(I)=I (essendo Trasp(I)=I).
+
+Insomma abbiamo a che fare con un sottogruppo di GL(2,R) che sara' indicato con O(2,R) ed e' detto gruppo ortogonale.
+
+Data la proprieta' della matrice ortogonale A*Trasp(A)=I si ha che:
+
+In generale (A*B)[i,j]=(Somma(k=1,n) (a[i,k]*b[k,j])) ma qui B e' la trasposta di A percio' b[k,j]=a[j,k] da cui:
+
+(A*Trasp(A))[i,j]=(Somma(k=1,n) (a[i,k]*a[j,k]))=I[i,j]=  1 se i=j      0 se i<>j
+
+ovvero chiamando con A[i] il vettore di n elementi dato dalla RIGA i della matrice A:
+
+per i=j   <A[i],A[j]> = 1    e per i<>j    <A[i],A[j]> = 0 dove <a,b> e' il dot product (prodotto scalare o interno)
+										dei 2 vettori RIGA a e b
+
+Mentre per la proprieta' della matrice ortogonale Trasp(A)*A=I si ricava analogamente:
+
+chiamando con A[i] il vettore di n elementi dato dalla COLONNA i della matrice A:
+
+per i=j   <A[i],A[j]> = 1    e per i<>j    <A[i],A[j]> = 0 dove <a,b> e' il dot product (prodotto scalare o interno)
+										dei 2 vettori COLONNA a e b
+
+Quindi l'insieme dei vettori riga (colonna) costituisce una base ORTONORMALE di R^n.
+Infatti i vari vettori della base sono mutuamente ortogonali (avendo dot product nullo) e hanno tutti norma unitaria
+(essendo la norma la radice quadrata del prodotto interno di un vettore con se stesso)
+
+Ora si puo' dimostrare che la trasformazione data dal gruppo ortogonale conserva il prodotto scalare di due vettori.
+Cioe' <[v1x,v1y],[v2x,v2y]> = <[[o11,o12][o21,o22]]*[v1x,v1y],[[o11,o12][o21,o22]]*[v2x,v2y]> dove [[o11,o12][o21,o22]] e' ortogonale.
+
+Ma il prodotto scalare di 2 vettori geometricamente dipende dalla lunghezza dei 2 vettori e dall' angolo compreso tra essi.
+
+Questo significa che la trasformazione ortogonale mantiene costante la lunghezza dei segmenti e l'angolazione reciproca.
+Questo corrisponde ad una rotazione o riflessione o roto-riflessione di una figura nel piano, cioe' ad una isometria del piano.
+Ovvero questa trasformazione non altera le forme. La forma viene solo ruotata, riflessa o roto-riflessa.
+La rotazione corrisponde alle matrici ortogonali a determinante + 1
+(che formano l'ulteriore sottogruppo SO(2,R) detto gruppo ortogonale speciale)
+
+Le riflessioni o le roto-riflessioni a matrici ortogonali a determinante -1.
+
+Le riflessioni o le roto-riflessioni cambiano il verso delle angolazioni (da orarie ad antiorarie o viceversa)
+
+Si verifica che anche la traslazione mantiene costante il prodotto interno dei vettori:
+
+Cioe' <[v1x,v1y],[v2x,v2y]> = <[v1x,v1y]+[tx,ty],[v2x,v2y]+[tx,ty]> = <[v1x+tx,v1y+ty],[v2x+tx,v2y+ty]>
+
+Quindi anche la traslazione e' un isometria (il verso degli angoli viene mantenuto)
+
+
+Torniamo di nuovo al gruppo GL(2,R)
+Ora consideriamo solo le matrici aventi determinante pari a +1
+
+Costituisce un sottogruppo in quanto:
+
+det(A*B)=det(A)*det(B) percio' l'operazione e' interna.
+
+La matrice identita' ha determinante = 1
+
+E' det(A^-1)=1/det(A)	percio' anche l'inversione e' operazione interna
+
+Questo sottogruppo viene indicato come SL(2,R) detto gruppo speciale lineare.
+
+
+
+
+La coniugazione gode di interessanti proprieta':
+
+indichiamo a^-1.b.a come b^a (impropriamente)
+
+Allora (b1.b2)^a = a^-1.(b1.b2).a = a^-1.b1.(a.a^-1).b2.a = (a^-1.b1.a).(a^-1.b2.a) = b1^a . b2^a
+       ((b^a1)^a2) = a2^-1.(a1^-1.b.a1).a2 = (a2^-1.a1^-1).b.(a1.a2) = (a1.a2)^-1.b.(a1.a2) = b^(a1.a2)
+che sono 2 proprieta' son simili a quelle degli esponenziali. Da cui l'impropria notazione.
+
+Notare la prima uguaglianza. Se consideriamo fy:G->G fy(x)=y^-1.x.y si ha: fy(a.b)=fy(a).fy(b)
+quindi la coniugazione risulta essere un endomorfismo e ce ne sara' uno per ogni elemento del gruppo G.
+Anzi poiche' ora vedremo che la coniugazione e' funzione biettiva, questi saranno automorfismi
+e sono detti automorfismi interni e sono in numero pari a Ord(G). Si indicano con Inn(G) che sara' un sottogruppo normale
+di Aut(G). IL quoziente Aut(G)/Inn(G) = Out(G) costituisce l'insieme degli automorfismi esterni.
+Chiaramente se G e' abeliano poiche' a^-1.b.a = a^-1.a.b = b tutte le coniugazioni degenerano nell'automorfismo identita'.
+In tal caso Inn(G)=In (n ordine del gruppo) e quindi anche Aut(G)=Out(G).
+Gli automorfismi interni sono detti cosi' per 2 motivi:
+1) Sono l'espressione del coniugo che e' un'azione del gruppo su se' stesso
+2) Se un gruppo G e' sottogruppo di un altro gruppo H e' naturale estendere Inn(G) all'intero gruppo H
+   (cosa non possibile per gli automorfismi di H non interni)
+
+a^-1.b1.a=a^-1.b2.a ==> a.(a^-1.b1.a).a^-1=a.(a^-1.b2.a).a^-1 ==> (a.a^-1).b1.(a.a^-1)=(a.a^-1).b2.(a.a^-1) ==> b1=b2
+quindi la coniugazione e' iniettiva.
+a^-1.x.a = b ==> a.(a^-1.x.a).a^-1 = a.b.a^-1 ==> (a.a^-1).x.(a.a^-1) = a.b.a^-1 ==> x = a.b.a^-1
+quindi la coniugazione e' suriettiva.
+Quindi la coniugazione e' una funzione biettiva ed essendo un morfismo e' dunque un automorfismo.
+
+
+
+
+
+Supponiamo ora di avere un gruppo G e due suoi sottogruppi S e T e che l'intersezione dei due sottogruppi sia triviale:
+S intersez T = { e }. L'insieme degli elementi di G esprimibili come s.t con s appartenente a S e t appartenente a T,
+e' indicato con S.T
+Si puo' dimostrare che ogni elemento di S.T e' esprimibile come prodotto s.t in un unico modo:
+supponiamo per assurdo un elemento di ST abbia 2 scomposizioni diverse: s1.t1=s2.t2
+
+s2^-1.(s1.t1)=s2^-1.(s2.t2) ==> s2^-1.s1.t1=(s2^-1.s2).t2 ==> s2^-1.s1.t1=t2 ==> (s2^-1.s1.t1).t2^-1=t2.t2^-1 ==> s2^-1.s1.t1.t2^-1=e
+da cui (s2^-1.s1).(t1.t2^-1)=e ora, s2^-1.s1 apparterra' ad S e t1.t2^-1 apparterra' a T essendo essi 2 sottogruppi.
+ma se in generale s.t=e poiche' s.s^-1=e dovrebbe essere s^-1=t che e' impossibile poiche' s^-1 sta in S e S e T hanno solo e in comune.analognamente poiche' t^-1.t=e dovrebbe essere t^-1=s che e' impossibile poiche' t^-1 sta in T e S e T hanno solo e in comune.
+Percio' se s.t=e l'unica possibilita' e' che sia s=t=e. Da cui: s2^-1.s1=e e t1.t2^-1=e ==> s1^-1=s2^-1 e t1^-1=t2^-1
+da cui s1=s2 e t1=t2. Quindi la scomposizione e' UNICA. (Basta che S e T siano 2 sottogruppi con intersezione triviale)
+
+Ora in piu' se S.T=T.S cioe' se S e T commutano: attenzione: la commutazione avviene a livello di insieme non per elemento;
+significa questo: prendiamo un qualunque elemento di S.T, abbiamo visto che avra' una composizione univoca t1.s1.
+Poiche' e' S.T=T.S quello stesso elemento apparterra' anche a T.S e li' avra' di nuovo una composizione unica s2.t2.
+Percio' non necessariamente s.t=t.s; La condizione imposta e' solo sugli insiemi: S.T=T.S non sugli elementi.
+Se questa condizione e' soddisfatta si ha che anche S.T=T.S e' un gruppo (sottogruppo di G).
+
+Infatti in tal caso:
+
+1) (s1.t1).(s2.t2)=(s1.t1).(t3.s3)=s1.(t1.t3).s3=s1.t4.s3=s1.s4.t5=s5.t5
+Quindi l'operazione e' interna
+2) Associativita': ((s1.t1).(s2.t2)).(s3.t3)=(s1.t1).((s2.t2).(s3.t3)) si eredita dall'associativita' di G
+3) Elemento neutro: e appartiene a S.T essendo e=e.e (il primo da S e il secondo da T)
+4) Elemento inverso: (s1.t1)^-1=t1^-1.s1^-1 ma t1^-1 appartiene a T e s1^-1 appartiene a S da cui potremo scrivere:
+   (s1.t1)^-1 = t2.s2 = s3.t3 e quindi l'inverso esiste ed appartiene ancora a S.T
+
+Quindi ricapitoliamo:
+
+Abbiamo un gruppo G e 2 sottogruppi S e T.
+
+L'insieme degli elementi di G esprimibili come s.t (s in S e t in T) e' detto S.T
+
+Supponiamo ora che l'intersezione di S e T sia triviale ({e})
+
+In tal caso ogni elemento di S.T ha una scomposizione s.t univoca.
+
+Se poi S e T commutano cioe' se s1.t1=t2.s2 per ogni s1 in S e t1 in T (cioe' se S.T=T.S)
+allora S.T=T.S e' un gruppo (cioe' un sottogruppo di G)
+
+Chiaramente un caso possibile e' che sia S.T=T.S=G
+
+Si hanno 3 casi distinti: da quello piu' generale a quello piu' specifico:
+
+1) S e T non sono sottogruppi normali. Il gruppo S.T (o T.S) e' detto prodotto interno di Zappa-Szep di S e T
+2) Uno solo tra S e T e' sottogruppo normale di G allora S.T (o T.S) e' detto prodotto semidiretto interno di S e T
+3) Entrambi S e T sono sottogruppi normali di G allora S.T (o T.S) e' detto prodotto diretto interno di S e T
+
+Il prodotto diretto e' anche un prodotto semidiretto; non e' vero il viceversa
+Il prodotto semidiretto e' anche un prodotto di Zappa-Szep; non e' vero il viceversa
+
+Ciascuna definizione di prodotto interno ha una corrispettiva definizione di prodotto esterno.
+
+Nel caso del prodotto interno si parte da un gruppo G e si trovano 2 sottogruppi S e T da cui si
+costruisce il sottogruppo S.T (o T.S)
+
+Nel caso del prodotto esterno di parte da 2 gruppi S e T completamente slegati tra di loro e
+si costruisce tramite le opportune regole il prodotto esterno S.T (o T.S) che sara' di
+nuovo un gruppo a se' stante che potremo chiamare G.
+Si dimostra che allora G avra' 2 sottogruppi H e K (normali o no a seconda del prodotto eseguito con S e T)
+H sara' isomorfo a S e K sara' isomorfo a T e G sara' il prodotto interno (dello stesso tipo di quello esterno) di H e K.
+
+Quindi in pratica il prodotto interno ed esterno sono solo un modo diverso di vedere la stessa struttura.
+L'unica differenza e' che nel caso di prodotto esterno il nuovo gruppo G va' completamente definito
+come elementi e come operazioni tra elementi (tutto questo sara' chiaramente derivato da S e T).
+Nel caso del prodotto interno invece sia gli elementi che l'operazione tra elementi e' gia definito
+(dal gruppo G preesistente).
+
+Partendo dal prodotto interno di Zappa-Szep (quello piu' generale) vediamo di specificare il prodotto esterno.
+
+Partiamo da un gruppo G avente due sottogruppi H e K non normali a intersezione triviale.
+Sappiamo allora che in H.K ogni elemento ha una scomposizione univoca h.k
+Supponiamo poi che H e K commutano cioe' che H.K=K.H. Allora abbiamo visto che H.K e' un sottogruppo di G
+ed e' detto prodotto interno di Zappa-Szep di H e K.
+
+Poiche' H e K commutano, dato k e h esisteranno k' e h' tali che k.h=h'.k'.
+k' e h' saranno funzioni di k e h. Potro' percio' scrivere:
+k.h=A(k,h).B(k,h) essendo k'=B(k,h) e h'=A(k,h).
+Le 2 mappe A e B sono cosi' descritte:
+A : KxH -> H
+B : KxH -> K
+
+Queste 2 mappe hanno le seguenti proprieta':
+1) Se h=e la commutazione sara' necessariamente k.e=k=e.k da cui A(k,e)=e B(k,e)=k 
+   Se k=e la commutazione sara' necessariamente e.h=h=h.e da cui A(e,h)=h B(e,h)=e
+
+2) Poniamo k=k1.k2 h=h1 ==> (k1.k2).h1 = A(k1.k2,h1).B(k1.k2,h1) ==> k1.(k2.h1) = A(k1.k2,h1).B(k1.k2,h1)
+   ma k2.h1=A(k2,h1).B(k2,h1) allora  k1.(A(k2,h1).B(k2,h1)) = A(k1.k2,h1).B(k1.k2,h1) ==>
+   (k1.A(k2,h1)).B(k2,h1) = A(k1.k2,h1).B(k1.k2,h1) ==> (A(k1,A(k2,h1)).B(k1,A(k2,k1))).B(k2,h1) = A(k1.k2,h1).B(k1.k2,h1) ==>
+   A(k1,A(k2,h1)).(B(k1,A(k2,h1)).B(k2,h1)) = A(k1.k2,h1).B(k1.k2,h1) da cui per l'unicita' della scomposizione h.k :
+
+   A(k1.k2,h1) = A(k1,A(k2,h1))
+   B(k1.k2,h1) = B(k1,A(k2,h1)).B(k2,h1)
+
+3) Poniamo k=k1 h=h1.h2 ==> k1.(h1.h2) = A(k1,h1.h2).B(k1,h1.h2) ==> (k1.h1).h2 = A(k1,h1.h2).B(k1,h1.h2)
+   ma k1.h1=A(k1,h1).B(k1,h1) allora  (A(k1,h1).B(k1,h1)).h2 = A(k1,h1.h2).B(k1,h1.h2) ==>
+   A(k1,h1).(B(k1,h1).h2) = A(k1,h1.h2).B(k1,h1.h2) ==> A(k1,h1).(A(B(k1,h1),h2).B(B(k1,h1),h2)) = A(k1,h1.h2).B(k1,h1.h2) ==>
+   (A(k1,h1).A(B(k1,h1),h2)).B(B(k1,h1),h2)) = A(k1,h1.h2).B(k1,h1.h2) da cui per l'unicita' della scomposizione h.k :
+
+   A(k1,h1.h2) = A(k1,h1).A(B(k1,h1),h2)
+   B(k1,h1.h2) = B(B(k1,h1),h2)
+
+Ricapitoliamo: per un qualunque h,h1,h2 in H e k,k1,k2 in K valgono le identita':
+
+1) A(k,e)=e B(k,e)=k
+   A(e,h)=h B(e,h)=e
+
+2) A(k1.k2,h1) = A(k1,A(k2,h1))
+   B(k1.k2,h1) = B(k1,A(k2,h1)).B(k2,h1)
+
+   A(k1,h1.h2) = A(k1,h1).A(B(k1,h1),h2)
+   B(k1,h1.h2) = B(B(k1,h1),h2)
+
+Da cio' si ricava che:
+
+1) per ogni k in K   A(k,h) : H --> H e' una funzione biettiva
+2) per ogni h in H   B(k,h) : K --> K e' una funzione biettiva
+
+Infatti:
+
+1) Dimostriamo l'iniettivita' di B(k,h):  sia B(k1,h)=B(k2,h)  ora e' k1 = B(k1,e) = B(k1,h^-1.h) = B(B(k1,h^-1),h)
+   Allora avremo k1 = B(B(k2,h^-1),h) = B(k2,h^-1.h) = B(k2,e) = k2
+   Dimostriamo la suriettivita': B(x,h) = k   Ora x = B(x,e) = B(x,h.h^-1) = B(B(x,h),h^-1) = B(k,h^-1)
+
+2) Dimostriamo l'iniettivita' di A(k,h):  sia A(k,h1)=A(k,h2)  ora e' h1 = A(e,h1) = A(k^-1.k,h1) = A(A(k,h1),k^-1)
+   Allora avremo h1 = A(A(k,h2),k^-1) = A(k^-1.k,h2) = A(e,h2) = h2
+   Dimostriamo la suriettivita': A(k,x) = h   Ora x = A(e,x) = A(k^-1.k,x) = A(A(k,x),k^-1) = A(k^-1,h)
+
+Percio' le due mappe A:H->H e B:K->K sono biunivoche:
+L'insieme delle mappe A:H->H costituisce un gruppo: Aut(H) (H inteso come insieme)
+con l'operazione di composizione di funzione A(k,h2).A(k,h1) = A(k,A(k,h1))
+L'insieme delle mappe B:K->K costituisce un gruppo: Aut(K) (K inteso come insieme)
+con l'operazione di composizione di funzione B(k2,h).B(k1,h) = B(B(k1,h),h)
+
+Percio' possiamo dire che il gruppo K agisce a destra del gruppo H tramite la mappa A
+Mentre' possiamo dire che il gruppo H agisce a sinistra del gruppo K tramite la mappa B
+
+Infatti: Consideriamo il gruppo K che agisce a sinistra sul gruppo H
+Avremo come operazione la mappa A(k,h). L'elemento k di K agisce a sinistra sull'elemento h di H e lo trasforma in A(k,h)
+Vediamo se sono soddisfatte le proprieta' di un'azione:
+
+1) e.h = A(e,h) = h
+2) k1.(k2.h) = A(k1,A(k2,h)) = A(k1.k2,h) = (k1.k2).h
+
+Ora consideriamo il gruppo H che agisce a destra sul gruppo K
+Avremo come operazione la mappa B(k,h). L'elemento h di H agisce a destra sull'elemento k di K e lo trasforma in B(k,h)
+Vediamo se sono soddisfatte le proprieta' di un'azione:
+
+1) k.e = B(k,e) = k
+2) (k.h1).h2 = B(B(k,h1),h2) = B(k,h1.h2) = k.(h1.h2)
+
+Essendo 2 azioni si avra'
+
+1) un omomorfismo tra K Aut(H) tramite la mappa A:
+   A(k1.k2,h) = A(k1,A(k2,h1)) = A(k1,h).A(k2,h) (Composizione automorfismi in Aut(H))
+
+2) un omomorfismo tra H Aut(K) tramite la mappa B:
+   B(k,h2.h1) = B(B(k,h2),h1) = B(k,h1).B(k,h2) (Composizione automorfismi in Aut(K))
+
+Gli automorfismi in Aut(H) e Aut(K) sono automorfismi di insieme (essendo funzioni biunivioche)
+ma non mantengono la struttura di gruppo di H e K. Infatti:
+
+A(k,h1.h2)=A(k,h1).A(B(k,h1),h2) e non A(k,h1.h2)=A(k,h1).A(k,h2)
+B(k1.k2,h)=B(k1,A(k2,h)).B(k2,h) e non B(k1.k2,h)=B(k1,h).B(k2,h)
+
+Per forse e' meglio parlare di azione su insiemi H e K (invece di gruppi H e K)
+
+
+Allora a questo punto definiamo il prodotto esterno di Zappa-Szep:
+
+supponiamo di avere due gruppi H e K e supponiamo esistano le 2 mappe
+A : HxK -> H
+B : HxK -> K
+e che soddisfino le 6 identita' descritte in "Ricapitoliamo:"
+
+Considerando come sostegno il prodotto cartesiano HxK definiamo un'operazione binaria in tale insieme:
+
+(h1,k1).(h2,k2) = (h1.A(k1,h2),B(k1,h2).k2) e 
+(h,k)^-1 = (A(k^-1,h^-1),B(k^-1,h^-1))
+
+
+Vediamo:
+
+Chiusura: deriva dal fatto che h1.A(k1,h2) appartiene ad H (poiche' la mappa A ha codominio in H e moltiplicando 2 elementi di H
+							    si ottiene un elemento di H essendo H gruppo
+          e      dal fatto che B(k1,h2).k2 appartiene a  K (poiche' la mappa B ha codominio in K e moltiplicando 2 elementi di K
+							    si ottiene un elemento di K essendo K gruppo
+
+(eh,ek) e' l'elemento neutro.
+
+Infatti: (h,k).(eh,ek)=(h.A(k,eh),B(k,eh).ek)=(h.eh,k.ek)=(h,k)
+         (eh,ek).(h,k)=(eh.A(ek,h),B(ek,h).k)=(eh.h,ek.k)=(h,k)
+
+
+Proprieta' associativa: ((h1,k1).(h2,k2)).(h3,k3) = (h1.A(k1,h2),B(k1,h2).k2).(h3,k3) =
+                                                    ((h1.A(k1,h2)).A(B(k1,h2).k2,h3),B(B(k1,h2).k2,h3).k3) =
+						    (h1.(A(k1,h2).A(B(k1,h2).k2,h3)),(B(B(k1,h2),A(k2,h3)).B(k2,h3)).k3) =
+						    (h1.(A(k1,h2).A(B(k1,h2),A(k2,h3))),B(B(k1,h2),A(k2,h3)).(B(k2,h3).k3)) =
+						    (h1.(A(k1,h2).A(B(k1,h2),A(k2,h3))),B(B(k1,h2),A(k2,h3)).(B(k2,h3)).k3)) =
+
+                  	(h1,k1).((h2,k2).(h3,k3)) = (h1,k1).(h2.A(k2,h3),B(k2,h3).k3) =
+						    (h1.A(k1,h2.A(k2,h3)),B(k1,h2.A(k2,h3)).(B(k2,h3).k3))
+						    (h1.(A(k1,h2).A(B(k1,h2),A(k2,h3))),B(k1,h2.A(k2,h3)).(B(k2,h3).k3))
+						    (h1.(A(k1,h2).A(B(k1,h2),A(k2,h3))),B(B(k1,h2),A(k2,h3)).(B(k2,h3).k3))
+
+Elemento inverso:
+(A(k^-1,h^-1),B(k^-1,h^-1)).(h,k) = (A(k^-1,h^-1).A(B(k^-1,h^-1),h),B(B(k^-1,h^-1),h).k) =
+                                    (A(k^-1,h^-1.h),B(k^-1,h^-1.h).k) =
+                                    (A(k^-1,eh),B(k^-1,eh),k) =
+                                    (eh,k^-1.k)=
+                                    (eh,ek)
+(h,k).(A(k^-1,h^-1),B(k^-1,h^-1)) = (h.A(k,A(k^-1,h^-1)),B(k,A(k^-1,h^-1)).B(k^-1,h^-1)) =
+				    (h.A(k.k^-1,h^-1),B(k.k^-1,h^-1))
+                                    (h.A(ek,h^-1),B(ek,h^-1)) =
+                                    (h.h^-1,ek)=
+                                    (eh,ek)
+
+
+Allora HxK e' un gruppo detto prodotto esterno di Zappa-Szep di H e K.
+
+Di questo gruppo si hanno 2 particolati sottogruppi:
+
+Il primo con elementi del tipo (h,ek) con h appartenente da H e ek elemento neutro di K.
+Infatti:
+
+1) (h1,ek).(h2,ek) = (h1.A(ek,h2),B(ek,h2).ek) = (h1.h2,ek.ek) = (h1.h2,ek) quindi l'operazione e' interna.
+2) L'elemento neutro (eh,ek) vi appartiene (basta prendere h=eh)
+3) Dato (h,ek) e' (h,ek)^-1=(A(ek^-1,h^-1),B(ek^-1,h^-1))=(A(ek,h^-1),B(ek,h^-1))=(h^-1,ek) per cui l'inverso e' interno.
+
+Chiamiamo questo sottogruppo Hx{ek}
+
+Si vede che Hx{ek} e' isomorfo a H:
+
+Basta definire f : Hx{ek} --> H  con  f((h,ek)) = h
+E un isomorfismo in quanto e' invertibile: f^-1(h) = (h,ek) ed e' f((h1,ek).(h2,ek))=f((h1.h2,ek))=h1.h2=f((h1,ek)).f((h2,ek))
+
+Il secondo con elementi del tipo (eh,k) con eh elemento neutro di H e k elemento di K.
+Infatti:
+
+1) (eh,k1).(eh,k2) = (eh.A(k1,eh),B(k1,eh).k2) = (eh.eh,k1.k2) = (eh,k1.k2) quindi l'operazione e' interna.
+2) L'elemento neutro (eh,ek) vi appartiene (basta prendere k=ek)
+3) Dato (eh,k) e' (eh,k)^-1=(A(k^-1,eh^-1),B(k^-1,eh^-1))=(A(k^-1,eh),B(k^-1,eh))=(eh,k^-1) per cui l'inverso e' interno.
+
+Chiamiamo questo sottogruppo {eh}xK
+
+Si vede che {eh}xK e' isomorfo a K:
+
+Basta definire f : {eh}xK --> K  con  f((eh,k)) = k
+E un isomorfismo in quanto e' invertibile: f^-1(k) = (eh,k) ed e' f((eh,k1).(eh,k2))=f((eh,k1.k2))=k1.k2=f((eh,k1)).f((eh,k2))
+
+Quindi ci riconduciamo al prodotto interno:
+
+Dato il gruppo G = (Hx{ek})x({eh}xK) ha come sottogruppi Hx{ek} e {eh}xK e il loro prodotto interno da' G
+
+
+Passiamo ora al prodotto semi-diretto interno
+
+Partiamo da un gruppo G avente H sottogruppo normale e K sottogruppo non normale a intersezione triviale.
+Sappiamo allora che in H.K ogni elemento ha una scomposizione univoca h.k
+Supponiamo poi che H e K commutano cioe' che H.K=K.H. Allora abbiamo visto che H.K e' un sottogruppo di G.
+Esso e' detto semi-prodotto interno di di H e K e si scrive H|xK
+
+Allora k.h=e.(k.h)=(k.k^-1).(k.h).(k^-1.k)=(k.h.k^-1).k ma essendo H normale k.h.k^-1 e' comunque un elemento di H
+da cui si deducono le 2 mappe A e B:
+A(k,h)=k^-1.h.k e B(k,h)=k
+
+Allora l'azione destra di K su H e' il coniugo
+mentre l'azione sinistra di H su K e' l'identita'
+
+In questo caso (a differenza del prodotto di Zappa-Szep)
+le 2 mappe A e B oltre a essere automorfismi di insieme (cioe' funzioni biettive)
+mantengono l'operazione di gruppo in H e K. Infatti:
+
+A(k,h1.h2)=k^-1.(h1.h2).k ed essendo A(k,h1)=k^-1.h1.k e A(k,h2)=k^-1.h2.k si ha
+A(k,h1).A(k,h2)=(k^-1.h1.k).(k^-1.h2.k)=k^-1.h1.(k.k^-1).h2.k=k^-1.(h1.h2).k
+
+ed e' anche:
+
+B(k1.k2,h)=k1.k2 ed essendo B(k1,h)=k1 e B(k2,h)=k2
+
+Percio' e':
+
+A(k,h1.h2)=A(k,h1).A(k,h2)
+B(k1.k2,h)=B(k1,h).B(k2,h)
+
+Quindi qui e' giusto parlare di azione sinistra del gruppo K sul gruppo H
+e dell'azione destra del gruppo H sul gruppo K. Poiche' i 2 omomorfismi K->Aut(H) e H->Aut(K) hanno come codominio gli automorfismi
+di gruppo (non solo d'insieme) di H e K.
+
+Per quanto riguarda il prodotto semi-diretto esterno di H e K (H|xK):
+
+(h1,k1).(h2,k2) = (h1.A(k1,h2)),k1.k2) e 
+(h,k)^-1 = (A(k^-1,h^-1),k^-1)			dove A(k,h) e' un omomorfismo di K su Aut(H) ovvero un'azione sinistra
+						del gruppo K sul gruppo H
+
+
+Passiamo ora al prodotto diretto interno
+
+Partiamo da un gruppo G avente H sottogruppo normale e K sottogruppo normale a intersezione triviale.
+Sappiamo allora che in H.K ogni elemento ha una scomposizione univoca h.k
+Supponiamo poi che H e K commutano cioe' che H.K=K.H. Allora abbiamo visto che H.K e' un sottogruppo di G.
+Esso e' detto prodotto interno di di H e K e si scrive HxK
+
+Allora
+	k.h=(h.h^-1).(k.h)=h.(h^-1.k.h)
+	k.h=(k.h).(k^-1.k)=(k.h.k^-1).k
+
+ed essendo H e K normali si avra':
+
+	k.h.k^-1 appartiene a H
+	h^-1.k.h appartiene a K
+
+da cui si deducono le 2 mappe A e B:
+
+A(k,h)=h e B(k,h)=k
+
+Allora l'azione destra di K su H e' l'identita'
+mentre l'azione sinistra di H su K e' l'identita'
+
+In pratica qui non c'e piu' nessuna azione ne' destra ne' sinistra.
+
+
+Per quanto riguarda il prodotto diretto esterno di H e K (HxK):
+
+(h1,k1).(h2,k2) = (h1.h2,k1.k2) e 
+(h,k)^-1 = (h^-1,k^-1)
+
+
+
+Un esempio di prodotto interno di Zappa-Szep:
+
+sia G=S4 e H={(1,2,3),(1,2)} e K={(1,2,3,4)}
+
+Allora S4 e' l'insieme delle permutazioni di 4 simboli ed ha 4! = 24 elementi.
+
+H={[1,2,3,4],[3,1,2,4],[2,3,1,4],[2,1,3,4],[1,3,2,4],[3,2,1,4]}
+K={[1,2,3,4],[4,1,2,3],[3,4,1,2],[2,3,4,1]}
+
+Avendo H 6 elementi e K 4 elementi, HK avra' 24 elementi.
+Come si vede H e K sono 2 sottogruppi di S4 con solo [1,2,3,4] in comune.
+Nessuno dei due e' sottogruppo normale.
+
+Vediamo se H e K commutano:
+
+[3,1,2,4] . [4,1,2,3] = [2,4,1,3]
+[3,4,1,2] . [1,3,2,4] = [2,4,1,3]
+etc....
+
+H.K=K.H=G
+
+In generale dato Sn sara' H=Sn-1 con un punto fisso e K={(1,2,.... n)} (gruppo ciclico di ordine n)
+allora Sn=H.K profotto interno di Zappa-Szep.
+

@@ -1,0 +1,81 @@
+Uno Steiner system e' un particolare tipo di block design.
+
+Un block design e' contraddistinto da 4 valori (l,t,k,n) con l<=t<=k<=n
+
+Abbiamo un insieme X di n simboli.
+Chiamiamo C la collezione dei sottinsiemi di X aventi k simboli.
+Prendiamo un sottoinsieme di C nel quale ciascun sottinsieme di X di t simboli
+vi compaia esattamente l volte.
+
+Nel caso dello Steiner System si ha l=1.
+
+Per cui lo Steiner System e' definito da una terna (t,k,n) con t<=k<=n
+
+Abbiamo un insieme X di n simboli.
+Chiamiamo C la collezione dei sottinsiemi di X aventi k simboli.
+Prendiamo un sottoinsieme di C nel quale ciascun sottinsieme di X di t simboli
+vi compaia esattamente una e una sola volta.
+I sottinsiemi di X di k elementi sono detti blocchi.
+
+Dati n simboli il numero di sottinsiemi diversi possibili di t elementi e' Binomial(n,t)=n!/(t!.(n-t)!)
+Quindi la collezione C dovra' contenere questi Binomial(n,t) sottinsiemi di t elementi.
+Ora, ogni blocco di k elementi e' in grado di contenere Binomial(k,t) sottinsiemi diversi contenenti t elementi.
+Quindi condizione necessaria affinche' lo steiner system (t,k,n) esista e' che il rapporto:
+nb=Binomial(n,t)/Binomial(k,t) sia intero. Se lo e' sara' il numero di blocchi dello Steiner system (se esiste).
+
+Chiaramente i casi n=k,k=t,t=1,sono triviali.
+1) Se n=k si ha nb=1. Si ha un solo blocco coincidente con X (indipendentemente da t)
+2) Se k=t si ha nb=Binomial(n,t) e la collezione comprende tutti i possibili sottinsiemi di X di t elementi.
+3) Se t=1 nb=n/k e una qualunque collezione di blocchi e' uno steiner system
+
+Gli Steiner system piu' semplici non banali saranno del tipo (2,3,n) e si chiamano Steiner triple systems.
+
+Condizione necessaria per l'esistenza: Binomial(n,2) % 3 = 0 ==> n!/(2*(n-2)!) % 3 = 0 ==> n*(n-1)/2 % 3 = 0
+==> allora se n=6k+1 ==> (6k+1)*6k/2 = (6k+1)*3k e' divisibile per 3
+==> allora se n=6k+2 ==> (6k+2)*(6k+1)/2 = (3k+1)*(6k+1) non e' divisibile per 3
+==> allora se n=6k+3 ==> (6k+3)*(6k+2)/2 = (6k+3)*(3k+1) e' divisibile per 3
+==> allora se n=6k+4 ==> (6k+4)*(6k+3)/2 = (3k+2)*(6k+3) e' divisibile per 3
+==> allora se n=6k+5 ==> (6k+5)*(6k+4)/2 = (6k+5)*(3k+2) non e' divisibile per 3
+
+Poiche' Binomial(3,2)=3 condizione necessaria per l'esistenza sara' che Binomial(n,2) dovra' essere multiplo di 3
+
+Vediamo:
+
+n=4	Binomial(4,2)=6 la condizione necessaria e' soddisfatta. Avremo nb=6/3=2 solo 2 blocchi.
+        I blocchi possibili di 3 elementi sono Binomial(4,3)=4 e sono {a,b,c} {a,b,d} {b,c,d} {a,c,d}
+        {a,b,c} ha al suo interno {a,b},{b,c},{a,c}
+        {a,b,d} ha al suo interno {a,b},{b,d},{a,d}
+        {b,c,d} ha al suo interno {b,c},{c,d},{b,d}
+        {a,c,d} ha al suo interno {a,c},{c,d},{a,d}
+
+	Come si vede ogni coppia compare sempre in 2 blocchi, quindi non esiste una coppia di blocchi tutte e 6 le possibili coppie.
+
+n=5     Binomial(5,2)=10 non e' divisibile per 3
+n=6	Binomial(6,2)=15 e' divisibile per 3. Quindi il numero dei blocchi sara' 15/3=5
+	I blocchi possibili di 3 elementi sono Binomial(6,3)=20 e sono:
+        {a,b,c} ha al suo interno {a,b},{b,c},{a,c}
+        {a,b,d} ha al suo interno {a,b},{b,d},{a,d}
+        {a,b,e} ha al suo interno {a,b},{b,e},{a,e}
+        {a,b,f} ha al suo interno {a,b},{b,f},{a,f}
+        {a,c,d} ha al suo interno {a,c},{c,d},{a,d}
+        {a,c,e} ha al suo interno {a,c},{c,e},{a,e}
+        {a,c,f} ha al suo interno {a,c},{c,f},{a,f}
+        {a,d,e} ha al suo interno {a,d},{d,e},{a,e}
+        {a,d,f} ha al suo interno {a,d},{d,f},{a,f}
+        {a,e,f} ha al suo interno {a,e},{e,f},{a,f}
+        {b,c,d} ha al suo interno {b,c},{c,d},{b,d}
+        {b,c,e} ha al suo interno {b,c},{c,e},{b,e}
+        {b,c,f} ha al suo interno {b,c},{c,f},{b,f}
+        {b,d,e} ha al suo interno {b,d},{d,e},{b,e}
+        {b,d,f} ha al suo interno {b,d},{d,f},{b,f}
+        {b,e,f} ha al suo interno {b,e},{e,f},{b,f}
+        {c,d,e} ha al suo interno {c,d},{d,e},{c,e}
+        {c,d,f} ha al suo interno {c,d},{d,f},{c,f}
+        {c,e,f} ha al suo interno {c,e},{e,f},{c,f}
+        {d,e,f} ha al suo interno {d,e},{e,f},{d,f}
+
+        Facendo delle prove si vede che non esistono 5 blocchi che contengono tutte e solo le 15 coppie possibili.
+
+Si verifica invece che il sistema (2,3,7) esiste ed e' il piu' piccolo steiner system.
+
+Qui si hanno Binomial(7,2)=21 coppie possibili e quindi avremo 21/3=7 blocchi

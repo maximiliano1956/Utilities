@@ -1,0 +1,261 @@
+Ricordiamo il concetto di GRUPPO (GROUP):
+Abbiamo un insieme G e un'operazione binaria interna indicata convenzionalmente con il simbolo '.' :
+
+. : FxF -> F
+
+Devono essere soddisfatte le seguenti proprieta':
+
+1) Dati 2 elementi a e b di G (anche coincidenti) deve essere sempre possibile calcolare a.b
+2) Deve valere la proprieta' associativa:
+   (a.b).c=a.(b.c)   per ogni a,b,c appartenenti a G.  Quindi se ho operazioni multiple posso omettere le parentesi.
+3) Deve esistere l'elemento 'neutro' dell'operazione '.' convenzionalmente indicato con il simbolo e. che deve soddisfare:
+   a.e = e.a = a per un generico elemento a di G. Si dimostra facilmente che l'elemento e e' unico.
+4) Ogni elemento a deve avere un elemento inverso (indicato con a^-1) tale che:
+   a.(a^-1) = (a^-1).a = e	Si dimostra facilmente che l'inverso di un elemento e' unico
+
+Un GRUPPO (GROUP) e' detto ABELIANO (ABELIAN) o COMMUTATIVO (COMMUTATIVE)
+se vale anche la proprieta' commutativa:
+
+5) Dati 2 elementi qualunque a e b di G deve valere la proprieta' commutativa:
+   a.b=b.a
+
+=======================================================================================================================================
+
+Ricordiamo il concetto di CAMPO (FIELD):
+
+Abbiamo un insieme F e due operazioni binarie interne indicate convenzionalmente con i simboli '+' e '*' :
+
++ : FxF -> F
+* : FxF -> F
+
+Per convenzione in un'espressione il '*' ha priprita' sul '+'
+
+Devono essere soddisfatte le seguenti proprieta':
+
+1) (F,+) deve essere un gruppo abeliano (il cui elemento neutro verra' indicato convenzionalmente con il simbolo '0',
+   mentre l'inverso di un elemento a verra' indicato come opposto di a e descritto con il simbolo -a)
+2) (F-{'0'},*) deve essere un gruppo abeliano (il cui elemento neutro verra' indicato convenzionalmente con il simbolo '1',
+   mentre l'inverso di un elemento a verra' indicato come reciproco di a e descritto con il simbolo a^-1 (o 1/a))
+3) Le 2 operazioni + e * hanno un legame: deve valere la proprieta' distributiva del '*' rispetto al '+'
+   in entrambi gli argomenti:
+   (a+b)*c = a*c+b*c
+   a*(b+c)=a*b+a*c	per ogni a,b,c appartenenti a F.
+   Dalla proprieta' distributiva si deduce che e':
+   1) 0*a=a*0=0 per ogni elemento a appartenente a F (quindi il neutro del '+' non ha inverso rispetto al '*')
+   2) (-a)*b  =  a*(-b)  =  -(a*b) e  (-a)*(b) = a*b
+
+=======================================================================================================================================
+
+SPAZIO VETTORIALE su un CAMPO K (VECTOR SPACE OVER A FIELD K)
+
+Supponiamo di avere:
+
+1) Un campo K(+,*) i cui elementi saranno detti 'scalari' (qui il '+' e' tra scalari)
+2) Un gruppo abeliano V(+) i cui elementi saranno detti 'vettori' (qui il '+' e' tra vettori)
+3) Un'operazione che ha come primo argomento uno scalare e come secondo argomento un vettore e restituisce un vettore:
+   quest'operazione e' detta MOLTIPLICAZIONE DI UNO SCALARE PER UN VETTORE e si indica con il simbolo '.':
+   . : KxV -> V e deve godere delle seguenti proprieta':
+
+   a) bilinearita' rispetto entrambi gli argomenti:
+      
+      (k1+k2).v = k1.v+k2.v  per ogni k1,k2 appartenenti a K e per ogni v appartenente a V
+      k.(v1+v2) = k.v1+k.v2  per ogni k appartenente a K e per ogni v1,v2 appartenenti a V
+
+   b) Proprieta' di compatibilita':
+
+      k1.(k2.v) = (k1*k2).v  per ogni k1,k2 appartenenti a K e per ogni v appartenente a V
+
+   c) 1.v = v per ogni v appartenenti a V
+
+=======================================================================================================================================
+
+ALGEBRA SU UN CAMPO K (ALGEBRA OVER A FIELD K)
+
+Dato uno spazio vettoriale V su un campo K introduciamo la moltiplicazione vettoriale (indicato con il simbolo X) :
+
+X : VxV -> V   che dovra' soddisfare alla proprieta' di bilinearita' in entrambi gli argomenti:
+
+1) (v1+v2) X v3 = (v1 X v3) + (v2 X v3)	 per ogni v1,v2,v3 appartenenti a V
+2) v1 X (v2+v3) = (v1 X v2) + (v1 X v3)	 per ogni v1,v2,v3 appartenenti a V
+
+Notare che non abbiamo richiesto per l'operazione 'X' la proprieta' associativa, ne' quella commutativa,
+ne' abbiamo richiesto l'esistenza di un elemento neutro.
+
+Molti testi quando parlano di Algebra su un campo senza specificare intendono un'algebra ASSOCIATIVA CON ELEMENTO NEUTRO
+(ASSOCIATIVE, UNITAL ALGEBRA) mentre la commutativita' va' specificata.
+
+Ricordiamo che:
+
+1) Proprieta' associativa per la moltiplicazione vettoriale:
+
+   (v1 X v2) x v3 = v1 X (v2 X v3)	per ogni v1,v2,v3 appartenenti a V.
+					Quindi nei prodotti multipli si potra' omettere le parentesi.
+
+2) Proprieta' commutativa per la moltiplicazione vettoriale:
+
+   v1 X v2 = v2 X v1			per ogni v1,v2,v3 appartenenti a V.
+
+3) Esistenza elemento neutro per la moltiplicazione vettoriale:
+
+   questo vettore e' indicato con il simbolo 1 ed e' tale che:
+
+   v X 1 = 1 x v	per un qualunque v appartenente a V
+
+Se valgono le prorieta' 1) e 3) il tutto puo' essere visto come un anello di vettori.
+
+=======================================================================================================================================
+
+
+Ricordiamo che uno spazio vettoriale ha sempre una dimenzione n (numero intero)
+che corrisponde al minimo numero di vettori linearmente indipendenti in grado di generare l'interno spazio.
+Questo insieme di n vettori linearmente indipendenti e' detto BASE dello spazio.
+
+Esempio: supponiamo di avere uno spazio vettoriale sul campo K di dimensione 4.
+
+Allora una base e' un insieme di 4 vettori {v1,v2,v3,v4} tali che k1.v1+k2.v2+k3.v3+k4.v4=0 <==> k1=k2=k3=k4=0
+(che significa che i vettori sono linearmente indipendenti).
+Questa base e' in grado di generare l'intero spazio cioe:
+
+preso un vettore qualunque v esistera' una 4-pla (k1,k2,k3,k4) di elementi di K tale che:
+v = k1.v1+k2.v2+k3.v3+k4.v4
+
+Quindi c'e' una corrispondenza biunivoca tra V e K^4. Anzi di piu' questa corrispondenza e' un ISOMORFISMO.
+
+Infatti ad ogni vettore corrisponde (tramite la base scelta) una 4-pla (k1,k2,k3,k4) :
+
+Allora consideriamo 2 vettori v1 = k11.v1+k12.v2+k13.v3+k14.v4
+			      v2 = k21.v1+k22.v2+k23.v3+k24.v4
+
+Allora v1+v2 = (k11+k21).v1+(k12+k22).v1+(k13+k23).v1+(k14+k24).v1
+
+Quindi in K^4 basta definire (k11,k12,k13,k14)+(k21,k22,k23,k24)=(k11+k21,k12+k22,k13+k23,k14+k24)
+
+e si avra' un ISOMORFISMO tra V e K^4.
+
+Quindi per studiare gli spazi vettoriali di dimensione n sul campo K basta studiare lo spazio vettoriale K^n che risulta essere
+ISOMORFO a ciascuno di essi.
+
+
+Alla luce di questo supponiamo di avere un campo K(+,*)
+Consideriamo ora un magma finito M(X) e supponiamo che i suoi elementi siano {a,b,c}
+
+Allora potremo supporre che l'insieme M sia UNA BASE di uno spazio vettoriale sul campo K.
+
+Quindi un elemento del nostro spazio vettoriale sara' del tipo: k1.a+k2.b+k3.c con k1,k2,k3 elementi di K.
+
+Questo e' uno spazio vettoriale infatti:
+
+sia v1=k1.a+k2.b+k3.c e v2=k3.a+k4.b+k5.c allora v1+v2=(k1+k3).a+(k2+k4).b+(k3+k5).c
+e sono soddisfatte tutte le proprieta' richieste.
+
+Ma essendo M un magma si potra' definire anche un prodotto vettoriale:
+
+v1Xv2 = (k1.a+k2.b+k3.c)X(k3.a+k4.b+k5.c) =
+				(k1*k3)aXa+(k1*k4)aXb+(k1*k5)aXc+(k2*k3)bXa+(k2*k4)bXb+(k2*k5)bXc+(k3*k3)cXa+(k3*k4)cXb+(k3*k5)cXc
+
+Quindi il prodotto viene definito dal prodotto degli elementi della base. Ma questi prodotti sono univocamente definiti
+essendo la base elementi di un magma.
+
+Chiaramente l'algebra cosi' ottenuta non e' necessariamente associativa ne' commutativa ne' unital.
+
+Pero' se M e' qualcosa di piu' di un magma...
+
+Se M e' un semigruppo l'algebra sara' associativa
+Se M e' un monoide l'algebra sara' associativa e unital (infatti il vettore unita' sara 1.e)
+Se M e' un monoide commutativo l'algebra sara' associativa,commutativa e unital.
+
+Il tutto puo' essere visto come un'estensione del campo K aggiungendo i simboli esterni pari agli elementi della base
+
+
+Vediamo alcuni esempi.
+
+Supponiamo K=R e la base {1,u}	quindi un magma con elemento neutro.
+
+Bisogna stabilire il calcolo di uXu (poiche' e' gia' stabilito che 1X1=1 1Xu=u uX1=u)
+
+In generale uXu potra' essere un qualunque vettore: uXu = 1.a+b.u con a e b reali.
+
+Allora: u^2 - b.u + b^2/4 = a + b^2/4
+Da cui: (u - b/2)^2 = a + b^2/4
+Cioe': (u - b/2)^2 = u1^2 dove u1^2 = a + b^2/4
+
+Si hanno percio' 3 casi in base al valore di a + b^2/4 :
+
+1) a + b^2/4 = 0  cioe' a = -b^2/4
+   Allora sara' (u - b/2)^2 = 0 porta alla base {1,eps} con eps^2 = 0
+2) a + b^2/4 > 0  porta alla base {1,j} con j^2 = 1
+3) a + b^2/4 < 0  porta alla base {1,i} con i^2 = -1
+
+Caso 1)		DUAL NUMBERS
+
+v = a + b.eps		con eps^2 = 0
+
+Se v1 = a + b.eps e v2 = c + d.eps allora v1Xv2 = a*c + (a*d+b*c).eps
+
+Quindi in questa algebra (a,b) X (c,d) = (a*c,a*d+b*c)
+			 (a,b) + (c,d) = (a+c,b+d)
+
+E' associativa ?  vediamo: ( (a,b) X (c,d) ) X (e,f) = (a*c,a*d+b*c) X (e,f) = ((a*c)*e,((a*c)*f+(a*d+b*c)*e))
+									     = (a*c*e,a*c*f+a*d*e+b*c*e)
+			   (a,b) X ( (c,d) X (e,f) ) = (a,b) X (c*e,c*f+d*e) = (a*(c*e),a*(c*f+d*e)+b*(c*e))
+									     = (a*c*e,a*c*f+a*d*e+b*c*e)
+E' associativa!
+
+E' commutativa?  vediamo: (a,b) X (c,d) = (a*c,a*d+b*c)
+                          (c,d) X (a,b) = (c*a,c*b+d*a)
+
+E' commutativa!
+
+Esiste elemento neutro: Si': e'  (1,0)  infatti (a,b)X(1,0) = a*1,a*0+b*1 = (a,b)
+						(1,0)X(a,b) = 1*a,1*b+0*a = (a,b)
+
+Vediamo se per caso esistono gli elementi inversi rispetto il 'X':
+
+a<>0 e b<>0    (a,b)X(x,y)=(1,0)   da cui: a*x = 1  e a*y+b*x = 0  da cui : x = 1/a e y=-b/a^2 avendo pero' a<>0.
+Tutti gli elementi del tipo (0,b) NON hanno inverso
+Quindi l'anello e' dotato di unit: se a<>0 si ha (a,b)^-1 = (1/a,-b/a^2)
+Se invece a=0 non c'e' inverso.
+
+Caso 2)		SPLIT-COMPLEX NUMBERS
+
+v = a + b.j		con j^2 = 1
+
+Se v1 = a + b.j e v2 = c + d.j allora v1Xv2 = (a*c + b*d) + (a*d+b*c).j
+
+Quindi in questa algebra (a,b) X (c,d) = (a*c+b*d,a*d+b*c)
+			 (a,b) + (c,d) = (a+c,b+d)
+
+E' associativa ?  vediamo: Si'
+E' commutativa ?  vediamo: Si'
+Esiste elemento neutro: Si' e' (1,0)
+
+Vediamo se per caso esistono gli elementi inversi rispetto il 'X':
+
+a<>0 e b<>0    (a,b)X(x,y)=(1,0)   da cui: a*x+b*y = 1  e a*y+b*x = 0  da cui : x = -(a/b)*y da cui -(a^2/b)*y+b*y = 1
+
+y = b/(b^2-a^2) x = -a/(b^2-a^2) questo pero' e' vero se a<>b. Tutti gli elementi del tipo (a,a) NON hanno inverso
+
+Quindi l'anello e' dotato di unit: se a<>b si ha (a,b)^-1 = (-a/(b^2-a^2),b/(b^2-a^2))
+Se invece a=b non c'e' inverso.
+
+Caso 3)		COMPLEX NUMBERS
+
+v = a + b.i		con i^2 = -1
+
+Se v1 = a + b.j e v2 = c + d.j allora v1Xv2 = (a*c - b*d) + (a*d+b*c).i
+
+Quindi in questa algebra (a,b) X (c,d) = (a*c-b*d,a*d+b*c)
+			 (a,b) + (c,d) = (a+c,b+d)
+
+E' associativa ?  vediamo: Si'
+E' commutativa ?  vediamo: Si'
+Esiste elemento neutro: Si' e' (1,0)
+
+Vediamo se per caso esistono gli elementi inversi rispetto il 'X':
+
+a<>0 e b<>0    (a,b)X(x,y)=(1,0)   da cui: a*x-b*y = 1  e a*y+b*x = 0  da cui : x = -(a/b)*y da cui -(a^2/b)*y-b*y = 1
+y = -b/(a^2+b^2) x = a/(a^2+b^2)
+
+Quindi se (a,b)<>(0,0) si ha (a,b)^-1 = (a/(a^2+b^2),-b/(a^2+b^2))
+
+Percio' OGNI ELEMENTO DIVERSO DA 0 E' DOTATO DI INVERSO. PERCIO' (SOLO PER QUESTA ALGEBRA) SI HA UN CAMPO

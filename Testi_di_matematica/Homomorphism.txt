@@ -1,0 +1,84 @@
+Il morfismo tra gruppi e' detto omomorfismo.
+
+Dati 2 gruppi (G,·) e (H,×) si dice che f:G->H e' un omomorfismo di gruppi se:
+
+f(a·b)=f(a)×f(b) per ogni a in G e per ogni b in H
+
+Da cio' deriva che:
+
+f(a·eg)=f(a)×f(eg)=f(a)=f(a)×eh da cui f(eg)=eh. Quindi l'omomorfismo fa' corrispondere gli elementi neutri dei 2 gruppi.
+
+Si definisce kernel dell'omomorfismo f ( ker(f) ) il sottinsieme di G i cui elementi vengono fatti corrispondere dall'omomorfismo
+all'elemento neutro di H : Ker(f)={g,g appartenenti a G tali che f(g)=eh}
+Al kernel appartiene necessariamente eg (per quanto detto prima).
+
+Dimostriamo che ker(f)={eg} <==> f e' iniettiva.
+Supponiamo esista un a diverso da eg appartenente al kernel; allora si avrebbe f(a)=eh
+ma allora si deduce: f(eg)=eh ==> f(a.a^-1)=eh ==> f(a)×f(a^-1)=eh ==> f(a^-1)=eh e quindi la f non e' iniettiva.
+Viceversa se la f non e' iniettiva esistono a e b diversi tali che f(a)=f(b); allora si deduce:
+f(a)×f(a^-1)=f(b)×f(a^-1) ==> f(a.a^-1)=f(b·a^-1) ==> f(eg)=f(b·a^-1) quindi b.a^-1 fa' parte di ker(f)
+
+Dimostriamo che ora che ker(f) e' sottogruppo normale di G.
+
+1) Dimostriamo innanzitutto che e' sottogruppo:
+
+   a) eg appartiene da ker(f) in quanto abbiamo visto che f(eg)=eh
+   b) supponiamo di avere a e b appartenenti a ker(f);
+      allora: f(a)=f(b)=eh ==> f(a)×f(b)=eh×eh ==> f(a·b)=eh quindi anche a·b appartiene a ker(f)
+   c) supponiamo a appartenga a ker(f) ovvero che sia f(a)=eh;
+      poiche' f(eg)=eh ==> f(a·a^-1)=eh ==> f(a)·f(a^-1)=eh ==> eh·f(a^-1)=eh si deduce f(a^-1)=eh;
+      quindi anche a^-1 appartiene a ker(f).
+
+  Ora dimostriamo che ker(f) e' sottogruppo normale:
+
+  Bisogna dimostrare che se a appartiene a ker(f) allora per ogni g in G si ha che g^-1·a·g appartiene a ker(f)
+  Si ha f(g^-1·a·g)=f(g^-1)×f(a)×f(g)=f(g^-1)×eh×f(g)=f(g^-1)×f(g)=f(g·g^-1)=f(eg)=eh
+  quindi anche g^-1·a·g appartiene a ker(f)
+
+Si definisce immagine dell'omomorfismo f l'immagine della funzione f ( Imm(f) )
+
+Dimostriamo che Imm(f) e' un sottogruppo di H.
+
+a) eh appartiene a Imm(f) poiche' e' f(eg)=eh
+b) supponiamo di avere 2 elementi h1 e h2 di H che appartengano a Imm(f). Allora esisteranno 2 elementi g1 e g2 appartenenti a G
+   tali che f(g1)=h1 e f(g2)=h2. Da cui: f(g1)×f(g2)=h1×h2 ==> f(g1·g2)=h1×h2. Percio' anche g1·g2 appartiene a Imm(f)
+c) supponiamo h appartenga a Imm(f). Allora esiste g in G tale che f(g)=h da cui: f(g)×f(g^-1)=h×f(g^-1) ==> f(g·g^-1)=h×f(g^-1) ==>
+   f(eg)=h×f(g^-1) ==> eh=h×f(g^-1) ==> h^-1=f(g^-1) Percio' anche h^-1 appartiene a Imm(f)
+
+
+Il teorema fondamentale dell'omomorfismo dice che:
+
+Dati 2 gruppi (G,·) e (H,×) sia f:G->H un omomorfismo di gruppi
+
+Allora: H:Ker(f) e' isomorfo a Imm(f)
+
+DIMOSTRAZIONE:
+
+Poiche' Ker(f) e' un sottogruppo normale di G sappiamo che G:Ker(f) e' effettivamente un gruppo.
+
+Sappiamo anche che G viene partizionato in sottinsiemi del tipo g·ker(f). Se g appartiene a ker(f) allora g·ker(f)=ker(f)
+Se invece g e' esterno a ker(f) g·ker(f) sara' un coset di ker(f). Ciascuna di queste partizioni e' un elemento di G/ker(f).
+
+Allora consideriamo la mappa m : (G:ker(f)) --> H  m(x·ker(f))=f(x).
+
+Dimostriamo che m e' well-defined cioe' che e' una congruenza in quanto fa' corrispondere 2 elementi della stessa partizione
+allo stesso elemento: Consideriamo 2 elementi della stessa partizione: se x·ker(f) e y·ker(f) appartengono alla stessa partizione
+significa che posso esprimere y come prodotto di x per un elemento di ker(f);
+infatti in tal caso y·ker(f)=(x·k)·ker(f)=x·(k·ker(f))=x·ker(f)
+Ora dimostreremo che se x·ker(f)=y·ker(f) allora m(x·ker(f))=m(y·ker(f))
+E' x·ker(f)=y·ker(f) ==> f(x·ker(f))=f(y·ker(f)) ==>
+f(x)×f(ker(f))=f(y)×f(ker(f)) ==> f(x)×eh=f(y)×eh ==> f(x)=f(y) ==> m(x·ker(f))=m(y·ker(f))
+
+Ora dimostriamo che m e' un omomorfismo:
+
+m((x·ker(f))·(y·ker(f)))=f((x·ker(f))·(y·ker(f))))=f(x·ker(f)·y·ker(f))=
+f(x·y·ker(f)·ker(f))=f(x·y·ker(f))=f(x·y)×f(ker(f))=f(x·y)×eh=f(x·y)=f(x)×f(y)=m((x·ker(f)))×m((y·ker(f)))
+
+Ora dimostriamo che m e' iniettiva cioe' che m(x·ker(f))=m(y·ker(f)) ==> x·ker(f)=y·ker(f)
+Infatti f(x)=f(y) ==> f(x)×eh=f(y)×eh ==> f(x)×f(ker(f))=f(y)×f(ker(f)) ==> f(x·ker(f))=f(y·ker(f)) ==> x·ker(f)=y·ker(f)
+da cui m(x·ker(f))=m(y·ker(f)) ==> x·ker(f)=y·ker(f)
+Poi e' chiaro che Imm(m)=Imm(f(x·ker(f))) ma se x varia in G x·ker(f) assume ogni valore in G e quindi Imm(f(x·ker(f)))=Imm(f)
+Percio' Imm(m)=Imm(f). Quindi assumendo Imm(f) (e non H) come codominio di m essa diventa suriettiva
+
+Quindi m e' una funzione biunivoca da G:ker(f) a Imm(f) ed e' anche un omomorfismo:
+percio' G:ker(f) e' isomorfo a Imm(f)

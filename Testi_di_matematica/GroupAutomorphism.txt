@@ -1,0 +1,124 @@
+Vediamo gli automorfismi di un gruppo finito.
+
+Dato un gruppo finito G un automorfismo e' una funzione biunivoca f:G->G
+(cioe' una permutazione dei suoi elementi) che mantiene la struttura
+del gruppo:
+
+f(a.b)=f(a).f(b) da cui f(e)=e (la permutazione deve avere l'elemento neutro
+come punto fisso).
+
+Ricordiamo che le funzioni biunivoche costituiscono un automorfismo
+dell'insieme di sostegno del gruppo (l'insieme se cambia l'ordine dei suoi
+elementi)
+Gli automorfismi del gruppo sono un sottinsieme di quello dell'insieme in
+quanto in piu' devono mantenere la struttura del gruppo.
+
+L'insieme degli automorfismi munito dell'operazione di composizione
+e' a sua volta un gruppo.
+
+Definiamo ora il centro di un gruppo:
+
+Z(G) = {elementi g in G tali che per ogni elemento x in g e' x.g=g.x}
+
+In pratica sono quegli elementi del gruppo che commutano rispetto un
+qualunque elemento.
+
+Questo e' un sottogruppo normale di G.
+
+Dimostriamo che e' un sottogruppo di G:
+
+1) x.e=e.x ==> e appartiene comunque a Z(G)
+2) se x e y appatengono al centro ==> (x.y).z = x.(y.z) = x.(z.y) = (x.z).y = (z.x).y = z.(x.y) quindi anche x.y appartiene al centro.
+3) se x appartiene al centro x.y=y.x ==> (x.y)^-1=(y.x)^-1 ==> y^-1.x^-1 = x^-1.y^-1 ==> z.x^-1 = x^-1.z
+   quindi anche x^-1 appartiene al centro
+
+Dimostriamo che e' normale:
+x.Z(G) = Z(G).x  per le proprieta' degli elementi del centro.
+
+E' chiaro che si hanno 2 estremi:
+
+1) G e' abeliano: in tal caso Z(G)=G (poiche' ogni elemento di G commuta)
+2) Nessun elemento di G commuta: in tal caso Z(G)={e}
+
+Ora consideriamo la mappa f_g:G->G f_g(h)=g^-1.h.g
+
+Dimostriamo che essa e' un azione a destra del gruppo G su se' stesso:
+
+Infatti:
+
+definiamo h*g=f_g(h)=g^-1.h.g
+
+1) h*e=e^-1.h.e=h
+2) h*(g1.g2)=(g1.g2)^-1.h.(g1.g2)=g2^-1.g1^.1.h.g1.g2=g2^-1.(g1^.1.h.g1).g2=(h*g1)*g2
+
+Quindi per quanto detto sulle azioni ogni mappatura sara' biunivoca (automorfismo di insieme).
+Qui in piu' risultera' essere un automorfismo di gruppo:
+infatti f_g(h1h2)=g^-1.(h1.h2).g=g^-1.h1.(g.g^-1).h2.g=(g^-1.h1.g).(g^-1.h2.g)=f_g(h1).f_g(h2)
+Quindi ogni f_g(h)=g^-1.h.g e' un automorfismo di G.
+Questo tipo di automorfismo (il coniugo) essendo in pratica un'azione del gruppo in se' stesso e' detto automorfismo interno
+e il gruppo degli automorfismi interni di G viene indicato con Inn(G) (sara' un sottogruppo dell'intero Aut(G))
+E ci sara' un omomorfismo tra G e Aut(G): f:G->Aut(G) f(g)=f_g(h)=g^-1.h.g
+(Questo deriva dalla proprieta' 2) delle azioni)
+
+Dimostriamo ora che il kernel di questo omomorfismo e' Z(G)
+
+Infatti Ker(f)= {g di G tali che f_g(h)=h cioe' quando f_g e' l'elemento neutro di Aut(G) cioe' e' la funzione identica}
+
+ma f_g(h)=h significa g^-1.h.g=h ==> (g.g^-1).h.g=g.h ==> h.g=g.h per ogni h che e' proprio la proprieta' di un elemento di Z(G)
+
+Quindi per un teorema sugli omomorfismi sara' G:Z(G)=Inn(G) (poiche' Z(G) e' kernel di un omomorfismo tra G e Inn(G))
+
+Abbiamo visto prima che se G e' abeliano si ha Z(G)=G e allora Inn(G)=G:Z(G)={I}
+Cioe' in tal caso c'e' solo l'automorfismo interno triviale dato dalla funzione identita'.
+Se invece G non e' abeliano ad ogni elemento di G non appartenente a Z(G) corrispondera' un automorfismo interno dato dal coniugo.
+
+Quindi possiamo affermare che se un gruppo non e' abeliano ha sicuramente almeno un automorfismo non triviale (dato dal coniugo).
+
+Se G e' abeliano tutti gli automorfismi (se ci sono) saranno esterni e apparterranno a Out(G)
+e sara' in generale Aut(G) = Inn(G) x Out(G)
+
+Se G e' abeliano un automorfismo e' la mappatura che fa' corrispondere ogni elemento al suo inverso:
+
+Infatti:
+
+sia f(g)=g^-1
+
+Allora: f(g1.g2)=(g1.g2)^-1=g2^-1.g1^.1=g1^-1.g2^-1=f(g1).f(g2) e questo sara' un automorfismo esterno.
+
+Quindi dato un gruppo non abeliano esiste almeno un automorfismo (esterno) dato dall'operazione di inversione.
+
+Ci sono pero' gruppi abeliani per cui ogni elemento e' nil-potente
+cioe' per cui a.a=e per ogni elemento.
+
+Un esempio e' il gruppo K4 (gruppo di Klein) pari alle simmetrie di un rettangolo.
+
+In tal caso poiche' ogni elemento e' l'inverso di se' stesso avremo che l'inversione ci realizza l'automorfismo triviale.
+Poiche' questi gruppi essendo abeliani hanno come automorfismo interno solo quello triviale, uno potrebbe pensare
+che questi gruppi non avessero alcun altro automorfismo. Invece non e' cosi'.
+
+Questa e' la tabella di Cailey di K4
+
+1 2 3 4 
+2 1 4 3 
+3 4 1 2 
+4 3 2 1 
+
+Possiamo giocare sulle 6 permutazioni tra 2,3,4:
+
+234		ci da' il gruppo K4 di partenza
+243		scambiando il 3 col 4
+324		scambiando il 2 col 3
+342		con una rotazione a sinistra
+423		scambiando il 3 col 4
+432		con una rotazione a destra
+
+Nel gruppo di Klein si trova sperimentalmente che questi sono tutti automorfismi (esterni)
+
+Per altri casi di gruppi abeliano nil-potenti si puo' dimostrare partendo dal gruppo di Klein che anch'essi hanno automorfismi esterni.
+
+Quindi possiamo dire che gli unici 2 gruppi privi di automorfismi non triviali sono:
+
+C1 {e}
+C2 {e,a}
+
+tutti gli altri hanno automorfismi

@@ -1,0 +1,152 @@
+
+Azione di un gruppo su un insieme.
+
+L'azione puo' essere a sinistra o a destra (potrebbero anche coincidere)
+
+Noi descriviamo quella a sinistra.
+
+Sia G un gruppo e X un insieme.
+Si dice che G agisce a sinistra su un insieme X se esiste una funzione f : G x X --> X
+per cui ad ogni elemento di G e' associata una funzione di X in se' stesso.
+
+Per essere un'azione devono valere le seguenti proprieta':
+
+1) Compatibilita': g1.(g2.x) = (g1.g2).x per ogni coppia g1,g2 di elementi del gruppo e per ogni elemento x dell'insieme X
+2) 1.x = x per ogni x appartenente a X
+
+Ora si vede facilmente che l'insieme costituito dalle funzioni f (una per ogni elemento di G) costituisce un gruppo con
+l'operazione di composizione di funzione.
+Se G e' abeliano anche questo gruppo sara' abeliano.
+
+Infatti: Chiamiamo f_g1(x) la funzione da X in X corrispondente all'elemento g1 di G.
+
+1) f_g2 . f_g1 = f_g2(f_g1(x)) = g2 . (g1 . x) = (g2 . g1)(x) = f_g2g1(x) = f_g2g1    l'operazione e' interna.
+2) f_1(x) e' l'elemento neutro. Infatti f_g . f_1 = f_g(f_1(x)) = g . (1.x) = (g . 1) . x = g . x = f_g
+                                        f_1 . f_g = f_1(f_g(x)) = 1 . (g.x) = (1 . g) . x = g . x = f_g
+3) dato f_g(x) l'inversa e' f_(g^-1)(x); infatti:
+   f_(g^-1) . f_g = f_(g^-1)((f_g)(x)) = (g^-1) . (g . x) = ((g^-1) . g) . x = 1 . x = f_1(x) da cui f_(g^-1) . f_g = f_1
+e
+   f_g . f_(g^-1) = f_g((f_g(^-1))(x)) = g . ((g^-1) . x) = (g . (g^-1)) . x = 1 . x = f_1(x) da cui f_g . f_(g^-1) = f_1
+
+Quindi f_g(x) con g elemento di G e operazione composizione di funzione e' un gruppo.
+
+g . g1 = g . g2 ==> g1 = g2
+(g . g1) . x = (g . g2) . x ==> g1 . x = g2 . x
+g . (g1 . x) = g . (g2 . x) ==> g1 . x = g2 . x
+g . y1 = g . y2 ==> y1 = y2				avendo posto   y1 = g1 . x   e   y2 = g2 . x
+f_g(y1) = f_g(y2) ==> y1 = y2
+y1 <> y2 ==> f_g(y1) <> f_g(y2)
+
+Quindi la funzione f_g(x) e' iniettiva. Questo significa l'azione del gruppo G (tramite la f_g) induce una permutazione in X
+Quindi ad ogni elemento di G corrisponde una permutazione in X. Ma una permutazione e' un elemento del gruppo simmetrico di
+su un numero di simboli pari al numero degli elementi di X.
+
+Per quanto detto prima l'insieme di queste permutazioni e' un sottogruppo del gruppo simmetrico e sara' abeliano se lo e' G.
+La funzione F : G --> Bij(X) e' un omorfismo di gruppo. Infatti:
+
+F(g1 . g2) = f_g1g2(x) = (g1 . g2) . x = g1 . (g2 . x) = f_g1(f_g2(x)) = F(g1) . F(g2)
+F(g) = F(1 . g) = F(1) . F(g) quindi F(1) deve essere la permutazione identica
+
+Questo omomorfismo fa' corrispondere ad ogni elemento di G un automorfismo di H (inteso come insieme) (cioe' una funzione biunivoca)
+
+Se F e' iniettiva l'azione del gruppo e' detta fedele.
+Cio' significa che g1<>g2 ==> f_g1<>f_g2 cioe' elementi diversi di g inducono permutazioni diversi in X
+In tal caso c'e' isomorfismo tra G e un sottogruppo di Sym(X)
+In tal caso c'e' un embedding di G nel gruppo simmetrico a n simboli dove n e' il numero dei simboli di X
+
+E' possibile che un gruppo agisca su se stesso. In tal caso X coincide con il sostegno di G.
+Esempi f_g(x) = g.x
+       f_g(x) = x.g
+       f_g(x) = g^-1 . x . g (coniugazione) (e' significativa solo se G non e' abeliano)
+
+Esiste anche il concetto di azione di un gruppo G su un gruppo H.
+In tal caso viene richiesto che le f_g siano le biiezioni che mantengono la struttura di H (cioe' gli automorfismi di H)
+Percio' in tal caso l'omomorfismo e' tra un elemento di G e un automorfismo di H (inteso come gruppo)
+(cioe' una funzione biunivoca che mantiene l'operazione di gruppo)
+
+Si definisce Orbita dell'elemento x di X in seguito all'azione del gruppo G : Orb(x)=G.x ovvero {g.x con g elemento di G}
+
+x e y appartengono alla stessa orbita se esiste x1 in X e gx,gy in G tali che x=g1.x1 e y=g2.x1
+ovvero poiche' y=g2.x1 ==> g2^-1.y=x1  se si ha x=g1.(g2^-1.y)=(g1.g2^-1).y
+quindi x e y appartengono alla stessa orbita se esiste un g in G tale che x=g.y
+(oppure g^-1.x=y cioe' esiste un g' in G tale che y=g'.x).
+cioe' se posso trasformare x in y (o viceversa) mediante l'azione di G.
+
+Adesso introduciamo una relazione tra gli elementi dell'insieme X:
+diciamo che x1 R x2 se x1 e x2 appartengono alla stessa orbita.
+
+Questa e' una relazione di equivalenza, infatti:
+
+1) xRx poiche' 1.x=x
+2) x1Rx2 <==> x2Rx1 infatti x1 = g.x2 ==> g^-1.x1 = x2 e viceversa
+3) x1Rx2 e x2Rx3 ==> x1Rx3 infatti x1=g1.x2 x2=g2.x3 ==> x1=g1.(g2.x3)=(g1.g2).x3
+
+Quindi poiche' la relazione di appartenza alla stessa orbita e' di equivalenza
+essa indurra' un partizionamento di X in classi di equivalenza che corrispondono alle varie orbite.
+
+L'insieme delle orbite indotte dall'azione di G su X si indica normalmente come X/G ed e' detto quoziente dell'azione.
+In certi ambiti e' anche detto "spazio delle orbite" o "spazio dei coinvarianti"
+
+L'azione di G su X e' detta transitiva se si ha una solo orbita (coincidente con X)
+ovvero se tutti gli elementi di X appartengono alla stessa orbita cioe' se dati 2 elementi di X x1 e x2
+esiste sempre un elemento in g in grado di trasformare l'uno nell'altro.
+Questo si puo' anche esprimere concisamente cosi' X=G.x cioe' fissato un qualunque x in X esiste un g in grado di trasformarlo
+in qualunque altro elemento di X
+
+In generale l'azione di un gruppo G su un insieme X di almeno k elementi e' detta k-transitiva (k=1,2...) (1-transitiva = transitiva)
+se per ogni coppia di k-ple di elementi di X (x_1,x_2,....,x_k) e (y_1,y_2,....,y_k) dove ogni k-pla ha elementi mutualmente diversi,
+esiste un elemento g di G tale che x_i=g.y_i per i da 1 a k;
+
+Quindi l'azione di un gruppo G su un insieme X di almeno k elementi e' detta k-transitiva se G agisce transitivamente
+sulle k-ple di elementi diversi di X.
+
+L'azione e' detta strettamente k-transitiva (sharply k-transitive action)
+se esiste un'unico g che trasforma una generica k-pla in un'altra (ricordiamo che ogni k-pla deve avere elementi mutualmente diversi)
+
+Definizione dello stabilizer di un gruppo rispetto all'azione di esso su un insieme X:
+Consideriamo Stab_x(G) = { elementi di g che fissano l'elemento x di X cioe' gli elementi g di G tali che g.x=x }
+Verifichiamo che e' un sottogruppo di G (non necessariamente normale)
+
+Infatti
+
+1) Componendo 2 elementi di Stab_x(G) si ottiene un elemento di Stab_x(G):
+se g1.x=x e g2.x=x si ha g2.(g1.x)=g2.x=x da cui (g2.g1).x=x
+2) Poiche' e' e.x=x e fa' parte di Stab_x(G)
+3) infatti g.x=x ==> g^-1.(g.x)=g^-1.x ==> (g^-1.g).x=g^-1.x ==> e.x=g^-1.x ==> g^-1.x=x
+   quindi se g appartiene a Stab_x(G) anche g^-1 appartiene a Stab_x(G)
+
+
+Diamo ora 2 concetti relativi ad un'azione del gruppo su se' stesso
+
+Definizione del centralizer di un gruppo rispetto all'azione di esso su un suo sottinsieme S:
+Definiamo:
+Centr_s(G) = {elementi di g che commutano con ogni elemento di S cioe' elementi g in G tali che g.s=s.g per ogni s in S}
+
+Definizione del normalizer di un gruppo rispetto all'azione di esso su un suo sottinsieme S:
+Definiamo:
+Norm_s(G) = {elementi di g tali che g.S=S.g}
+
+Chiaramente Norm_s(G) e' un sottinsieme di Centr_s(G)
+
+Se S e' un sottogruppo di G allora sia Centr_s(G) che Norm_s(G) sono sottogruppi di G
+Centr_s(G) e' a sua volta un sottogruppo normale di Norm_s(G)
+
+Infatti:
+
+1) g1.s=s.g1 g2.s=s.g2 ==> (g1.s).(g2.s)=(s.g1).(g2.s)=s.(g1.g2).s
+2) e.s=s.e
+3) g.s=s.g ==> (g.s)^-1=(s.g)^-1 ==> s^-1.g^-1=g^-1.s^-1 ma s^-1 essendo S sottogruppo e' anch'esso in S
+
+1) g1.S=S.g1 g2.S=S.g2 ==> (g1.S).(g2.S)=(S.g1).(g2.S)=S.(g1.g2).S
+2) e.S=S.e
+3) g.S=S.g ==> (g.S)^-1=(S.g)^-1 ==> S^-1.g^-1=g^-1.S^-1 ==> S.g^-1=g^-1.S in quanto essendo S sottogruppo S^-1=S
+
+Se s.g=g.s per ogni S allora sara' S.g=g.S quindi Centr_s(G) e' sottogruppo di Norm_s(G)
+
+Verifichiamo che e' normale: sia g1 appartenente a Norm_s(G). Allora dimostriamo che g1^-1.Centr_s(G).g1=Centr_s(G)
+Infatti sia g2 appartenente a Centr_s(G); allora:
+
+(g1^-1.g2.g1).s=g1^-1.g2.(g1.s)=g1^-1.g2.(s'.g1)=g1^-1.(g2.s').g1=
+g1^-1.(s'.g2).g1=(g1^-1.s').g2.g1=(s''.g1^-1).g2.g1=s''.(g1^-1.g2.g1)
+Ma: g1.s=s'.g1 g1^-1.s'=s''.g1^-1 ==> s''=g1^-1.s'.g1=g1^-1.(g1.s.g1^-1).g1=(g1^-1.g1).s.(g1^-1.g)=s
+Percio': (g1^-1.g2.g1).s=s.(g1^-1.g2.g1) quindi Centr_s(G) e' sottogruppo normale di Norm_s(G)
