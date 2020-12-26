@@ -1,0 +1,118 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3866,        110]
+NotebookOptionsPosition[      3303,         92]
+NotebookOutlinePosition[      3694,        108]
+CellTagsIndexPosition[      3651,        105]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"p", "=", "5"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "[", "x_", "]"}], ":=", " ", 
+  RowBox[{
+   RowBox[{"x", "^", 
+    RowBox[{"(", 
+     RowBox[{"p", "-", "1"}], ")"}]}], " ", "/", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"E", "^", "x"}], " ", "-", " ", "1"}], 
+    ")"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SommaDiRiemann", "[", 
+   RowBox[{"a_", ",", "b_", ",", "n_"}], "]"}], ":=", " ", 
+  RowBox[{"(", " ", 
+   RowBox[{
+    RowBox[{"deltax", "=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"b", "-", "a"}], ")"}], "/", 
+      RowBox[{"2", "^", "n"}]}]}], ";", 
+    RowBox[{"x", "=", "a"}], ";", 
+    RowBox[{"Somma", "=", "0"}], ";", "  ", 
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"k", "=", "0"}], ",", 
+      RowBox[{"k", "<", 
+       RowBox[{"2", "^", "n"}]}], ",", 
+      RowBox[{"k", "++"}], ",", 
+      RowBox[{
+       RowBox[{"Somma", "+=", " ", 
+        RowBox[{"f", "[", "x", "]"}]}], ";", 
+       RowBox[{"x", "+=", "deltax"}]}]}], "]"}], ";", " ", 
+    RowBox[{"Somma", "*=", "deltax"}], ";", 
+    RowBox[{"Return", "[", "Somma", "]"}]}], ")"}]}], "\n", 
+ RowBox[{"SommaDiRiemann", "[", 
+  RowBox[{"0.01", ",", "100", ",", "12"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", 
+  RowBox[{
+   RowBox[{"Gamma", "[", "p", " ", "]"}], "*", 
+   RowBox[{"Zeta", "[", "p", "]"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.813219558011764*^9, 3.8132195893146687`*^9}, {
+   3.813219884280108*^9, 3.8132199380817327`*^9}, {3.813220123528113*^9, 
+   3.8132201784565687`*^9}, {3.813220682182498*^9, 3.813220699007114*^9}, 
+   3.81322090755674*^9, 3.8132209618031273`*^9, {3.813221042515587*^9, 
+   3.8132210459770327`*^9}, {3.8132211355206614`*^9, 3.813221145899366*^9}, {
+   3.8132211844740868`*^9, 3.8132212070863447`*^9}, {3.813221356129813*^9, 
+   3.813221367319439*^9}, {3.813221441915642*^9, 3.8132214610100927`*^9}, {
+   3.813221679971403*^9, 3.813221757708715*^9}, {3.813221832471517*^9, 
+   3.8132218771053343`*^9}},
+ CellLabel->
+  "In[127]:=",ExpressionUUID->"fccacfe7-9011-472a-9a9b-223afd4c3df5"],
+
+Cell[BoxData["24.886266121196925`"], "Output",
+ CellChangeTimes->{{3.813221445270473*^9, 3.813221462300973*^9}, {
+  3.813221724496242*^9, 3.8132217587387257`*^9}, {3.8132218569632187`*^9, 
+  3.813221878562468*^9}},
+ CellLabel->
+  "Out[130]=",ExpressionUUID->"43c56479-f0ea-4d4e-8ed2-b317036aa65a"],
+
+Cell[BoxData["24.88626612344088`"], "Output",
+ CellChangeTimes->{{3.813221445270473*^9, 3.813221462300973*^9}, {
+  3.813221724496242*^9, 3.8132217587387257`*^9}, {3.8132218569632187`*^9, 
+  3.813221878638288*^9}},
+ CellLabel->
+  "Out[131]=",ExpressionUUID->"5e30e8f3-f19f-49b9-805b-11194c089045"]
+}, Open  ]]
+},
+WindowSize->{1920, 1136},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
+FrontEndVersion->"12.1 for Linux x86 (64-bit) (March 18, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"b1e30027-5ca0-4660-aa25-b31abd9dfbee"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 2108, 53, 302, "Input",ExpressionUUID->"fccacfe7-9011-472a-9a9b-223afd4c3df5"],
+Cell[2691, 77, 297, 5, 51, "Output",ExpressionUUID->"43c56479-f0ea-4d4e-8ed2-b317036aa65a"],
+Cell[2991, 84, 296, 5, 51, "Output",ExpressionUUID->"5e30e8f3-f19f-49b9-805b-11194c089045"]
+}, Open  ]]
+}
+]
+*)
+
