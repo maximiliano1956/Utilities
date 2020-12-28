@@ -1,0 +1,390 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[a4paper,bindingoffset=0.2in,
+            left=1in,right=1in,top=1in,bottom=1in,
+            footskip=.25in]{geometry}
+\usepackage{amsmath}
+
+\usepackage{graphicx}
+\graphicspath{{images/}}
+            
+\begin{document}
+
+\title{\textbf{Trasformazione di Eulero e sua applicazione nella definizione della funzione Zeta}}
+\author{Autore: Lelli Massimo}
+\date{\today}
+\maketitle
+
+\begin{flushleft}
+\vspace{10mm}
+
+Una trasformazione di una serie convergente e' una seconda serie (i cui termini sono funzioni dei termini della prima serie) che converge allo stesso limite.\\
+\vspace{5mm}
+Tipicamente la trasformazione e' utile in quanto rende la convergenza piu' rapida ovvero il numero di termini da sommare nella serie trasformata per ottenere la stessa precisione e' minore rispetto alla serie originale.\\
+\vspace{5mm}
+In piu' se la serie e' una serie di funzioni, molto spesso la serie trasformata permettere di estendere il dominio della funzione data dalla serie stessa. (Questo lo vedremo ad esempio per la funzione Zeta di Riemann).\\
+\vspace{5mm}
+La trasformazione di Eulero si applica alle serie convergenti a segni alterni.\\
+\vspace{5mm}
+Percio' sia data una serie convergente a segni alterni: $S=\sum_{k=0}^{\infty}(-1)^k*a_k$\\
+\vspace{5mm}
+La serie trasformata con la trasformazione di Eulero e':  $T=\sum_{k=0}^{\infty}\frac{\Delta _0^k}{2^{k+1}}$\\
+dove $\Delta_0^k$ e' la k-esima differenza in avanti a partire dal primo elemento della successione $a_n$.\\
+\vspace{5mm}
+Definiamo la differenza k-esima in avanti dell'elemento n-esimo di una successione in maniera ricorsiva come:\\
+1) $\Delta_n^0 = a_n$\\
+2) $\Delta_n^k = \Delta_{n}^{k-1} - \Delta_{n+1}^{k-1}$\\
+\vspace{5mm}
+Vediamo ora le varie somme parziali della serie originale e quelle della serie trasformata di Eulero:\\
+\vspace{5mm}
+$S_0 = a_0$\\
+$S_1 = a_0 - a_1$\\
+$S_2 = a_0 - a_1 + a_2$\\
+$S_3 = a_0 - a_1 + a_2 - a_3$\\
+\dots\\
+$T_0 = \frac{1}{2}\Delta_0^0$\\
+$T_1 = \frac{1}{2}\Delta_0^0 + \frac{1}{4}\Delta_0^1$\\
+$T_2 = \frac{1}{2}\Delta_0^0 + \frac{1}{4}\Delta_0^1 +  \frac{1}{8}\Delta_0^2$\\
+$T_3 = \frac{1}{2}\Delta_0^0 + \frac{1}{4}\Delta_0^1 +  \frac{1}{8}\Delta_0^2 + \frac{1}{16}\Delta_0^3$\\
+\dots\\
+\vspace{5mm}
+Esplicitiamo i termini della nuova serie:\\
+$\Delta_0^0 = a_0$\\
+$\Delta_0^1 = \Delta_0^0 - \Delta_1^0 = a_0 - a_1$\\
+$\Delta_0^2 = \Delta_0^1 - \Delta_1^1 = (\Delta_0^0 - \Delta_1^0) - (\Delta_1^0 - \Delta_2^0) = (a_0 - a_1) - (a_1 - a_2) = a_0 - 2a_1 + a_2$\\
+$\Delta_0^3 = \Delta_0^2 - \Delta_1^2 = (\Delta_0^1 -\Delta_1^1) - (\Delta _1^1 - \Delta _2^1) =$\\$[(\Delta _0^0 -\Delta_1^0) -(\Delta_1^0 - \Delta_2^0)] - [(\Delta_1^0 - \Delta_2^0) - (\Delta_2^0 -\Delta_3^0)] = [(a_0 - a_1) - (a_1 - a_2)] - [(a_1 - a_2) - (a_2 - a_3)] = a_0-3a_1+3a_2-a_3$\\
+\vspace{5mm}
+Percio' le somme parziali della trasformazione di Eulero sono:\\
+$S_0 = \frac{1}{2}a_0$\\
+$S_1 = \frac{1}{2}a_0 + \frac{1}{4}(a_0 - a_1)$\\
+$S_2 = \frac{1}{2}a_0 + \frac{1}{4}(a_0 - a_1) + \frac{1}{8}(a_0 - 2a_1 + a_2)$\\
+$S_3 = \frac{1}{2}a_0 + \frac{1}{4}(a_0 - a_1) + 
+\frac{1}{8}(a_0 - 2a_1 + a_2) + \frac{1}{16}(a_0 - 3a_1 + 3a_2 - a_3)$\\
+\dots\\
+\vspace{5mm}
+Ora vogliamo dimostrare che e': $S=T$ cioe' che\\
+\begin{equation}
+\label{eq:ind5}
+\sum_{k=0}^{\infty}(-1)^k*a_k = \sum_{k=0}^{\infty}\frac{\Delta_0^k}{2^{k+1}}
+\end{equation}
+\\
+\vspace{10mm}
+Questa dimostrazione viene fatta in vari step:
+
+\begin{itemize}
+
+\item{Definizione del prodotto di Cauchy di due serie:\\
+\vspace{5mm}
+Date due serie convergenti:\hspace{20mm}$A=\sum_{k=0}^{\infty} a_k$\hspace{20mm}$B=\sum_{k=0}^{\infty} b_k$\\
+\vspace{5mm}
+Il prodotto di Cauchy delle 2 serie e' la serie che si ottiene moltiplicandole:\\
+\vspace{5mm}
+$\sum_{k=0}^{\infty} a_k * \sum_{k=0}^{\infty} b_k=\sum_{k=0}^{\infty} c_k = C$\\
+\vspace{5mm}
+Se almeno una delle 2 serie componenti e' uniformemente convergente allora si avra' che $C=A*B$\\
+In tal caso vediamo di ricavare $c_n$ in funzione di $a_n$ e $b_n$.\\
+Per fare questo definiamo formalmente le funzioni generatrici delle 3 serie:\\
+\vspace{5mm}
+$A(x)=\sum_{k=0}^{\infty} a_k * x^k$\hspace{10mm}$B(x)=\sum_{k=0}^{\infty} b_k * x^k$\hspace{10mm}$C(x)=\sum_{k=0}^{\infty} c_k * x^k$\\
+\vspace{5mm}
+Poiche' sara' $C(x)=A(x)*B(x)$ bastera' moltiplicare i polinomi ed eguagliare i coefficienti del polinomio prodotto a quelli del polinomio $C(x)$.\\
+Vediamo as es. di ricavare i primi coefficienti $c_0$ , $ c_1$ , $ c_2$:\\
+\vspace{5mm}
+E' abbastanza chiaro che sara':\\
+$c_0=a_0*b_0$\hspace{10mm}$c_1=a_0*b_1+a_1*b_0$\hspace{10mm}$c_2=a_0*b_2+a_1*b_1+a_2*b_0$\hspace{10mm}\dots\\
+\vspace{5mm}
+Da cui:\hspace{10mm}$c_k=\sum_{i=0}^{k} a_i * b_{k-i}$\hspace{10mm}che assomiglia molto ad una convoluzione discreta.\\
+\vspace{5mm}
+Se la serie A nel prodotto avesse come primo termine non la potenza zero ma il termine di potenza $m>0$ si ha:\\
+$c_k=\sum_{i=m}^{k} a_i * b_{k-i}$\hspace{5mm}per $k>=m$\hspace{5mm}e\hspace{5mm}$c_k=0$ per $k<m$\\
+\vspace{5mm}
+Un'altra uguaglianza notevole che ci servira' in seguito:\\
+\vspace{5mm}
+$S=\sum_{i=0}^{\infty}{\sum_{j=0}^{j=i}{a_{ij}}}=$\\
+\vspace{5mm}
+$(a_{00})+(a_{10}+a_{11})+(a_{20}+a_{21}+a_{22})$\dots$+(a_{n0}+a_{n1}+a_{n2}+$\dots$a_{nn})$\dots$=$\\
+\vspace{5mm}
+$(a_{00}+a_{10}+a_{20}+$\dots$+a_{n0}+$\dots$)+(a_{11}+a_{21}+a_{31}+$\dots$+a_{n1}+$\dots$)+$\\
+\vspace{5mm}
+$(a_{22}+a_{32}+a_{42}+$\dots$+a_{n2}+$\dots$)+$\dots\hspace{5mm}Quindi sara':\\
+\vspace{5mm}
+\begin{equation}
+\label{eq:ind6}
+\sum_{i=0}^{\infty}{\sum_{j=0}^{j=i}{a_{ij}}}=\sum_{j=0}^{\infty}{\sum_{i=j}^{\infty}{a_{ij}}}
+\end{equation}
+}
+
+\item{
+Proprieta' dei coefficienti binomiali:\\
+\vspace{5mm}
+Ricordiamo che $\binom{n}{k}$ e' il numero di sottinsiemi diversi di k simboli scelti da un insieme di n simboli ($0<=k<=n$). Se $k<0$ o $k>n$ e' $\binom{n}{k} = 0$.\\
+\vspace{5mm}
+Il coefficiente binomiale definisce anche i coefficienti dello sviluppo di un binomio; infatti e': \hspace{5mm}$(a+b)^n=\sum_{k=0}^{k=n}{\binom{n}{k}a^{k}b^{n-k}}$.\\
+\vspace{5mm}
+In particolare e': $(x+1)^n=\sum_{k=0}^{k=n}{\binom{n}{k}x^{k}}$\\
+\vspace{5mm}
+La riga n ($n>=0$) del triangolo di Tartaglia e' costituita dagli $n+1$ coefficienti binomiali $\binom{n}{k}$ per $k=0,$\dots$n$\\
+\vspace{5mm}
+Nel triangolo di Tartaglia e': $a_{nk}=a_{(n-1)(k-1)}+a_{(n-1)k}$\\
+\vspace{5mm}
+Essendo pero' $a_{nk}=\binom{n}{k}$ dovra' essere (per $n>0$ e $k>0$):\\
+\begin{equation}
+\label{eq:ind2}
+\binom{n}{k}=\binom{n-1}{k-1}+\binom{n-1}{k}
+\end{equation}
+\\
+\vspace{5mm}
+Dimostriamolo:\\
+\vspace{5mm}
+Sappiamo che $\binom{n}{k}=\frac{n!}{k!(n-k)!}$\hspace{5mm}Percio':\\
+\vspace{5mm}
+$\binom{n-1}{k-1}=\frac{(n-1)!}{(k-1)!((n-1)-(k-1))!}$\hspace{15mm}$\binom{n-1}{k}=\frac{(n-1)!}{k!((n-1)-k)!}$\\
+\vspace{5mm}
+Da cui:\hspace{15mm}$\binom{n-1}{k-1}+\binom{n-1}{k} = \frac{(n-1)!}{(k-1)!(n-k)!} + \frac{(n-1)!}{k!(n-k-1)!}$\\
+\vspace{5mm}
+\hspace{53.3mm}$=\frac{k(n-1)!}{k(k-1)!(n-k)!} + \frac{(n-k)(n-1)!}{k!(n-k)(n-k-1)!}$\\
+\hspace{53.3mm}$=\frac{k(n-1)!}{k!(n-k)!} + \frac{(n-k)(n-1)!}{k!(n-k)!}$\\
+\vspace{5mm}
+\hspace{53.3mm}$=\frac{k(n-1)!+(n-k)(n-1)!}{k!(n-k)!}$\\
+\vspace{5mm}
+\hspace{53.3mm}$=\frac{(k+n-k)(n-1)!}{k!(n-k)!}$\\
+\vspace{5mm}
+\hspace{53.3mm}$=\frac{n(n-1)!}{k!(n-k)!}=\frac{n!}{k!(n-k)!}=\binom{n}{k}$\hspace{10mm}CVD\\
+}
+\item{
+Dimostriamo ora che:\\
+\begin{equation}
+\label{eq:ind1}
+\Delta_n^k=\sum_{i=0}^{k}(-1)^{i}\binom{k}{i}a_{n+i}
+\end{equation}
+\\
+\vspace{5mm}
+Lo dimostriamo per induzione:
+\vspace{5mm}
+La \eqref{eq:ind1} e' vera per k=0:\hspace{14mm}$\Delta_n^0=\sum_{i=0}^{0}(-1)^{0}\binom{0}{i}a_{n+i}=a_n$\\
+\vspace{5mm}
+Ora supponiamo che la \eqref{eq:ind1} sia vera per un generico $k$.\\
+\vspace{5mm}
+Dedurremo che sia vera per $k+1$:\\
+\vspace{5mm}
+Poiche' e':\hspace{5mm}$\Delta_n^{k+1}=\Delta_{n}^k - \Delta_{n+1}^k$\hspace{5mm}per la \eqref{eq:ind1} avremo:\\
+\vspace{5mm}
+$\Delta_n^{k+1}=\sum_{i=0}^{k}(-1)^{i}\binom{k}{i}a_{n+i}-\sum_{i=0}^{k}(-1)^{i}\binom{k}{i}a_{n+1+i}$\\
+\vspace{5mm}
+\hspace{10mm}$=\sum_{i=0}^{k}(-1)^{i}\binom{k}{i}a_{n+i}-\sum_{i=1}^{k+1}(-1)^{i-1}\binom{k}{i-1}a_{n+i}$\\
+\vspace{5mm}
+Poiche' e':\hspace{5mm}$\binom{k}{k+1}=0$\hspace{5mm}e$\binom{k}{-1}=0$\hspace{5mm}\hspace{5mm}potremo scrivere:\\
+\vspace{5mm}
+$\Delta_n^{k+1}=\sum_{i=0}^{k+1}(-1)^{i}\binom{k}{i}a_{n+i}-\sum_{i=0}^{k+1}(-1)^{i-1}\binom{k}{i-1}a_{n+i}$\\
+\vspace{5mm}
+\hspace{10mm}$=\sum_{i=0}^{k+1}(-1)^{i}\binom{k}{i}a_{n+i}-(-1)\frac{\sum_{i=0}^{k+1}(-1)^{i-1}\binom{k}{i-1}a_{n+i}}{-1}$\\
+\vspace{5mm}
+\hspace{10mm}$=\sum_{i=0}^{k+1}(-1)^{i}\binom{k}{i}a_{n+i}+\sum_{i=0}^{k+1}(-1)^{i}\binom{k}{i-1}a_{n+i}$\\
+\vspace{5mm}
+\hspace{10mm}$=\sum_{i=0}^{k+1}(-1)^{i}[\binom{k}{i}+\binom{k}{i-1}]a_{n+i}$\hspace{5mm}\\
+\vspace{5mm}
+e poiche' per la \eqref{eq:ind2} e':\hspace{10mm}$\binom{k}{1}+\binom{k}{i-1}=\binom{k+1}{i}$\\
+\vspace{5mm}
+Si ha:\hspace{10mm}$\Delta_n^{k+1}=\sum_{i=0}^{k+1}(-1)^{i}\binom{k+1}{i}a_{n+i}$\\
+\vspace{5mm}
+che e' la \eqref{eq:ind1} dove $k+1$ prende il posto di $k$.  CVD\\
+}
+\item{Dimostriamo ora che:
+\begin{equation}
+\label{eq:ind3}
+\sum_{l=k}^{n}{\binom{l}{k}}=\binom{n+1}{k+1}
+\end{equation}
+\\
+\vspace{5mm}
+Infatti per la \eqref{eq:ind2} e':\\
+\vspace{5mm}
+$\sum_{l=k}^{n}{\binom{l}{k}}=\sum_{l=k}^{n}{[\binom{l+1}{k+1}-\binom{l}{k+1}]}=\sum_{l=k}^{n}{\binom{l+1}{k+1}}-\sum_{l=k}^{n}{\binom{l}{k+1}}$\\
+\vspace{5mm}
+Ponendo $l+1=l$ nella prima e tenendo presente che $\binom{k}{k+1}=0$ si avra':\\
+\vspace{5mm}
+$\sum_{l=k}^{n}{\binom{l}{k}}=\sum_{l=k+1}^{n+1}{\binom{l}{k+1}}-\sum_{l=k+1}^{n}{\binom{l}{k+1}}=\binom{n+1}{k+1}$\hspace{10mm}CVD\\
+}
+\item{
+Dimostriamo ora che per $|x|<1$:\\
+\begin{equation}
+\label{eq:ind4}
+\sum_{n=m}^{\infty}{}\binom{n}{m}x^n=\frac{x^{m}}{(1-x)^{m+1}}
+\end{equation}
+\\
+\vspace{5mm}
+Lo dimostriamo per induzione:
+\vspace{5mm}
+La \eqref{eq:ind4} e' vera per m=0:\hspace{14mm}$\sum_{n=0}^{\infty}{}\binom{n}{0}x^n=\frac{x^{0}}{(1-x)^{0+1}}$\hspace{10mm}da cui:\hspace{10mm}$\sum_{n=0}^{\infty}{}x^n=\frac{1}{(1-x)}$\\
+\vspace{5mm}
+che e' vera in quanto abbiamo una serie geometrica di ragione x.\\
+\vspace{5mm}
+Infatti:\hspace{10mm}$x^{m+1}-1=(x-1)\sum_{n=0}^{m}{x^n}$\hspace{5mm}(lo si dimostra per induzione)\\
+\vspace{5mm}
+Allora se $x<>1$ si avra':\hspace{10mm}$\frac{x^{m+1}-1}{x-1}=\sum_{n=0}^{m}{x^{n}}$\\
+\vspace{5mm}
+Passando al limite per m che tende a $\infty$ se $|x|<1$ $x^{m+1}$ tende a zero.\\
+\vspace{5mm}
+Ora supponiamo che la \eqref{eq:ind4} sia vera per un generico $m$.\\
+\vspace{5mm}
+Dedurremo che sia vera per $m+1$:\\
+\vspace{5mm}
+$\sum_{n=m}^{\infty}{}\binom{n}{m}x^n=\frac{x^{m}}{(1-x)^{m+1}}$\hspace{5mm}da cui:\hspace{5mm}$\frac{x}{1-x}\sum_{n=m}^{\infty}{}\binom{n}{m}x^n=\frac{x}{1-x}\frac{x^{m}}{(1-x)^{m+1}}$\\
+\vspace{5mm}
+Ovvero:\hspace{5mm}$x\sum_{n=m}^{\infty}{}\binom{n}{m}x^n\sum_{n=0}^{\infty}{x^n}=\frac{x^{m+1}}{(1-x)^{[(m+1)+1]}}$\\
+\vspace{5mm}
+ma  $\sum_{n=m}^{\infty}{}\binom{n}{m}x^n\sum_{n=0}^{\infty}{x^n}$  e'  un  prodotto di Cauchy con $a_n=\binom{n}{m}$ e $b_n=1$\\
+\vspace{5mm}
+e quindi e' uguale a: $\sum_{n=m}^{\infty}{(\sum_{l=m}^{n}{\binom{l}{m})}x^n}$  da cui per la \eqref{eq:ind3}:\\
+\vspace{5mm}
+$x\sum_{n=m}^{\infty}{\binom{n+1}{m+1}x^n}=\frac{x^{m+1}}{(1-x)^{[(m+1)+1]}}$\hspace{5mm}ovvero:\hspace{5mm}$\sum_{n=m}^{\infty}{\binom{n+1}{m+1}x^{n+1}}=\frac{x^{m+1}}{(1-x)^{[(m+1)+1]}}$\\
+\vspace{5mm}
+Ovvero:\hspace{5mm}$\sum_{n=m+1}^{\infty}{\binom{n}{m+1}x^{n}}=\frac{x^{m+1}}{(1-x)^{[(m+1)+1]}}$\\
+\vspace{5mm}
+che e' la \eqref{eq:ind4} con $m+1$ al posto di $m$.\hspace{20mm}CVD\\
+}
+\end{itemize}
+\vspace{5mm}
+Adesso possiamo dimostrare finalmente la \eqref{eq:ind5} :\\
+\vspace{5mm}
+$S=\sum_{k=0}^{\infty}\frac{\Delta_0^k}{2^{k+1}}=\sum_{k=0}^{\infty}\frac{\sum_{i=0}^{k}{(-1)^{i}\binom{k}{i}a_{i}}}{2^{k+1}}$ per la \eqref{eq:ind1}\\
+\vspace{5mm}
+Per la \eqref{eq:ind6} si ha:
+\vspace{5mm}
+$S=\sum_{i=0}^{\infty}[{\frac{(-1)^i}{2}a_{i}\sum_{k=i}^{\infty}{\binom{k}{i}(\frac{1}{2})^{k}}}]$\\
+\vspace{5mm}
+Ma per la \eqref{eq:ind4} e':\hspace{5mm}$\sum_{k=i}^{\infty}{\binom{k}{i}(\frac{1}{2})^{k}}=\frac{(\frac{1}{2})^i}{(\frac{1}{2})^{(i+1)}}=(\frac{1}{2})^{-1}=2$\\
+\vspace{5mm}
+Da cui:\hspace{22mm}$\sum_{k=0}^{\infty}\frac{\Delta_0^k}{2^{k+1}}=\sum_{i=0}^{\infty}({\frac{(-1)^i}{2}a_{i})2}=\sum_{k=0}^{\infty}{(-1)^k*a_{k}}$\hspace{20mm}CVD\\
+\vspace{30mm}
+Riprendiamo ora la \eqref{eq:ind4}:\hspace{20mm}$\sum_{n=m}^{\infty}{}\binom{n}{m}x^n=\frac{x^{m}}{(1-x)^{m+1}}$\\
+\vspace{5mm}
+Moltiplichiamo ambo i membri per $x$:\hspace{10mm}$\sum_{n=m}^{\infty}{}\binom{n}{m}x^{n+1}=\frac{x^{m+1}}{(1-x)^{m+1}}=(\frac{x}{1-x})^{m+1}$\\
+\vspace{5mm}
+Poniamo:  $y=\frac{1-x}{x}$  cioe':  $x=\frac{1}{y+1}$   e sostituendo si ha (per $y>0$): \\
+\vspace{5mm}
+$\sum_{n=m}^{\infty}{}\binom{n}{m}(\frac{1}{y+1})^{n+1}=(\frac{1}{y})^{m+1}$\\
+\vspace{5mm}
+Cioe':\\
+\begin{equation}
+\label{eq:ind8}
+{y}^{m+1}\sum_{n=m}^{\infty}{\binom{n}{m}\frac{1}{({1+y})^{n+1}}}=1
+\end{equation}
+\\
+\vspace{5mm}
+Allora data una serie:\hspace{10mm}$\sum_{j=0}^{\infty}{a_j}$\hspace{10mm}potro' scrivere per la \eqref{eq:ind8}:\\
+\vspace{5mm}
+$\sum_{j=0}^{\infty}{a_j}=\sum_{j=0}^{\infty}[{{a_j}*({y}^{j+1}\sum_{i=j}^{\infty}{\binom{i}{j}\frac{1}{({1+y})^{i+1}}}})]$\hspace{5mm}avendo posto $m=j$\hspace{5mm}$n=i$\\
+\vspace{5mm}
+Ovvero:\hspace{10mm}$\sum_{i=0}^{\infty}{a_i}=\sum_{j=0}^{\infty}{\sum_{i=j}^{\infty}({{a_j}*{y}^{j+1}\binom{i}{j}\frac{1}{({1+y})^{i+1}}}})$\\
+\vspace{5mm}
+Ma per la \eqref{eq:ind6} e':\hspace{10mm}$\sum_{j=0}^{\infty}{\sum_{i=j}^{\infty}{s_{ij}}}=\sum_{i=0}^{\infty}{\sum_{j=0}^{j=i}{s_{ij}}}$\hspace{5mm}da cui:\\
+\vspace{5mm}
+$\sum_{i=0}^{\infty}{a_i}=\sum_{i=0}^{\infty}{\sum_{j=0}^{j=i}{{a_j}*{y}^{j+1}}\binom{i}{j}\frac{1}{({1+y})^{i+1}}}$\hspace{10mm}e quindi:\\
+\pagebreak
+\begin{equation}
+\label{eq:ind9}
+\sum_{i=0}^{\infty}{a_i}=\sum_{i=0}^{\infty}{\frac{1}{({1+y})^{i+1}}\sum_{j=0}^{j=i}{\binom{i}{j}{y}^{j+1}}{a_j}}
+\end{equation}
+\\
+\vspace{5mm}
+La \eqref{eq:ind9} (valida per $y>0$) e' l'espressione piu' generale della trasformazione di Eulero e corrisponde a quella trattata in precedenza ponendo $y=1$.\\
+Come gia' detto questa trasformazione oltre ad accelerare un'eventuale convergenza, permette talvolta di definire la somma di serie che originariamente sarebbero divergenti.\\
+\vspace{10mm}
+Supponiamo ora:\hspace{5mm}$y=1$\hspace{5mm}e\hspace{5mm}$a_{i}=(-1)^{i}P_{k}(i)$\hspace{5mm}polinomio di grado $k$ in $i$.\\
+\vspace{5mm}
+Allora la serie $\sum_{i=0}^{\infty}{(-1)^{k}P_{k}(i)}$ non converge ma formalmente per la \eqref{eq:ind9} si ha:\\
+\vspace{5mm}
+$\sum_{i=0}^{\infty}{(-1)^{i}P_{k}(i)}=\sum_{i=0}^{\infty}{\frac{1}{2^{i+1}}\sum_{j=0}^{j=i}{\binom{i}{j}(-1)^{j}P_{k}(j)}}$ ma per la \eqref{eq:ind1} e':\\
+\vspace{5mm}
+$\sum_{j=0}^{j=i}{\binom{i}{j}(-1)^{j}P_{k}(j)}=\Delta^{i}P_{k}(0)$\\
+\vspace{5mm}
+Ricordiamo che: $\Delta^{0}P_{k}(0)=P_{k}(0)$\hspace{5mm}e\hspace{5mm}$\Delta^{i+1}P_{k}(m)=\Delta^{i}P_{k}(m)-\Delta^{i}P_{k}(m+1)$\\
+\vspace{5mm}
+Ora ogni volta che si passa ad una differenza successiva si ottiene un polinomio di grado inferiore di 1: infatti nella differenza $P_k(m)-P_k(m+1)$ il termine di grado k si elide.\\
+Percio' $\Delta^{1}P_{k}$ avra' grado $k-1$\hspace{5mm}da cui prendendo le differenze successive\hspace{5mm}$\Delta^{k}P_{k}$\hspace{5mm}avra' grado zero cioe' sara' una costante. Percio' $\Delta^{i}P_{k}=0$\hspace{5mm}per $i>k$.\\
+Quindi potro' scrivere:\\
+\begin{equation}
+\label{eq:ind10}
+\sum_{i=0}^{\infty}{(-1)^{i}P_{k}(i)}=\sum_{i=0}^{k}{\frac{1}{2^{i+1}}\sum_{j=0}^{j=i}{\binom{i}{j}(-1)^{j}P_{k}(j)}}
+\end{equation}
+\\
+\vspace{5mm}
+ Ho trasformato percio' una serie infinita in una somma finita.\\
+\vspace{5mm}
+Ora prendiamo come esempio di serie a segni alterni la funzione $\eta(s)$:\\
+\vspace{5mm}
+\begin{equation}
+\label{eq:ind7}
+\eta(s)=\sum_{k=0}^{\infty}{(-1)^{k}*\frac{1}{(k+1)^s}}
+\end{equation}
+\\
+\vspace{10mm}
+Ricordiamo che condizione necessaria e sufficiente per la convergenza di una serie a segni alterni e' che l'n-esimo termina tenda a zero per n che tende all'infinito.\\
+\vspace{10mm}
+Percio' la serie converge solo per $s>0$.\\
+(per $s=0$ e' oscillante limitata mentre per $s<0$ e' oscillante divergente).\\
+Per s che tende a $0^+$ la serie tende a $\frac{1}{2}$.\\
+Per s che tende a $+\infty$ la serie tende a 1. (Rimane solo il primo termine della serie)
+\vspace{10mm}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{Eta}
+    \caption{Eta function}
+    \label{fig:Eta}
+\end{figure}
+\vspace{5mm}
+La funzione $\eta$ e' intimamente legata alla funzione Zeta di Riemann.\\
+Infatti ricordiamo che che la funzione Zeta viene cosi' definita:\\
+\begin{equation}
+\label{eq:ind11}
+\zeta(s)=\sum_{k=0}^{\infty}{\frac{1}{(k+1)^s}}
+\end{equation}
+\\
+\vspace{5mm}
+Questa serie converge per $s>1$\\
+\vspace{5mm}
+Ora esplicitiamo i primi termini: $\zeta(s)=1+\frac{1}{2^{s}}+\frac{1}{3^{s}}+\frac{1}{4^{s}}+\dots$\\
+\vspace{5mm}
+Moltiplichiamo ambo i membri per $\frac{1}{2^{s}}$:\hspace{5mm}$\frac{1}{2^{s}}\zeta(s)=\frac{1}{2^{s}}(1+\frac{1}{2^{s}}+\frac{1}{3^{s}}+\frac{1}{4^{s}}+\dots)$\\
+\vspace{5mm}
+da cui:\hspace{5mm}$\frac{1}{2^{s}}\zeta(s)=\frac{1}{2^{s}}+\frac{1}{(2*2)^{s}}+\frac{1}{(2*3)^{s}}+\frac{1}{(2*4)^{s}}+\dots$\\
+\vspace{5mm}Cioe':\hspace{5mm}$\frac{1}{2^{s}}\zeta(s)=\frac{1}{2^{s}}+\frac{1}{4^{s}}+\frac{1}{6^{s}}+\frac{1}{8^{s}}+\dots$\hspace{2mm}Restano solo i termini di denominatore pari.\\
+\vspace{5mm}
+Ma allora:\hspace{5mm}$\zeta(s)-2\frac{1}{2^{s}}\zeta(s)=\eta(s)$\hspace{5mm}da cui:\hspace{5mm}$\zeta(s)=\frac{1}{1-\frac{1}{2^{(s-1)}}}\eta(s)$\hspace{5mm}Quindi:\\
+\begin{equation}
+\label{eq:ind12}
+\zeta(s)=\frac{1}{1-2^{(1-s)}}\eta(s)=\frac{1}{1-2^{(1-s)}}\sum_{k=0}^{\infty}{(-1)^{k}\frac{1}{{(k+1)}^{s}}}
+\end{equation}
+\\
+\vspace{5mm}
+Questa nuova definizione permette di estendere il dominio della funzione Zeta anche nell'intervallo $0<s<1$.\hspace{1mm}Quindi il dominio e' l'intervallo\hspace{1mm}$s>0$\hspace{1mm}escluso il valore\hspace{1mm}$s=1$.\\
+\vspace{5mm}
+Applichiamo ora la trasformazione di Eulero:\\
+\begin{equation}
+\label{eq:ind14}
+\zeta(s)=\frac{1}{1-2^{(1-s)}}\sum_{i=0}^{\infty}({\frac{1}{2^{i+1}}\sum_{j=0}^{i}{\binom{i}{j}(-1)^{j}\frac{1}{(j+1)^s}}})
+\end{equation}
+\\
+\vspace{5mm}
+Se\hspace{5mm}$s=-k$\hspace{5mm}intero negativo e': $\frac{1}{(j+1)^{-k}}=(j+1)^{k}$\hspace{5mm}Allora ponendo\hspace{5mm}$P_{k}(j)=(j+1)^{k}$\hspace{5mm}per la \eqref{eq:ind10} si ha:\\
+\begin{equation}
+\label{eq:ind13}
+\zeta(-k)=\frac{1}{1-2^{(k+1)}}\sum_{i=0}^{k}({\frac{1}{2^{i+1}}\sum_{j=0}^{i}{\binom{i}{j}(-1)^{j}(j+1)^k}})
+\end{equation}
+\\
+\vspace{5mm}
+La \eqref{eq:ind13} definisce in forma chiusa il valore della funzione Zeta  per i valori di s interi negativi.\\
+\vspace{5mm}
+Quindi ricapitolando: la \eqref{eq:ind14} definisce la funzione Zeta per $s<>1$ e nel caso $s=-k$ intero negativo la prima sommatoria la si puo' calcolare fino a $k$.\\
+\vspace{5mm}
+Se si estende la funzione Zeta sul piano complesso si vede che la  \eqref{eq:ind14} e' analitica su tutto il piano escluso il punto $s=1$ nel quale la funzione ha un polo.\\
+\vspace{5mm}
+Infatti supponiamo che la serie $f(s)=\sum_{n=1}^{\infty}{\frac{1}{n^{s}}}$ converga per $s>a$ con $s$ e $a$ numeri reali.\\
+Supponiamo di estendere la funzione f al campo complesso. Percio' ora $s=\sigma+i\theta$ e' complesso mentre $a$ e' complesso con $\Im(a)=0$.\\
+Allora:\\
+\vspace{5mm}
+$n^{s}=n^{\sigma+i\theta}=n^{\sigma}n^{i\theta}=n^{\sigma}e^{i(\theta\ln{n})}$\hspace{5mm}da cui\hspace{5mm}$|n^{s}|=|n^{\sigma}||e^{i(\theta\ln{n})}|=n^{\sigma}=n^{\Re(s)}$
+\end{flushleft}
+
+\end{document}
