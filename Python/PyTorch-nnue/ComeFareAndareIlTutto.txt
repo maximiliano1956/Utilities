@@ -1,0 +1,103 @@
+1) Attivare un ambiente python virtuale (es: source /home/lelli/Venvs/tensorflow-2.3.0/bin/activate)
+2) Fare l'upgrade di pytorch-lightning all'ultima versione (in modo che un exception diventi un warning) :
+   pip3 install --upgrade pytorch-lightning
+3) Installare la versione di pytorch per CPU:
+   pip3 install torch==1.7.1+cpu torchvision==0.8.2+cpu torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+
+4) Compilare la libreria libtraining_data_loader.so :
+   sh compile_data_loader.bat e rendere libtraining_data_loader.so eseguibile (cmod a+x ...)
+
+5) Modificare nnue_dataset.py sostituendo tutti i ".pin_memory()" con ""
+   (Questo poiche' la pinned memory (che velocizza) necessita della cuda library che non posso avere non avendo GPU aggiornata)
+
+6) In train.py routine data_loader_cc modificare (ad es.)
+   epoch_size = 100000000 --> 10
+   val_size = 1000000     --> 2
+
+7) in scripts/train.sh modificare:
+   python train.py d8_128000_21865.binpack d8_128000_21865.binpack --lambda 1.0 --val_check_interval 2000 --threads 2 --batch-size 16384 --progress_bar_refresh_rate 20 --enable-factorizer
+
+   in (ad es.)
+
+   python3 train.py ./scripts/d5_100_6559.binpack ./scripts/d5_100_6559.binpack --lambda 1.0 --val_check_interval 1 --threads 2 --batch-size 10 --progress_bar_refresh_rate 20
+
+8) Copiare train.py da scripts al direttorio precedente
+
+9) Copiare in scripts l'eseguibile di stockfish preso da Stockfish-master-2020-08-30.zip (l'ultima versione di nodchip)
+   Fare il download in scripts della rete nn-c3ca321c51c9.nnue :  wget https://tests.stockfishchess.org/api/nn/nn-c3ca321c51c9.nnue
+
+10) Modificare in scripts gensfen.sh:
+
+Da:
+
+#!/bin/bash
+
+# Using this commit:
+# https://github.com/Sopel97/Stockfish.git
+# commit d7d4ec211f7ef35ff39fe8aea54623a468b36c7d
+
+DEPTH=5
+GAMES=128000000
+SEED=$RANDOM
+ 
+options="
+uci
+setoption name PruneAtShallowDepth value false
+setoption name Use NNUE value pure
+setoption name Threads value 250
+setoption name Hash value 10240
+setoption name SyzygyPath value /dev/shm/vjoost/3-4-5-6/WDL/:/dev/shm/vjoost/3-4-5-6/DTZ/
+isready
+gensfen set_recommended_uci_options ensure_quiet random_multi_pv 4 random_multi_pv_diff 50 random_move_count 8 random_move_maxply 20 write_minply 5 eval_limit 1000 seed $SEED depth $DEPTH loop $GAMES output_file_name d${DEPTH}_${GAMES}_${SEED}"
+ 
+printf "$options" | ./stockfish
+
+
+A:
+
+#!/bin/bash
+
+DEPTH=5
+GAMES=100
+SEED=$RANDOM
+ 
+options="uci
+setoption name PruneAtShallowDepth value false
+setoption name Use NNUE value pure
+setoption name Threads value 2
+setoption name Hash value 2000
+setoption name SyzygyPath value /home/lelli/Chess-Engines/syzygy/3-4-5
+isready
+gensfen set_recommended_uci_options ensure_quiet random_multi_pv 4 random_multi_pv_diff 50 random_move_count 8 random_move_maxply 20 write_minply 5 eval_limit 1000 seed $SEED depth $DEPTH loop $GAMES output_file_name d${DEPTH}_${GAMES}_${SEED}"
+ 
+printf "$options" | ./stockfish
+
+
+===========================
+
+11) A questo punto si puo' partire con uno straccio di learning...
+
+IMPORTANTE: Questi comandi necessitano di molta ram, per cui e' consigliabile
+            prima di cominciare di interrompere qualunque altra applicazione (chrome soprattutto!)
+            Altrimenti il PC potrebbe andare in swap di memoria e e tutto si rallenterebbe in maniera inaffrontabile.
+
+    a) in scripts dare il comando ./gensfen.sh
+       Questo comando genera il file d5_100_xxxx.binpack
+       Questo nome di file va' riportato in train.sh (anche solo in quello copiato in nnue-pytorch-master)
+
+    b) Nel direttorio principale (nnue-pytorch-master) dare il comando ./train.sh
+
+       Se tutto va' bene nel direttorio nnue-pytorch-master/logs/default/version_xx/checkpoints/
+       ci sara' il file last.ckpt che rappresenta la rete creata.
+
+       Trasferire last.ckpt nel direttorio nnue-pytorch-master e dare il comando:
+       "python3 serialize.py last.ckpt nn.nnue".
+       Questo comando converte la rete dal formato .pt al formato .nnue (stockfish)
+
+       A questo punto si puo' gia' disattivare l'ambiente virtuale di Python (deactivate)
+
+       Trasferire nn.nue nel direttorio scripts e dare il comando:
+       ./rename_net.sh nn.nnue
+       Questo comando rinomina la rete nella convenzione di stockfish (nn-sha.nnue).
+
+       A questo punto si puo' provare ad utilizzare sotckfish con questa rete.
