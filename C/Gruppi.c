@@ -285,7 +285,7 @@ void StampaPerm(void)
 	printf("\n");
 
 	for (nr=0;nr<dim;nr++)
-		printf("%d ",tabperm[nr]);
+		printf("%d ",tabperm[nr]+1);
 
 	printf("\n\n");
 	}
