@@ -351,11 +351,17 @@ void ScanPerm(unsigned int nperm)
 						}
 
 			if (esci==0)
-			{
-				for (nelp=0;nelp<dim;nelp++)
-					permiso[niso][nelp]=tabperm[nelp];
-				printf("Trovato isomorfismo nr=%d\n",++niso);
-			}
+				{
+					if (niso>=MAXISO)
+					{
+						printf("Not enough memory!\n");
+						exit(1);
+					}
+				
+					for (nelp=0;nelp<dim;nelp++)
+						permiso[niso][nelp]=tabperm[nelp];
+					printf("Trovato isomorfismo nr=%d\n",++niso);
+				}
 			continue;
 			}
 
