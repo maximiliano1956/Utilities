@@ -80,7 +80,7 @@ int main(int argc, char *argv[]) {
 	ADDONEEDGE(g,29,8,m);
 
 	printf("\n");
-	printf("Automorphisms of Tutte-Coxeter graph:\n");
+	printf("Generators of Tutte-Coxeter graph automorphisms group:\n");
 	printf("\n");
 	densenauty(g,lab,ptn,orbits,&options,&stats,m,n,NULL);
 	printf("\n");
