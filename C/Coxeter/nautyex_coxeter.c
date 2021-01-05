@@ -42,6 +42,7 @@ int main(int argc, char *argv[]) {
 	EMPTYGRAPH(g,m,n);
 
 	options.writeautoms = TRUE;
+	options.linelength=120;
 
 	for (v = 0; v < n; ++v) {
 		ADDONEEDGE(g,v,(v+1)%n,m);
