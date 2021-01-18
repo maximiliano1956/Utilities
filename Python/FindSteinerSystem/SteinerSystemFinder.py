@@ -49,5 +49,4 @@ for g in solve(X, Y, []):
             if counter == 5:
                 print()
                 counter = 0
-
     print()
