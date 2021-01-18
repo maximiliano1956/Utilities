@@ -41,7 +41,6 @@ Y = {y:[y[:i]+y[i+1:] for i in range(k)] for y in Y}
 print('S('+str(k-1)+','+str(k)+','+str(n)+'): ',end='\n\n')
 
 for g in solve(X, Y, []):
-
     if g != None:
         counter = 0
         for w in g:
