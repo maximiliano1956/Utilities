@@ -1,0 +1,455 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "dlx.h"
+
+#define MAXS	200000
+
+typedef struct {
+	char **combnz;
+	int numc;
+} MATRIX;
+
+MATRIX comb_bn;
+MATRIX comb_tn;
+MATRIX comb_tb;
+
+char **soluz;
+int **set_tb;
+
+char *ind;
+char *MatDlx;
+char *set;
+  
+unsigned int nsol;
+unsigned int nb;
+
+unsigned char n;
+unsigned char b;
+unsigned char t;
+
+unsigned int nt;
+unsigned int bt;
+unsigned int tnb;
+
+unsigned char dlx_err_ram;
+
+char **allocMatChar(int nrow,int ncol) {
+
+	char **mat;
+	int nr;
+	int nc;
+
+	if ((mat=malloc((nrow)*sizeof(char **)))==NULL)
+		return(NULL);
+
+	for (nr=0;nr<nrow;nr++)
+        	if ((mat[nr]=malloc(ncol))==NULL)
+			return(NULL);
+
+	return(mat);
+}
+
+void deallocMatChar(char **mat,int nrow) {
+
+	int nr;
+
+	if (mat==NULL)
+		return;
+
+	for (nr=0;nr<nrow;nr++)
+		free(mat[nr]);
+
+	free(mat);
+
+	mat=NULL;
+}
+
+char *allocVectChar(int nel) {
+
+	char *vect;
+
+	if ((vect=malloc(nel))==NULL)
+		return(NULL);
+
+	return(vect);
+}
+
+void deallocVectChar(char *vect) {
+
+	if (vect==NULL)
+		return;
+
+	free(vect);
+
+	vect=NULL;
+}
+
+int **allocMatInt(int nrow,int ncol) {
+
+	int **mat;
+	int nr;
+	int nc;
+
+	if ((mat=malloc((nrow)*sizeof(int **)))==NULL)
+		return(NULL);
+
+	for (nr=0;nr<nrow;nr++)
+        	if ((mat[nr]=malloc(ncol*sizeof(int)))==NULL)
+			return(NULL);
+
+	return(mat);
+}
+
+void deallocMatInt(int **mat,int nrow) {
+
+	int nr;
+
+	if (mat==NULL)
+		return;
+
+	for (nr=0;nr<nrow;nr++)
+		free(mat[nr]);
+
+	free(mat);
+
+	mat=NULL;
+}
+
+
+void allocArr(void) {
+
+	comb_bn.combnz=allocMatChar(tnb,t);
+	if (comb_bn.combnz==NULL) {
+		printf("Non riesco ad allocare comb_bn!\n");
+		exit(1);
+	}
+	comb_tn.combnz=allocMatChar(nt,t);
+	if (comb_tn.combnz==NULL) {
+		printf("Non riesco ad allocare comb_tn!\n");
+		exit(1);
+	}
+	comb_tb.combnz=allocMatChar(bt,t);
+	if (comb_tb.combnz==NULL) {
+		printf("Non riesco ad allocare comb_tb!\n");
+		exit(1);
+	}
+
+	set_tb=allocMatInt(tnb,bt);
+	if (set_tb==NULL) {
+		printf("Non riesco ad allocare set_tb!\n");
+		exit(1);
+	}
+	MatDlx=allocVectChar(tnb*nt);
+	if (MatDlx==NULL) {
+		printf("Non riesco ad allocare MatDlx!\n");
+		exit(1);
+	}
+	ind=allocVectChar(n);
+	if (ind==NULL) {
+		printf("Non riesco ad allocare ind!\n");
+		exit(1);
+	}
+	soluz=allocMatChar(MAXS,n*n);
+	if (soluz==NULL) {
+		printf("Non riesco ad allocare soluz!\n");
+		exit(1);
+	}
+	set=allocVectChar(n);
+	if (set==NULL) {
+		printf("Non riesco ad allocare set!\n");
+		exit(1);
+	}
+}
+
+void deallocArr(void) {
+
+	deallocMatChar(comb_bn.combnz,tnb);
+	deallocMatChar(comb_tn.combnz,nt);
+	deallocMatChar(comb_tb.combnz,bt);
+
+	deallocMatInt(set_tb,tnb);
+	deallocVectChar(MatDlx);
+	deallocVectChar(ind);
+	deallocMatChar(soluz,MAXS);
+	deallocVectChar(set);
+}
+
+
+int Comb(int n,int k) {
+
+	if (n == 0)
+		return(1);
+
+	if (k==0 || k==n)
+		return(1);
+	if (k==1 || k==(n-1))
+		return(n);
+
+	return(Comb(n-1,k-1)+Comb(n-1,k));
+}
+
+void Scan2(unsigned char nn,unsigned char nsym,unsigned char n,unsigned char ii,MATRIX *m,
+		char set[],unsigned char verbose) {
+
+	if (n==nn) {
+		for (int i=0;i<nn;i++)
+			m->combnz[m->numc][i]=(set!=NULL) ? set[ind[i]-1]:ind[i];
+
+		m->numc++;
+
+		return;
+	}
+
+	for (int i=ii;i<=nsym;i++) {
+		ind[n]=i;
+
+		Scan2(nn,nsym,n+1,i+1,m,set,verbose);
+	}
+}
+
+void Scan(unsigned char order,unsigned char nsym,MATRIX *m,
+		unsigned char append,char set[],unsigned char verbose) {
+
+	if (append==0)
+		m->numc=0;
+	Scan2(order,nsym,0,1,m,set,verbose);
+
+	if (verbose==1) {
+		printf("\n");
+		printf("(");
+
+		for (int i=0;i<nsym;i++) {
+			if (set!=NULL)
+				printf("%2d",set[i]);
+			else
+				printf("%2d",i+1);
+			if (i<nsym-1)
+				printf(",");
+		}
+		printf(")\n");
+
+		for (int i=0;i<m->numc;i++) {
+			for (int j=0;j<order;j++)
+				printf("%2d ",m->combnz[i][j]);
+			printf("\n");
+		}
+		printf("Nr. elementi = %d\n",m->numc);
+	}
+}
+
+
+int cback(int rows_size,int *rows,void *data) {
+
+	int idx;
+
+	if (rows_size!=nb) {
+		printf("Incoerent data!\n!");
+		return(1);
+	}
+
+	if (nsol>=MAXS) {
+		dlx_err_ram=1;
+		return(1);
+	}
+
+	idx=0;
+	for (int i=0;i<rows_size;i++)
+		for (int j=0;j<b;j++)
+			soluz[nsol][idx++]=comb_bn.combnz[rows[i]][j];
+	nsol++;
+
+	return(0);
+}
+
+
+int main(char argc,char *argv[]) {
+
+	unsigned int cp_tnb;
+	unsigned int trovati;
+	char verbose;
+	unsigned int idx;
+	struct dlx_Node *header;
+
+
+	t=2;
+	b=3;
+	n=7;		// Steiner system (t,b,n)
+
+/*
+	t=5;
+	b=8;
+	n=24;
+*/
+
+	verbose=0;
+
+	nsol=0;
+  
+	printf("\n");
+
+	if (b==3)
+		if (n%6!=1 && n%6!=3) {
+			printf("It sistema di Steiner (%d,%d,%d) non puo esistere!\n",t,b,n);
+			exit(1);
+		}
+
+	if (Comb(n,t)%Comb(b,t)!=0) {
+		printf("It sistema di Steiner (%d,%d,%d) non puo esistere!\n",t,b,n);
+		exit(1);
+	}
+
+	printf("Steiner System (%d,%d,%d)\n",t,b,n);
+	printf("\n");
+
+	nt=Comb(n,t);
+	bt=Comb(b,t);
+	nb=nt/bt;
+	tnb=Comb(n,b);
+
+	printf("Numero combinazioni di %d elementi su %d = %d\n",t,n,nt);
+	printf("Numero combinazioni di %d elementi su %d = %d\n",b,n,tnb);
+	printf("Numero blocchi di %d elementi su %d necessari per la copertura esatta = %d\n",b,n,nb);
+	printf("\n");
+	printf("Premere un tasto ");
+	getchar();
+	printf("\n");
+
+	allocArr();
+
+//	Scan(t,n,&comb_tn,0,NULL,verbose);
+//	Scan(b,n,&comb_bn,0,NULL,verbose);
+
+	Scan(t,n,&comb_tn,0,NULL,verbose);
+	Scan(b,n,&comb_bn,0,NULL,verbose);
+
+	printf("Generazione dei %d blocchi di %d elementi su %d possibili\n\n",tnb,b,n);
+
+	for (int i=0;i<comb_bn.numc;i++) {
+		if (verbose==0)
+			if (i%500==0 || comb_bn.numc-i<10)
+				printf("%d\n",i);
+		for (int j=0;j<b;j++)
+			set[j]=comb_bn.combnz[i][j];
+		Scan(t,b,&comb_tb,0,set,0);
+		for (int j=0;j<comb_tb.numc;j++) {
+				for (int k=0;k<comb_tn.numc;k++) {
+					trovati=0;
+					for (int l=0;l<t;l++)
+						if (comb_tb.combnz[j][l]==comb_tn.combnz[k][l])
+							trovati++;
+					if (trovati==t) {
+						set_tb[i][j]=k;
+						break;
+					}
+				}
+				if (trovati!=t) {
+					printf("Incoerent data!\n");
+					exit(1);
+				}
+		}
+	}
+
+	if (verbose==1)
+		for (int i=0;i<tnb;i++) {
+			printf("{");
+			for (int j=0;j<b;j++) {
+				printf("%2d",comb_bn.combnz[i][j]);
+				if (j<b-1)
+					printf(",");
+			}
+			printf("}     ");
+			for (int j=0;j<bt;j++) {
+				if (j==0)
+					printf("{");
+				for (int k=0;k<t;k++) {
+					if (k==0)
+						printf("{");
+					printf("%2d",comb_tn.combnz[set_tb[i][j]][k]);
+					if (k<t-1)
+						printf(",");
+					else
+						printf("}");
+				}
+				if (j<bt-1)
+					printf(",");
+				else
+					printf("}\n");
+			}
+		}
+	printf("Nr. elementi = %d\n",tnb);
+
+	idx=0;
+	for (int i=0;i<tnb;i++)
+		for (int j=0;j<nt;j++)
+			MatDlx[idx++]=0;
+
+	idx=0;
+	for (int i=0;i<tnb;i++) {
+		for (int j=0;j<bt;j++) {
+			if (set_tb[i][j]>=nt) {
+				printf("Incoerent data!\n!");
+				exit(1);
+			}
+			for (int k=0;k<t;k++)
+				MatDlx[idx+set_tb[i][j]]=1;
+		}
+		idx+=nt;
+	}
+#if 0
+	if (verbose) {
+		idx=0;
+		for (int i=0;i<tnb;i++) {
+			for (int j=0;j<nt;j++) {
+				printf("%1d",MatDlx[idx++]);
+			}
+			printf("\n");
+		}
+	}
+#endif
+	header=dlx_alloc(MatDlx,tnb,nt);
+
+	if (header==NULL) {
+		printf("Not enough memory! (dlx_alloc)\n");
+		exit(1);
+	}
+
+	dlx_err_ram=0;
+
+	dlx_solve(header,cback,NULL);
+	dlx_free(header);
+
+	if (dlx_err_ram==1)
+		printf("Nr. soluzioni limitato a %d (MAXS)\n\n",MAXS);
+
+	printf("\n");
+	printf("\n");
+	printf("Trovate %d soluzioni\n\n",nsol);
+	printf("Premere un tasto ");
+	getchar();
+	printf("\n");
+
+	for (int ns=0;ns<nsol;ns++) {
+		printf("Soluzione nr. %6d      ",ns+1);
+		printf("{");
+		idx=0;
+		for (int i=0;i<nb;i++) {
+			printf("{");
+			for (int j=0;j<b;j++) {
+				printf("%d",soluz[ns][idx++]);
+				if (j<b-1)
+					printf(",");
+			}
+			printf("}");
+			if (i<nb-1)
+				printf(",");
+		}
+		printf("}\n");
+	}
+
+	printf("\n");
+	printf("\n");
+
+	deallocArr();
+
+	return(0);
+}
