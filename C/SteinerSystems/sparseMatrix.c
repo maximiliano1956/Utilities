@@ -7,6 +7,8 @@ int nrows=35;
 int ncols=21;
 int b=3;
 
+u_int64_t size;
+
 char sparseMatrix[][21] =
 	{
 		{ 1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
