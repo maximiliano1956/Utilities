@@ -1,0 +1,3073 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    138931,       3065]
+NotebookOptionsPosition[    137959,       3043]
+NotebookOutlinePosition[    138350,       3059]
+CellTagsIndexPosition[    138307,       3056]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+   RowBox[{
+   "Questa", " ", "funzione", " ", "disegna", " ", "un", " ", "grafo", " ", 
+    "di", " ", 
+    RowBox[{
+    "Levi", ".", "\[IndentingNewLine]", "\[IndentingNewLine]", "   ", 
+     RowBox[{"INPUT", ":", "   ", 
+      RowBox[{
+      "cx", "     ", "Coordinata", " ", "X", " ", "del", " ", "centro", " ", 
+       "del", " ", "grafo", " ", 
+       RowBox[{"(", 
+        RowBox[{"default", " ", "0"}], ")"}], "\[IndentingNewLine]", "\t\t  ",
+        "tipo", "   ", "Tipo", " ", "grafo", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"0", "=", 
+          RowBox[{
+           RowBox[{"Don", "'"}], "t", " ", "care"}]}], ",", 
+         RowBox[{"1", "=", "Fano"}], ",", 
+         RowBox[{"2", "=", 
+          RowBox[{"Tutte", "-", "Coxeter"}]}]}], ")"}], " ", 
+       RowBox[{"(", 
+        RowBox[{"default", " ", "1"}], ")"}], "\[IndentingNewLine]", "\t\t  ",
+        "prm", "    ", "Permutazione", " ", "degli", " ", "n", " ", "nodi", 
+       " ", 
+       RowBox[{"(", 
+        RowBox[{"default", " ", "la", " ", "permutazione", " ", "identica"}], 
+        ")"}], "\[IndentingNewLine]", "\t\t  ", "nfs", "    ", "Rotazione", 
+       " ", "del", " ", 
+       RowBox[{"grafo", ".", " ", "Viene"}], " ", "realizzata", " ", "una", 
+       " ", "rotazione", " ", "in", " ", "senso", " ", "antiorario", " ", 
+       "di", " ", "angolo", " ", "nsf", "*", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"360", "/", "n"}], " ", "gradi"}], ")"}], 
+       "\[IndentingNewLine]", "\t\t         ", "Se", " ", "nfs", " ", 
+       RowBox[{"e", "'"}], " ", "intero", " ", "questo", " ", "corrisponde", 
+       " ", "ad", " ", "una", " ", "rotazione", " ", "dei", " ", 
+       RowBox[{"nodi", ".", " ", 
+        RowBox[{"(", 
+         RowBox[{"default", " ", "0"}], ")"}]}], "\[IndentingNewLine]", 
+       "\t\t  ", "nn", "     ", "Numero", " ", "di", " ", "nodi", " ", "del", 
+       " ", "grafo", " ", 
+       RowBox[{"(", 
+        RowBox[{"numero", " ", "pari"}], ")"}], " ", 
+       RowBox[{"(", 
+        RowBox[{"default", " ", "4"}], ")"}], "\[IndentingNewLine]", 
+       "          ", "lagg", "   ", "Lista", " ", "connessioni", " ", 
+       "interne", " ", "di", " ", "n", " ", "nodi", " ", 
+       RowBox[{"(", 
+        RowBox[{"default", " ", "nessun", " ", "nodo"}], ")"}], 
+       "\[IndentingNewLine]", "\t\t  ", "sgl", "    ", "Sigle", " ", "nodi", 
+       " ", "elementi", " ", 
+       RowBox[{"(", 
+        RowBox[{"default", " ", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "2", ",", "3", ",", "4", ",", "..."}], "}"}]}], 
+        ")"}], "\[IndentingNewLine]", "\t      ", "\[IndentingNewLine]", 
+       "\t      ", "\[IndentingNewLine]", 
+       RowBox[{"OUTPUT", ":", "  ", 
+        RowBox[{
+        "Lista", " ", "elementi", " ", "da", " ", "graficare"}]}]}]}]}]}], 
+   "\[IndentingNewLine]", "     ", "\[IndentingNewLine]", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"genLevi", "[", 
+     RowBox[{
+      RowBox[{"cx_", ":", "0"}], ",", 
+      RowBox[{"tipo_", ":", "1"}], ",", 
+      RowBox[{"prm_", ":", 
+       RowBox[{"{", "0", "}"}]}], ",", 
+      RowBox[{"nfs_", ":", "0"}], ",", 
+      RowBox[{"nn_", ":", "4"}], ",", 
+      RowBox[{"lagg_", ":", 
+       RowBox[{"{", 
+        RowBox[{"{", "0", "}"}], "}"}]}], ",", 
+      RowBox[{"sgl_", ":", 
+       RowBox[{"{", "0", "}"}]}]}], "]"}], ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"tipo", "\[Equal]", "0"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"n", "=", "nn"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";",
+       "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"tipo", "\[Equal]", "1"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"n", "=", "14"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";",
+       "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"tipo", "\[Equal]", "2"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"n", "=", "30"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";",
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"tipo", "\[Equal]", "0"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"lpagg", "=", "lagg"}], ";"}]}], "\[IndentingNewLine]", 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"tipo", "\[Equal]", "1"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"lpagg", "=", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", "10", "}"}], ",", 
+            RowBox[{"{", "7", "}"}], ",", 
+            RowBox[{"{", "12", "}"}], ",", 
+            RowBox[{"{", "9", "}"}], ",", 
+            RowBox[{"{", "14", "}"}], ",", 
+            RowBox[{"{", "11", "}"}], ",", 
+            RowBox[{"{", "2", "}"}], ",", 
+            RowBox[{"{", "13", "}"}], ",", 
+            RowBox[{"{", "4", "}"}], ",", 
+            RowBox[{"{", "1", "}"}], ",", 
+            RowBox[{"{", "6", "}"}], ",", 
+            RowBox[{"{", "3", "}"}], ",", 
+            RowBox[{"{", "8", "}"}], ",", 
+            RowBox[{"{", "5", "}"}]}], "}"}]}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"tipo", "\[Equal]", "2"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"lpagg", "=", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", "14", "}"}], ",", 
+            RowBox[{"{", "19", "}"}], ",", 
+            RowBox[{"{", "24", "}"}], ",", 
+            RowBox[{"{", "11", "}"}], ",", 
+            RowBox[{"{", "28", "}"}], ",", 
+            RowBox[{"{", "15", "}"}], ",", 
+            RowBox[{"{", "20", "}"}], ",", 
+            RowBox[{"{", "25", "}"}], ",", 
+            RowBox[{"{", "30", "}"}], ",", 
+            RowBox[{"{", "17", "}"}], ",", 
+            RowBox[{"{", "4", "}"}], ",", 
+            RowBox[{"{", "21", "}"}], ",", 
+            RowBox[{"{", "26", "}"}], ",", 
+            RowBox[{"{", "1", "}"}], ",", 
+            RowBox[{"{", "6", "}"}], ",", 
+            RowBox[{"{", "23", "}"}], ",", 
+            RowBox[{"{", "10", "}"}], ",", 
+            RowBox[{"{", "27", "}"}], ",", 
+            RowBox[{"{", "2", "}"}], ",", 
+            RowBox[{"{", "7", "}"}], ",", 
+            RowBox[{"{", "12", "}"}], ",", 
+            RowBox[{"{", "29", "}"}], ",", 
+            RowBox[{"{", "16", "}"}], ",", 
+            RowBox[{"{", "3", "}"}], ",", 
+            RowBox[{"{", "8", "}"}], ",", 
+            RowBox[{"{", "13", "}"}], ",", 
+            RowBox[{"{", "18", "}"}], ",", 
+            RowBox[{"{", "5", "}"}], ",", 
+            RowBox[{"{", "22", "}"}], ",", 
+            RowBox[{"{", "9", "}"}]}], "}"}]}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"tipo", "\[Equal]", "2"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"sigle", "=", 
+         RowBox[{"{", 
+          RowBox[{
+          "12", ",", "13", ",", "14", ",", "15", ",", "16", ",", "23", ",", 
+           "24", ",", "25", ",", "26", ",", "34", ",", "35", ",", "36", ",", 
+           "45", ",", "46", ",", "56"}], "}"}]}], ",", "\[IndentingNewLine]", 
+        
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"sgl", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", "0"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"sigle", "=", 
+            RowBox[{"Range", "[", "n", "]"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"sigle", "=", "sgl"}], ";"}]}], "\[IndentingNewLine]", 
+          "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"prm", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", "0"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"perm", "=", 
+         RowBox[{"Range", "[", "n", "]"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"perm", "=", "prm"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+      ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"lcoo", "=", 
+       RowBox[{"Range", "[", "n", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"dxy", "=", 
+       RowBox[{"Range", "[", "n", "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"clr1", "=", "Black"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"clr2", "=", "Green"}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"cy", "=", "0"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"r", "=", "10"}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"stepa", "=", 
+       RowBox[{"Pi", "/", "n"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"da", "=", 
+       RowBox[{"2", "stepa"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ang", "=", 
+       RowBox[{
+        RowBox[{"Pi", "/", "2"}], "+", "stepa", "+", 
+        RowBox[{"nfs", " ", "da"}]}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"k", "=", "1"}], ",", 
+        RowBox[{"k", "\[LessEqual]", "n"}], ",", 
+        RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"dxy", "[", 
+           RowBox[{"[", 
+            RowBox[{"perm", "[", 
+             RowBox[{"[", "k", "]"}], "]"}], "]"}], "]"}], "=", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Cos", "[", "ang", "]"}], ",", 
+            RowBox[{"Sin", "[", "ang", "]"}]}], "}"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"ang", "-=", "da"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+      ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"k", "=", "1"}], ",", 
+        RowBox[{"k", "\[LessEqual]", "n"}], ",", 
+        RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"lcoo", "[", 
+           RowBox[{"[", "k", "]"}], "]"}], "=", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"cx", "+", 
+             RowBox[{"r", " ", 
+              RowBox[{
+               RowBox[{"dxy", "[", 
+                RowBox[{"[", "k", "]"}], "]"}], "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}]}], ",", 
+            RowBox[{"cy", "+", 
+             RowBox[{"r", " ", 
+              RowBox[{
+               RowBox[{"dxy", "[", 
+                RowBox[{"[", "k", "]"}], "]"}], "[", 
+               RowBox[{"[", "2", "]"}], "]"}]}]}]}], "}"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"ang", "-=", "da"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+      ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"colors", "=", 
+       RowBox[{"{", 
+        RowBox[{"\"\<Red\>\"", ",", "\"\<Blue\>\""}], "}"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"p", "=", 
+       RowBox[{"Range", "[", "n", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"sizep", "=", "10"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"offs", "=", "2"}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"k", "=", "1"}], ",", 
+        RowBox[{"k", "\[LessEqual]", "n"}], ",", 
+        RowBox[{"k", "+=", "2"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"p", "[", 
+           RowBox[{"[", "k", "]"}], "]"}], "=", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"AbsolutePointSize", "[", "sizep", "]"}], ",", 
+            RowBox[{"RGBColor", "[", 
+             RowBox[{"colors", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"Mod", "[", 
+                 RowBox[{
+                  RowBox[{"k", "-", "1"}], ",", "2"}], "]"}], "+", "1"}], 
+               "]"}], "]"}], "]"}], ",", 
+            RowBox[{"Point", "[", 
+             RowBox[{"lcoo", "[", 
+              RowBox[{"[", "k", "]"}], "]"}], "]"}], ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{
+              RowBox[{"sigle", "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"Floor", "[", 
+                  RowBox[{"k", "/", "2"}], "]"}], "+", "1"}], "]"}], "]"}], 
+              ",", 
+              RowBox[{
+               RowBox[{"lcoo", "[", 
+                RowBox[{"[", "k", "]"}], "]"}], "+", 
+               RowBox[{"offs", " ", 
+                RowBox[{"dxy", "[", 
+                 RowBox[{"[", "k", "]"}], "]"}]}]}]}], "]"}]}], "}"}]}], 
+         ";"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"k", "=", "2"}], ",", 
+        RowBox[{"k", "\[LessEqual]", "n"}], ",", 
+        RowBox[{"k", "+=", "2"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"p", "[", 
+           RowBox[{"[", "k", "]"}], "]"}], "=", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"AbsolutePointSize", "[", "sizep", "]"}], ",", 
+            RowBox[{"RGBColor", "[", 
+             RowBox[{"colors", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"Mod", "[", 
+                 RowBox[{
+                  RowBox[{"k", "-", "1"}], ",", "2"}], "]"}], "+", "1"}], 
+               "]"}], "]"}], "]"}], ",", 
+            RowBox[{"Point", "[", 
+             RowBox[{"lcoo", "[", 
+              RowBox[{"[", "k", "]"}], "]"}], "]"}], ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{
+              RowBox[{"sigle", "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"Mod", "[", 
+                  RowBox[{
+                   RowBox[{"Floor", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"k", "-", "2"}], ")"}], "/", "2"}], "]"}], ",", 
+                   RowBox[{"n", "/", "2"}]}], "]"}], "+", "1"}], "]"}], "]"}],
+               ",", 
+              RowBox[{
+               RowBox[{"lcoo", "[", 
+                RowBox[{"[", "k", "]"}], "]"}], "+", 
+               RowBox[{"offs", " ", 
+                RowBox[{"dxy", "[", 
+                 RowBox[{"[", "k", "]"}], "]"}]}]}]}], "]"}], ",", 
+            RowBox[{"Text", "[", 
+             RowBox[{
+              RowBox[{"sigle", "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"Mod", "[", 
+                  RowBox[{
+                   RowBox[{"Floor", "[", 
+                    RowBox[{"k", "/", "2"}], "]"}], ",", 
+                   RowBox[{"n", "/", "2"}]}], "]"}], "+", "1"}], "]"}], "]"}],
+               ",", 
+              RowBox[{
+               RowBox[{"lcoo", "[", 
+                RowBox[{"[", "k", "]"}], "]"}], "+", 
+               RowBox[{"2", "offs", " ", 
+                RowBox[{"dxy", "[", 
+                 RowBox[{"[", "k", "]"}], "]"}]}]}]}], "]"}]}], "}"}]}], ";", 
+         
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"lpagg", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "\[NotEqual]", " ", "0"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"For", "[", 
+             RowBox[{
+              RowBox[{"l", "=", "1"}], ",", 
+              RowBox[{"l", "\[LessEqual]", 
+               RowBox[{"Length", "[", " ", 
+                RowBox[{"lpagg", "[", 
+                 RowBox[{"[", "k", "]"}], "]"}], "]"}]}], ",", 
+              RowBox[{"l", "++"}], ",", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"AppendTo", "[", 
+                RowBox[{
+                 RowBox[{"p", "[", 
+                  RowBox[{"[", "k", "]"}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"Text", "[", 
+                   RowBox[{
+                    RowBox[{"sigle", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"Floor", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"lpagg", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "l", "]"}], "]"}], "/", "2"}], "+", "1"}], 
+                    "]"}], "]"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"lcoo", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "+", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"l", "+", "2"}], ")"}], "offs", " ", 
+                    RowBox[{"dxy", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}]}]}]}], "]"}], "}"}]}], 
+                "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+          "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", "]"}],
+       ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"ln", "=", 
+       RowBox[{"Range", "[", "n", "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"k", "=", "1"}], ",", 
+        RowBox[{"k", "<", "n"}], ",", 
+        RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"ln", "[", 
+           RowBox[{"[", "k", "]"}], "]"}], "=", 
+          RowBox[{"Line", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"lcoo", "[", 
+              RowBox[{"[", "k", "]"}], "]"}], ",", 
+             RowBox[{"lcoo", "[", 
+              RowBox[{"[", 
+               RowBox[{"k", "+", "1"}], "]"}], "]"}]}], "}"}], "]"}]}], 
+         ";"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ln", "[", 
+        RowBox[{"[", "n", "]"}], "]"}], "=", 
+       RowBox[{"Line", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"lcoo", "[", 
+           RowBox[{"[", "n", "]"}], "]"}], ",", 
+          RowBox[{"lcoo", "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], "}"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"lpagg", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", "0"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Return", "[", 
+         RowBox[{"{", 
+          RowBox[{"p", ",", 
+           RowBox[{"{", 
+            RowBox[{"clr1", ",", "ln"}], "}"}]}], "}"}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"lnaus", "=", 
+          RowBox[{"Range", "[", "n", "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"For", "[", 
+          RowBox[{
+           RowBox[{"k", "=", "1"}], ",", 
+           RowBox[{"k", "\[LessEqual]", "n"}], ",", 
+           RowBox[{"k", "++"}], ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"lnaus", "[", 
+              RowBox[{"[", "k", "]"}], "]"}], "=", 
+             RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"For", "[", 
+             RowBox[{
+              RowBox[{"l", "=", "1"}], ",", 
+              RowBox[{"l", "\[LessEqual]", 
+               RowBox[{"Length", "[", 
+                RowBox[{"lpagg", "[", 
+                 RowBox[{"[", "k", "]"}], "]"}], "]"}]}], ",", 
+              RowBox[{"l", "++"}], ",", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"AppendTo", "[", 
+                RowBox[{
+                 RowBox[{"lnaus", "[", 
+                  RowBox[{"[", "k", "]"}], "]"}], ",", 
+                 RowBox[{"Line", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"lcoo", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], ",", 
+                    RowBox[{"lcoo", "[", 
+                    RowBox[{"[", 
+                    RowBox[{
+                    RowBox[{"lpagg", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "l", "]"}], "]"}], "]"}], "]"}]}], "}"}], 
+                  "]"}]}], "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+            ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Return", "[", 
+       RowBox[{"{", 
+        RowBox[{"p", ",", 
+         RowBox[{"{", 
+          RowBox[{"clr1", ",", "ln"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"clr2", ",", "lnaus"}], "}"}]}], "}"}], "]"}], ";"}], 
+     "\[IndentingNewLine]", ")"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+    RowBox[{
+    "Questa", " ", "funzione", " ", "applica", " ", "una", " ", "serie", " ", 
+     "di", " ", "trasposizioni", " ", "ad", " ", "una", " ", "permutazione", 
+     " ", "di", " ", "partenza", "\[IndentingNewLine]", "\[IndentingNewLine]",
+      "\t", 
+     RowBox[{"INPUT", ":", " ", 
+      RowBox[{
+      "per", " ", "insieme", " ", "delle", " ", "trasposizioni", " ", "da", 
+       " ", "applicare", "\[IndentingNewLine]", "\t\t ", "n", "   ", "numero",
+        " ", "di", " ", "elementi", " ", "della", " ", "permutazione", " ", 
+       "di", " ", "partenza", "\[IndentingNewLine]", "\t\t ", "prm", " ", 
+       "permutazione", " ", "di", " ", "partenza", " ", 
+       RowBox[{"(", 
+        RowBox[{
+        "default", " ", "la", " ", "permutazione", " ", "identica", " ", "su",
+          " ", "n", " ", "elementi"}], ")"}]}]}]}], "\[IndentingNewLine]", 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"genPerm", "[", 
+     RowBox[{"per_", ",", "n_", ",", 
+      RowBox[{"prm_", ":", 
+       RowBox[{"{", "0", "}"}]}]}], "]"}], ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"prm", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", "0"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"result", "=", 
+         RowBox[{"Range", "[", "n", "]"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"result", "=", "prm"}], ";"}]}], "\[IndentingNewLine]", 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"nel1", "=", 
+       RowBox[{"Length", "[", "per", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"k1", "=", "1"}], ",", 
+        RowBox[{"k1", "\[LessEqual]", "nel1"}], ",", 
+        RowBox[{"k1", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"nel2", "=", 
+          RowBox[{"Length", "[", 
+           RowBox[{"per", "[", 
+            RowBox[{"[", "k1", "]"}], "]"}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"For", "[", 
+          RowBox[{
+           RowBox[{"k2", "=", "nel2"}], ",", 
+           RowBox[{"k2", ">=", "1"}], ",", 
+           RowBox[{"k2", "--"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"inda", "=", 
+             RowBox[{
+              RowBox[{"per", "[", 
+               RowBox[{"[", "k1", "]"}], "]"}], "[", 
+              RowBox[{"[", "k2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"k2", "<", "nel2"}], ",", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"result", "[", 
+                RowBox[{"[", "indp", "]"}], "]"}], "=", 
+               RowBox[{"result", "[", 
+                RowBox[{"[", "inda", "]"}], "]"}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"appo", "=", 
+                RowBox[{"result", "[", 
+                 RowBox[{"[", "inda", "]"}], "]"}]}], ";"}]}], 
+             "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+            RowBox[{"indp", "=", "inda"}], ";"}]}], "\[IndentingNewLine]", 
+          "]"}], ";", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"result", "[", 
+           RowBox[{"[", "indp", "]"}], "]"}], "=", "appo"}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Return", "[", "result", "]"}], ";"}], "\[IndentingNewLine]", 
+     ")"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+    RowBox[{
+     RowBox[{
+     "Questa", " ", "funzione", " ", "applica", " ", "una", " ", 
+      "riflessione", " ", "ad", " ", "una", " ", "permutazione", " ", 
+      "iniziale", " ", "di", " ", "vertici", "\[IndentingNewLine]", "   ", 
+      "La", " ", "riflessione", " ", 
+      RowBox[{"e", "'"}], " ", "effettuata", " ", "rispetto", " ", "ad", " ", 
+      "un", " ", "asse", " ", "che", " ", "passa", " ", "per", " ", "il", " ",
+       "vertice", " ", "v1", "\[IndentingNewLine]", "   ", "se", " ", "v1"}], 
+     "=", 
+     RowBox[{
+     "v2", " ", "o", " ", "passa", " ", "per", " ", "la", " ", "mediana", " ",
+       "del", " ", "lato", " ", "che", " ", "congiunge", " ", "v1", " ", "a", 
+      " ", "v2", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"dovra", "'"}], " ", "essere", " ", "v2"}], "=", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"v1", "+", 
+           RowBox[{"1", " ", "modulo", " ", "n"}]}], ")"}], " ", 
+         "\[IndentingNewLine]", "\[IndentingNewLine]", "\t", 
+         RowBox[{"INPUT", ":", " ", 
+          RowBox[{
+          "v1", "  ", "primo", " ", "vertice", "\[IndentingNewLine]", "\t\t ",
+            "v2", "  ", "secondo", " ", "vertice", "\[IndentingNewLine]", 
+           "\t\t ", "n", "   ", "numero", " ", "dei", " ", "vertici", 
+           "\[IndentingNewLine]", "\t\t ", "prm", " ", "permutazione", " ", 
+           "iniziale", " ", "di", " ", "n", " ", "vertici"}]}]}]}], 
+       "\[IndentingNewLine]"}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"genRiflex", "[", 
+     RowBox[{"v1_", ",", "v2_", ",", "n_", ",", 
+      RowBox[{"prm_", ":", 
+       RowBox[{"{", "0", "}"}]}]}], "]"}], ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"prm", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", "0"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"result", "=", 
+         RowBox[{"Range", "[", "n", "]"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"result", "=", "prm"}], ";"}]}], "\[IndentingNewLine]", 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"v1", "\[Equal]", "v2"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"v", "=", "v1"}], ";", "\[IndentingNewLine]", 
+         RowBox[{"For", "[", 
+          RowBox[{
+           RowBox[{"k", "=", "1"}], ",", 
+           RowBox[{"k", "\[LessEqual]", 
+            RowBox[{"Floor", "[", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"n", "-", "1"}], ")"}], "/", "2"}], "]"}]}], ",", 
+           RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"appo", "=", 
+             RowBox[{"result", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"Mod", "[", 
+                 RowBox[{
+                  RowBox[{"v", "-", "1", "-", "k"}], ",", "n"}], "]"}], "+", 
+                "1"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"result", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"Mod", "[", 
+                 RowBox[{
+                  RowBox[{"v", "-", "1", "-", "k"}], ",", "n"}], "]"}], "+", 
+                "1"}], "]"}], "]"}], "=", 
+             RowBox[{"result", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"Mod", "[", 
+                 RowBox[{
+                  RowBox[{"v", "-", "1", "+", "k"}], ",", "n"}], "]"}], "+", 
+                "1"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"result", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"Mod", "[", 
+                 RowBox[{
+                  RowBox[{"v", "-", "1", "+", "k"}], ",", "n"}], "]"}], "+", 
+                "1"}], "]"}], "]"}], "=", "appo"}], ";"}]}], 
+          "\[IndentingNewLine]", "]"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"For", "[", 
+          RowBox[{
+           RowBox[{"k", "=", "1"}], ",", 
+           RowBox[{"k", "\[LessEqual]", 
+            RowBox[{"Floor", "[", 
+             RowBox[{"n", "/", "2"}], "]"}]}], ",", 
+           RowBox[{"k", "++"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"appo", "=", 
+             RowBox[{"result", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"Mod", "[", 
+                 RowBox[{
+                  RowBox[{"v1", "-", "k"}], ",", "n"}], "]"}], "+", "1"}], 
+               "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"result", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"Mod", "[", 
+                 RowBox[{
+                  RowBox[{"v1", "-", "k"}], ",", "n"}], "]"}], "+", "1"}], 
+               "]"}], "]"}], "=", 
+             RowBox[{"result", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"Mod", "[", 
+                 RowBox[{
+                  RowBox[{"v2", "+", "k", "-", "2"}], ",", "n"}], "]"}], "+", 
+                "1"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"result", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"Mod", "[", 
+                 RowBox[{
+                  RowBox[{"v2", "+", "k", "-", "2"}], ",", "n"}], "]"}], "+", 
+                "1"}], "]"}], "]"}], "=", "appo"}], ";"}]}], 
+          "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", "]"}],
+       ";", "\[IndentingNewLine]", 
+      RowBox[{"Return", "[", "result", "]"}], ";"}], "\[IndentingNewLine]", 
+     ")"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.8193809422188663`*^9, 3.819380979226408*^9}, {
+   3.819384106711309*^9, 3.819384110903599*^9}, {3.819384177657144*^9, 
+   3.81938428244355*^9}, {3.819384318516819*^9, 3.819384321662286*^9}, {
+   3.819384390090282*^9, 3.819384491618067*^9}, {3.819384557825489*^9, 
+   3.819384644026773*^9}, {3.819384712081089*^9, 3.819384745306445*^9}, {
+   3.819384938342904*^9, 3.819384969363079*^9}, {3.819385034145008*^9, 
+   3.8193851630995398`*^9}, {3.819385206662985*^9, 3.8193852426254177`*^9}, {
+   3.819385300437565*^9, 3.819385314079966*^9}, {3.819385346553379*^9, 
+   3.819385512489139*^9}, {3.819385837142247*^9, 3.8193859052151413`*^9}, {
+   3.819386139971364*^9, 3.819386156195118*^9}, 3.819386411432296*^9, {
+   3.819386504267209*^9, 3.819386556530923*^9}, {3.8193865968298883`*^9, 
+   3.819386703445656*^9}, {3.819386748293787*^9, 3.819386816091585*^9}, {
+   3.819386925707556*^9, 3.819386959815082*^9}, {3.8193878795560417`*^9, 
+   3.819387982858879*^9}, {3.819388063961684*^9, 3.819388112310954*^9}, {
+   3.819388147815234*^9, 3.819388153177957*^9}, {3.8193881881853523`*^9, 
+   3.819388192740965*^9}, 3.819388282252577*^9, 3.8193885030355*^9, {
+   3.8193885943779907`*^9, 3.8193886109656982`*^9}, {3.8193886730337*^9, 
+   3.8193886841561127`*^9}, {3.819388720759137*^9, 3.8193887653594923`*^9}, {
+   3.819388801287846*^9, 3.819388805399682*^9}, {3.819388846862834*^9, 
+   3.819388873290038*^9}, {3.819389158978825*^9, 3.8193891958857327`*^9}, {
+   3.819390705559339*^9, 3.819390713770946*^9}, {3.81939075162149*^9, 
+   3.819390752935664*^9}, {3.8193915511645927`*^9, 3.81939155688435*^9}, {
+   3.819429788306617*^9, 3.8194298877862787`*^9}, {3.819429925970655*^9, 
+   3.8194299614411592`*^9}, {3.81943004297948*^9, 3.81943009278441*^9}, {
+   3.819430139984735*^9, 3.819430251124316*^9}, {3.8194302990348883`*^9, 
+   3.819430386573002*^9}, {3.819430420819928*^9, 3.819430429926993*^9}, {
+   3.8194304681699047`*^9, 3.81943053942665*^9}, 3.819430633957856*^9, {
+   3.819430671841091*^9, 3.8194307647104483`*^9}, {3.819430810579084*^9, 
+   3.8194308271811438`*^9}, {3.819430888649663*^9, 3.819430958499703*^9}, {
+   3.819431179162489*^9, 3.819431180220375*^9}, {3.81943131104132*^9, 
+   3.8194313316498423`*^9}, {3.819431606666203*^9, 3.819431614049429*^9}, {
+   3.819431689076516*^9, 3.81943172554353*^9}, {3.819431953739114*^9, 
+   3.819431958350462*^9}, {3.819432041924111*^9, 3.819432104725621*^9}, {
+   3.819432269992475*^9, 3.819432282760909*^9}, {3.81943233302211*^9, 
+   3.8194323792388144`*^9}, {3.819457085356501*^9, 3.819457127848722*^9}, {
+   3.8194573850651073`*^9, 3.819457433821254*^9}, {3.8194574984159393`*^9, 
+   3.81945752500126*^9}, {3.8194575716323757`*^9, 3.819457585099001*^9}, {
+   3.8194576788353157`*^9, 3.8194577207220697`*^9}, {3.820756163375772*^9, 
+   3.820756222485754*^9}, {3.820756387449193*^9, 3.820756553255674*^9}, {
+   3.820756713896295*^9, 3.8207568056647673`*^9}, {3.820756848934373*^9, 
+   3.820756867450762*^9}, {3.820756923927713*^9, 3.820756926103097*^9}, {
+   3.820756997298237*^9, 3.820757012778698*^9}, {3.820757043428187*^9, 
+   3.820757079136661*^9}, {3.820757589208256*^9, 3.82075760227736*^9}, {
+   3.8207579763590517`*^9, 3.8207580390218678`*^9}, {3.82075809163435*^9, 
+   3.820758120408998*^9}, {3.82075820635005*^9, 3.820758270780923*^9}, {
+   3.820758321095083*^9, 3.820758328526845*^9}, {3.82075837136419*^9, 
+   3.820758372946825*^9}, {3.820758617756075*^9, 3.820758634914441*^9}, {
+   3.8207602144891567`*^9, 3.82076021598322*^9}, {3.82076029700378*^9, 
+   3.8207604564175787`*^9}, {3.820760518034709*^9, 3.820760519680662*^9}, {
+   3.820760606031604*^9, 3.820760607689073*^9}, {3.82076675340475*^9, 
+   3.82076675396283*^9}, 3.820766814223907*^9, {3.82076714278484*^9, 
+   3.820767254699564*^9}, {3.8207678047282257`*^9, 3.820767828681426*^9}, {
+   3.820767867880576*^9, 3.8207679627989798`*^9}, 3.820768043996717*^9, {
+   3.820768305788198*^9, 3.8207683172699757`*^9}, {3.820775669892812*^9, 
+   3.820775798401765*^9}, {3.820775891630357*^9, 3.820775913610406*^9}, {
+   3.820775989425522*^9, 3.820775994468657*^9}, {3.820776046055683*^9, 
+   3.820776053281546*^9}, {3.820776194722185*^9, 3.820776253655963*^9}, {
+   3.820776337473639*^9, 3.8207763462852716`*^9}, {3.820776379346671*^9, 
+   3.820776440758527*^9}, {3.820776475367865*^9, 3.820776697162155*^9}, {
+   3.820776732414042*^9, 3.8207767406568108`*^9}, {3.820776803880618*^9, 
+   3.820776810124378*^9}, {3.820776845234784*^9, 3.820776879497304*^9}, {
+   3.820777308369403*^9, 3.82077732575729*^9}, {3.820777418799877*^9, 
+   3.820777419073073*^9}, {3.820777615485178*^9, 3.820777674525153*^9}, {
+   3.820777832636284*^9, 3.8207779849314413`*^9}, {3.820778160662154*^9, 
+   3.8207782194480743`*^9}, {3.82082860331913*^9, 3.8208286166938887`*^9}, {
+   3.820828756477573*^9, 3.8208287692034407`*^9}, {3.82082964733464*^9, 
+   3.820829703604712*^9}, {3.820830163991723*^9, 3.8208301659295673`*^9}, {
+   3.820839970542341*^9, 3.820840058525302*^9}, {3.8208400946038513`*^9, 
+   3.820840169570751*^9}, {3.8208402189902163`*^9, 3.8208402677983723`*^9}, 
+   3.820840321066478*^9, 3.820840393562018*^9, 3.820840619004706*^9, {
+   3.820840695109618*^9, 3.8208407301661873`*^9}, {3.8208408072321167`*^9, 
+   3.8208408826572647`*^9}, {3.820840925342785*^9, 3.820840964670948*^9}, {
+   3.8208410058989563`*^9, 3.820841041067457*^9}, {3.820841083287272*^9, 
+   3.820841148626873*^9}, {3.820946370528966*^9, 3.820946477792808*^9}, {
+   3.820946527953807*^9, 3.8209465868103952`*^9}, {3.820946723128619*^9, 
+   3.820946752461541*^9}, {3.820946817476901*^9, 3.820946818829214*^9}, {
+   3.820946852404468*^9, 3.820946873515649*^9}, {3.8209469186493607`*^9, 
+   3.820946982492432*^9}, {3.820947068785921*^9, 3.820947082788022*^9}, {
+   3.8209473657283077`*^9, 3.820947417630208*^9}, {3.820947485676548*^9, 
+   3.8209475812242928`*^9}, 3.82094762308062*^9, {3.820947656134789*^9, 
+   3.820947663934587*^9}, {3.820947698379752*^9, 3.820947823897155*^9}, {
+   3.820947893968108*^9, 3.8209479249996033`*^9}, {3.820947965147648*^9, 
+   3.820947978649968*^9}, {3.820948048094922*^9, 3.8209480521998034`*^9}, {
+   3.820948165476104*^9, 3.820948167917948*^9}, {3.820948370028542*^9, 
+   3.820948373874497*^9}, 3.8209484040864773`*^9, {3.8209484918803673`*^9, 
+   3.820948501420857*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"1e7d049f-74f8-4913-9565-f93f8cf06e5c"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"gen1", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"5", ",", "11"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"6", ",", " ", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"7", ",", " ", "17"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"8", " ", ",", "16"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"9", ",", " ", "15"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"12", ",", " ", "28"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"13", ",", " ", "29"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"14", ",", " ", "30"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"18", ",", " ", "20"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"21", ",", " ", "27"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"22", ",", " ", "26"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"23", " ", ",", "25"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gen2", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"5", ",", "11"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"6", ",", " ", "12"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"7", ",", " ", "21"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"8", " ", ",", "22"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"9", ",", " ", "29"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"10", ",", " ", "28"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"13", ",", " ", "15"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"16", ",", " ", "26"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"17", ",", " ", "27"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"23", ",", " ", "25"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gen3", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"2", ",", "14"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", " ", "15"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"4", ",", " ", "6"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"7", " ", ",", "11"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"8", ",", " ", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"12", ",", " ", "20"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"13", ",", " ", "19"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"16", ",", " ", "24"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"17", ",", " ", "25"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"18", ",", " ", "26"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"gen4", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "1", ",", "2", ",", "3", ",", " ", "4", ",", "5", ",", " ", "6", ",", 
+        "7", " ", ",", "8", ",", "9", ",", " ", "30"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "10", ",", " ", "29", ",", "14", ",", " ", "19", ",", "24", ",", " ", 
+        "11", ",", "28", ",", " ", "15", ",", "20", ",", " ", "25"}], "}"}], 
+      ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "12", ",", " ", "27", ",", "16", " ", ",", "21", ",", "26", ",", "17", 
+        ",", "22", ",", "13", ",", "18", ",", "23"}], "}"}]}], "}"}]}], ";"}],
+   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g1", "=", 
+   RowBox[{"genLevi", "[", 
+    RowBox[{"0", ",", "2"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g2", "=", 
+   RowBox[{"genLevi", "[", 
+    RowBox[{"35", ",", "2", ",", 
+     RowBox[{"genPerm", "[", 
+      RowBox[{"gen1", ",", "30"}], "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g3", "=", 
+   RowBox[{"genLevi", "[", 
+    RowBox[{"70", ",", "2", ",", 
+     RowBox[{"genPerm", "[", "gen2", "]"}], ",", "30"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g4", "=", 
+   RowBox[{"genLevi", "[", 
+    RowBox[{"105", ",", "2", ",", 
+     RowBox[{"genPerm", "[", "gen3", "]"}], ",", "30"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g5", "=", 
+   RowBox[{"genLevi", "[", 
+    RowBox[{"140", ",", "2", ",", 
+     RowBox[{"genPerm", "[", "gen4", "]"}], ",", "30"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Graphics", "[", 
+  RowBox[{"{", 
+   RowBox[{"g1", ",", "g2", ",", "g3", ",", "g4", ",", "g5"}], "}"}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.8193856113150873`*^9, 3.8193857167414923`*^9}, {
+   3.819385748243424*^9, 3.8193857848269672`*^9}, 3.819386198485052*^9, 
+   3.819386239677519*^9, {3.819386838172556*^9, 3.819386842313901*^9}, {
+   3.819387363144126*^9, 3.819387375888299*^9}, {3.819387478824604*^9, 
+   3.819387503203355*^9}, {3.819387795989552*^9, 3.819387806516863*^9}, {
+   3.819388001591075*^9, 3.819388025336618*^9}, {3.8193882998361177`*^9, 
+   3.8193883098127003`*^9}, {3.8193883927429247`*^9, 3.819388393062235*^9}, {
+   3.8193892191026297`*^9, 3.8193892457743607`*^9}, {3.819389294230001*^9, 
+   3.8193893397361507`*^9}, {3.819431193049254*^9, 3.819431213502252*^9}, 
+   3.819431271406672*^9, {3.819431382816662*^9, 3.8194313939692717`*^9}, {
+   3.819431770527841*^9, 3.819431932058972*^9}, {3.819431968929241*^9, 
+   3.81943199423202*^9}, {3.820829162203981*^9, 3.820829204340074*^9}, {
+   3.82083010931518*^9, 3.820830119773123*^9}},
+ CellLabel->
+  "In[174]:=",ExpressionUUID->"82d41f42-37c0-457c-abd2-42e000421b53"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"gen1", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"5", ",", "9"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"6", ",", "8"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"10", ",", "14"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"11", ",", "13"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gen2", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"4", ",", "12"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", "11"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"9", ",", "13"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"10", ",", "14"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gen3", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"2", ",", "14"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "5"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"6", ",", "12"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"7", ",", "13"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"gen4", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"1", ",", "3"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", "14"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"9", ",", "13"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"10", ",", "12"}], "}"}]}], "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g1", "=", 
+   RowBox[{"genLevi", "[", "0", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g2", "=", 
+   RowBox[{"genLevi", "[", 
+    RowBox[{"35", ",", "1", ",", 
+     RowBox[{"genPerm", "[", 
+      RowBox[{"gen1", ",", "14"}], "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g3", "=", 
+   RowBox[{"genLevi", "[", 
+    RowBox[{"70", ",", "1", ",", 
+     RowBox[{"genPerm", "[", 
+      RowBox[{"gen2", ",", "14"}], "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g4", "=", 
+   RowBox[{"genLevi", "[", 
+    RowBox[{"105", ",", "1", ",", 
+     RowBox[{"genPerm", "[", 
+      RowBox[{"gen3", ",", "14"}], "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g5", "=", 
+   RowBox[{"genLevi", "[", 
+    RowBox[{"140", ",", "1", ",", 
+     RowBox[{"genPerm", "[", 
+      RowBox[{"gen4", ",", "14"}], "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Graphics", "[", 
+  RowBox[{"{", 
+   RowBox[{"g1", ",", "g2", ",", "g3", ",", "g4", ",", "g5"}], "}"}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.819389389899473*^9, 3.819389424541366*^9}, {
+   3.819389475043766*^9, 3.819389564910733*^9}, {3.819389648440856*^9, 
+   3.819389677607749*^9}, {3.81938979517371*^9, 3.819389795601212*^9}, {
+   3.8193899706260633`*^9, 3.81938998680554*^9}, {3.8193900955786552`*^9, 
+   3.819390136402976*^9}, {3.8193901799768877`*^9, 3.819390181508696*^9}, {
+   3.8193904349880667`*^9, 3.819390456091566*^9}, {3.819390534089242*^9, 
+   3.8193905363853903`*^9}, {3.8193905883038893`*^9, 3.819390613900002*^9}, {
+   3.819390735114333*^9, 3.819390736073825*^9}, 3.819390826552968*^9, {
+   3.819390940887392*^9, 3.819390954940486*^9}, {3.81939104367624*^9, 
+   3.819391043991287*^9}, {3.819391094680827*^9, 3.819391115430482*^9}, {
+   3.8193913348980427`*^9, 3.819391337632765*^9}, {3.8193913951085052`*^9, 
+   3.8193913993088818`*^9}, {3.819391429528595*^9, 3.81939150061591*^9}, {
+   3.8194312216394577`*^9, 3.819431236512487*^9}, {3.819431417301567*^9, 
+   3.819431448747448*^9}, {3.8194315015413218`*^9, 3.8194315087674227`*^9}, {
+   3.819432150040247*^9, 3.819432228583951*^9}, {3.8208292480007067`*^9, 
+   3.8208292711039762`*^9}, {3.820830140956491*^9, 3.820830154555455*^9}},
+ CellLabel->
+  "In[184]:=",ExpressionUUID->"a7badfbb-0afd-4922-a450-49f2027e58c2"],
+
+Cell[BoxData[
+ RowBox[{"Graphics", "[", 
+  RowBox[{"genLevi", "[", 
+   RowBox[{"0", ",", "0", ",", 
+    RowBox[{"{", "0", "}"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.819457631790382*^9, 3.8194576481784267`*^9}},
+ CellLabel->
+  "In[194]:=",ExpressionUUID->"8afa90bb-752f-481d-984d-5c2c975c7634"],
+
+Cell[BoxData[
+ RowBox[{" ", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"gen1", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"4", ",", "14"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"5", ",", "37"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"6", ",", "42"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"7", ",", "29"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"8", ",", "16"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"9", ",", "39"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"10", ",", "26"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"13", ",", "17"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"15", ",", "25"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"18", ",", "34"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"27", ",", "33"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"28", ",", "38"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"35", ",", "41"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"36", ",", "40"}], "}"}]}], "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"gen2", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"2", ",", "12"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"3", ",", "11"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"4", ",", "26"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"5", ",", "35"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"9", ",", "13"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"10", ",", "14"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"17", ",", "39"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"18", ",", "38"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"19", ",", "23"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"20", ",", "22"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"27", ",", "33"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"28", ",", "34"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"36", ",", "40"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"37", ",", "41"}], "}"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"gen3", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"1", ",", "7"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"2", ",", "38"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"3", ",", "37"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"4", ",", "36"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"5", ",", "35"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"8", ",", "32"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"9", ",", "33"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"11", ",", "41"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"12", ",", "18"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"13", ",", "27"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"19", ",", "23"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"20", ",", "22"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"25", ",", "31"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"26", ",", "40"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"28", ",", "34"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"30", ",", "42"}], "}"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"gen4", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"1", ",", "9"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"4", ",", "30"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"5", ",", "11"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"6", ",", "10"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"7", ",", "33"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"8", ",", "32"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"12", ",", "28"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"13", ",", "27"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"17", ",", "29"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"18", ",", "34"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"25", ",", "31"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"26", ",", "40"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"35", ",", "41"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"36", ",", "42"}], "}"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"g1", "=", 
+     RowBox[{"genLevi", "[", 
+      RowBox[{"0", ",", "0", ",", 
+       RowBox[{"{", "0", "}"}], ",", "0", ",", "42", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"6", ",", "12", ",", "32"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"9", ",", "19", ",", "39"}], "}"}], ",", 
+         RowBox[{"{", "3", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"17", ",", "25", ",", "33"}], "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "15", ",", "35"}], "}"}], ",", 
+         RowBox[{"{", "7", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"13", ",", "21", ",", "25"}], "}"}], ",", 
+         RowBox[{"{", "9", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"15", ",", "33", ",", "41"}], "}"}], ",", 
+         RowBox[{"{", "11", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "17", ",", "23"}], "}"}], ",", 
+         RowBox[{"{", "13", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "27", ",", "37"}], "}"}], ",", 
+         RowBox[{"{", "15", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"21", ",", "29", ",", "39"}], "}"}], ",", 
+         RowBox[{"{", "17", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"7", ",", "27", ",", "41"}], "}"}], ",", 
+         RowBox[{"{", "19", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "35", ",", "41"}], "}"}], ",", 
+         RowBox[{"{", "21", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "11", ",", "37"}], "}"}], ",", 
+         RowBox[{"{", "23", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"15", ",", "19", ",", "31"}], "}"}], ",", 
+         RowBox[{"{", "25", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"11", ",", "35", ",", "39"}], "}"}], ",", 
+         RowBox[{"{", "27", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "9", ",", "23"}], "}"}], ",", 
+         RowBox[{"{", "29", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "7", ",", "11"}], "}"}], ",", 
+         RowBox[{"{", "31", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "21", ",", "27"}], "}"}], ",", 
+         RowBox[{"{", "33", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"13", ",", "19", ",", "29"}], "}"}], ",", 
+         RowBox[{"{", "35", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"9", ",", "17", ",", "31"}], "}"}], ",", 
+         RowBox[{"{", "37", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"7", ",", "23", ",", "33"}], "}"}], ",", 
+         RowBox[{"{", "39", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "13", ",", "31"}], "}"}], ",", 
+         RowBox[{"{", "41", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"25", ",", "29", ",", "37"}], "}"}]}], "}"}], ",", 
+       RowBox[{"{", "0", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"g2", "=", 
+     RowBox[{"genLevi", "[", 
+      RowBox[{"45", ",", "0", ",", 
+       RowBox[{"genPerm", "[", 
+        RowBox[{"gen1", ",", "42"}], "]"}], ",", "0", ",", "42", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"6", ",", "12", ",", "32"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"9", ",", "19", ",", "39"}], "}"}], ",", 
+         RowBox[{"{", "3", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"17", ",", "25", ",", "33"}], "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "15", ",", "35"}], "}"}], ",", 
+         RowBox[{"{", "7", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"13", ",", "21", ",", "25"}], "}"}], ",", 
+         RowBox[{"{", "9", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"15", ",", "33", ",", "41"}], "}"}], ",", 
+         RowBox[{"{", "11", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "17", ",", "23"}], "}"}], ",", 
+         RowBox[{"{", "13", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "27", ",", "37"}], "}"}], ",", 
+         RowBox[{"{", "15", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"21", ",", "29", ",", "39"}], "}"}], ",", 
+         RowBox[{"{", "17", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"7", ",", "27", ",", "41"}], "}"}], ",", 
+         RowBox[{"{", "19", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "35", ",", "41"}], "}"}], ",", 
+         RowBox[{"{", "21", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "11", ",", "37"}], "}"}], ",", 
+         RowBox[{"{", "23", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"15", ",", "19", ",", "31"}], "}"}], ",", 
+         RowBox[{"{", "25", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"11", ",", "35", ",", "39"}], "}"}], ",", 
+         RowBox[{"{", "27", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "9", ",", "23"}], "}"}], ",", 
+         RowBox[{"{", "29", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "7", ",", "11"}], "}"}], ",", 
+         RowBox[{"{", "31", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "21", ",", "27"}], "}"}], ",", 
+         RowBox[{"{", "33", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"13", ",", "19", ",", "29"}], "}"}], ",", 
+         RowBox[{"{", "35", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"9", ",", "17", ",", "31"}], "}"}], ",", 
+         RowBox[{"{", "37", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"7", ",", "23", ",", "33"}], "}"}], ",", 
+         RowBox[{"{", "39", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "13", ",", "31"}], "}"}], ",", 
+         RowBox[{"{", "41", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"25", ",", "29", ",", "37"}], "}"}]}], "}"}], ",", 
+       RowBox[{"{", "0", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"g3", "=", 
+     RowBox[{"genLevi", "[", 
+      RowBox[{"90", ",", "0", ",", 
+       RowBox[{"genPerm", "[", 
+        RowBox[{"gen2", ",", "42"}], "]"}], ",", "0", ",", "42", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"6", ",", "12", ",", "32"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"9", ",", "19", ",", "39"}], "}"}], ",", 
+         RowBox[{"{", "3", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"17", ",", "25", ",", "33"}], "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "15", ",", "35"}], "}"}], ",", 
+         RowBox[{"{", "7", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"13", ",", "21", ",", "25"}], "}"}], ",", 
+         RowBox[{"{", "9", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"15", ",", "33", ",", "41"}], "}"}], ",", 
+         RowBox[{"{", "11", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "17", ",", "23"}], "}"}], ",", 
+         RowBox[{"{", "13", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "27", ",", "37"}], "}"}], ",", 
+         RowBox[{"{", "15", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"21", ",", "29", ",", "39"}], "}"}], ",", 
+         RowBox[{"{", "17", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"7", ",", "27", ",", "41"}], "}"}], ",", 
+         RowBox[{"{", "19", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "35", ",", "41"}], "}"}], ",", 
+         RowBox[{"{", "21", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "11", ",", "37"}], "}"}], ",", 
+         RowBox[{"{", "23", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"15", ",", "19", ",", "31"}], "}"}], ",", 
+         RowBox[{"{", "25", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"11", ",", "35", ",", "39"}], "}"}], ",", 
+         RowBox[{"{", "27", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "9", ",", "23"}], "}"}], ",", 
+         RowBox[{"{", "29", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "7", ",", "11"}], "}"}], ",", 
+         RowBox[{"{", "31", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "21", ",", "27"}], "}"}], ",", 
+         RowBox[{"{", "33", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"13", ",", "19", ",", "29"}], "}"}], ",", 
+         RowBox[{"{", "35", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"9", ",", "17", ",", "31"}], "}"}], ",", 
+         RowBox[{"{", "37", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"7", ",", "23", ",", "33"}], "}"}], ",", 
+         RowBox[{"{", "39", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "13", ",", "31"}], "}"}], ",", 
+         RowBox[{"{", "41", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"25", ",", "29", ",", "37"}], "}"}]}], "}"}], ",", 
+       RowBox[{"{", "0", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"g4", "=", 
+     RowBox[{"genLevi", "[", 
+      RowBox[{"135", ",", "0", ",", 
+       RowBox[{"genPerm", "[", 
+        RowBox[{"gen3", ",", "42"}], "]"}], ",", "0", ",", "42", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"6", ",", "12", ",", "32"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"9", ",", "19", ",", "39"}], "}"}], ",", 
+         RowBox[{"{", "3", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"17", ",", "25", ",", "33"}], "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "15", ",", "35"}], "}"}], ",", 
+         RowBox[{"{", "7", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"13", ",", "21", ",", "25"}], "}"}], ",", 
+         RowBox[{"{", "9", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"15", ",", "33", ",", "41"}], "}"}], ",", 
+         RowBox[{"{", "11", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "17", ",", "23"}], "}"}], ",", 
+         RowBox[{"{", "13", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "27", ",", "37"}], "}"}], ",", 
+         RowBox[{"{", "15", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"21", ",", "29", ",", "39"}], "}"}], ",", 
+         RowBox[{"{", "17", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"7", ",", "27", ",", "41"}], "}"}], ",", 
+         RowBox[{"{", "19", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "35", ",", "41"}], "}"}], ",", 
+         RowBox[{"{", "21", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "11", ",", "37"}], "}"}], ",", 
+         RowBox[{"{", "23", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"15", ",", "19", ",", "31"}], "}"}], ",", 
+         RowBox[{"{", "25", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"11", ",", "35", ",", "39"}], "}"}], ",", 
+         RowBox[{"{", "27", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "9", ",", "23"}], "}"}], ",", 
+         RowBox[{"{", "29", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "7", ",", "11"}], "}"}], ",", 
+         RowBox[{"{", "31", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "21", ",", "27"}], "}"}], ",", 
+         RowBox[{"{", "33", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"13", ",", "19", ",", "29"}], "}"}], ",", 
+         RowBox[{"{", "35", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"9", ",", "17", ",", "31"}], "}"}], ",", 
+         RowBox[{"{", "37", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"7", ",", "23", ",", "33"}], "}"}], ",", 
+         RowBox[{"{", "39", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "13", ",", "31"}], "}"}], ",", 
+         RowBox[{"{", "41", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"25", ",", "29", ",", "37"}], "}"}]}], "}"}], ",", 
+       RowBox[{"{", "0", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"g5", "=", 
+     RowBox[{"genLevi", "[", 
+      RowBox[{"180", ",", "0", ",", 
+       RowBox[{"genPerm", "[", 
+        RowBox[{"gen4", ",", "42"}], "]"}], ",", "0", ",", "42", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"6", ",", "12", ",", "32"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"9", ",", "19", ",", "39"}], "}"}], ",", 
+         RowBox[{"{", "3", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"17", ",", "25", ",", "33"}], "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "15", ",", "35"}], "}"}], ",", 
+         RowBox[{"{", "7", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"13", ",", "21", ",", "25"}], "}"}], ",", 
+         RowBox[{"{", "9", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"15", ",", "33", ",", "41"}], "}"}], ",", 
+         RowBox[{"{", "11", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "17", ",", "23"}], "}"}], ",", 
+         RowBox[{"{", "13", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "27", ",", "37"}], "}"}], ",", 
+         RowBox[{"{", "15", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"21", ",", "29", ",", "39"}], "}"}], ",", 
+         RowBox[{"{", "17", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"7", ",", "27", ",", "41"}], "}"}], ",", 
+         RowBox[{"{", "19", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "35", ",", "41"}], "}"}], ",", 
+         RowBox[{"{", "21", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "11", ",", "37"}], "}"}], ",", 
+         RowBox[{"{", "23", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"15", ",", "19", ",", "31"}], "}"}], ",", 
+         RowBox[{"{", "25", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"11", ",", "35", ",", "39"}], "}"}], ",", 
+         RowBox[{"{", "27", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "9", ",", "23"}], "}"}], ",", 
+         RowBox[{"{", "29", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "7", ",", "11"}], "}"}], ",", 
+         RowBox[{"{", "31", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "21", ",", "27"}], "}"}], ",", 
+         RowBox[{"{", "33", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"13", ",", "19", ",", "29"}], "}"}], ",", 
+         RowBox[{"{", "35", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"9", ",", "17", ",", "31"}], "}"}], ",", 
+         RowBox[{"{", "37", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"7", ",", "23", ",", "33"}], "}"}], ",", 
+         RowBox[{"{", "39", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "13", ",", "31"}], "}"}], ",", 
+         RowBox[{"{", "41", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"25", ",", "29", ",", "37"}], "}"}]}], "}"}], ",", 
+       RowBox[{"{", "0", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Graphics", "[", 
+    RowBox[{"{", 
+     RowBox[{"g1", ",", "g2", ",", "g3", ",", "g4", ",", "g5"}], "}"}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.8207551340522633`*^9, 3.820755167871159*^9}, {
+   3.8207553553912153`*^9, 3.820755447793632*^9}, {3.820755494974379*^9, 
+   3.820755497824761*^9}, {3.820755575387244*^9, 3.820755600284699*^9}, 
+   3.820755644577636*^9, {3.820755791311255*^9, 3.820755796575411*^9}, {
+   3.820755835699397*^9, 3.820755890581682*^9}, 3.820756654399193*^9, 
+   3.8207571141847*^9, 3.820757215257008*^9, {3.8207576229488077`*^9, 
+   3.820757731888722*^9}, {3.8207584302383127`*^9, 3.820758468700925*^9}, 
+   3.8207587494985237`*^9, {3.820766921050867*^9, 3.820766923523291*^9}, {
+   3.820766955893272*^9, 3.820766964654306*^9}, {3.820768135695634*^9, 
+   3.8207682033994293`*^9}, {3.820769077429981*^9, 3.820769162769372*^9}, {
+   3.8207692054163847`*^9, 3.820769314001223*^9}, {3.820769733853858*^9, 
+   3.8207697374740467`*^9}, {3.820770263205991*^9, 3.8207702850603113`*^9}, {
+   3.820770318704932*^9, 3.820770323658416*^9}, {3.820770452280788*^9, 
+   3.8207704558069572`*^9}, {3.820770556561213*^9, 3.820770559558704*^9}, {
+   3.820770633767746*^9, 3.820770639181679*^9}, {3.820770775114603*^9, 
+   3.820770778962647*^9}, {3.82077105783666*^9, 3.8207710630822563`*^9}, {
+   3.820771173473648*^9, 3.820771179500719*^9}, {3.820772070146957*^9, 
+   3.8207720778227663`*^9}, {3.8207721667483873`*^9, 3.820772172790374*^9}, {
+   3.820772254283601*^9, 3.8207722583383827`*^9}, {3.820772330252934*^9, 
+   3.8207723344920053`*^9}, {3.820772424444345*^9, 3.820772429081243*^9}, {
+   3.8207725071975403`*^9, 3.820772513222117*^9}, {3.820772571629277*^9, 
+   3.820772577720274*^9}, {3.8207726718677797`*^9, 3.820772674191534*^9}, {
+   3.82077274455462*^9, 3.82077274676152*^9}, {3.820772832863332*^9, 
+   3.820772834765594*^9}, {3.820772902440031*^9, 3.820772906771064*^9}, {
+   3.8207729856408787`*^9, 3.820772988992413*^9}, {3.82077306105334*^9, 
+   3.820773064144595*^9}, {3.8207731006516953`*^9, 3.8207731139841413`*^9}, {
+   3.820773237193379*^9, 3.8207732429728403`*^9}, {3.820826780885233*^9, 
+   3.820826782597883*^9}, {3.820826813947221*^9, 3.820827074580996*^9}, {
+   3.820827136299191*^9, 3.82082714166679*^9}, {3.820827186687572*^9, 
+   3.8208271877223883`*^9}, {3.820827255245863*^9, 3.820827305652054*^9}, {
+   3.8208273414899054`*^9, 3.8208274178857393`*^9}, {3.820827532224311*^9, 
+   3.820827564943277*^9}, {3.820828040678081*^9, 3.820828060801485*^9}, {
+   3.820841816056985*^9, 3.8208418586166267`*^9}, {3.8208424060794497`*^9, 
+   3.8208426098223047`*^9}, {3.820842668304435*^9, 3.820842832362241*^9}, {
+   3.820842878352419*^9, 3.8208430835943813`*^9}, {3.8213659180103693`*^9, 
+   3.821365925642189*^9}},ExpressionUUID->"f08b8932-ef68-4c7e-bb05-\
+63780897f09c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"gen1", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"4", ",", "14"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", "13"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"6", ",", "18"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"7", ",", "17"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"8", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"11", ",", "15"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"12", ",", "16"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gen2", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"2", ",", "6"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "5"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"7", ",", "9"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"10", ",", "12"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"13", ",", "17"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"14", ",", "16"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gen3", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"4", ",", "6"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"7", ",", "11"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"8", ",", "10"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"14", ",", "18"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"15", ",", "17"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g1", "=", 
+   RowBox[{"genLevi", "[", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"{", "0", "}"}], ",", "0", ",", "18", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", "6", "}"}], ",", 
+       RowBox[{"{", "9", "}"}], ",", 
+       RowBox[{"{", "14", "}"}], ",", 
+       RowBox[{"{", "11", "}"}], ",", 
+       RowBox[{"{", "16", "}"}], ",", 
+       RowBox[{"{", "1", "}"}], ",", 
+       RowBox[{"{", "12", "}"}], ",", 
+       RowBox[{"{", "15", "}"}], ",", 
+       RowBox[{"{", "2", "}"}], ",", 
+       RowBox[{"{", "17", "}"}], ",", 
+       RowBox[{"{", "4", "}"}], ",", 
+       RowBox[{"{", "7", "}"}], ",", 
+       RowBox[{"{", "18", "}"}], ",", 
+       RowBox[{"{", "3", "}"}], ",", 
+       RowBox[{"{", "8", "}"}], ",", 
+       RowBox[{"{", "5", "}"}], ",", 
+       RowBox[{"{", "10", "}"}], ",", 
+       RowBox[{"{", "13", "}"}]}], "}"}], ",", 
+     RowBox[{"{", "0", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g2", "=", 
+   RowBox[{"genLevi", "[", 
+    RowBox[{"35", ",", "0", ",", 
+     RowBox[{"genPerm", "[", 
+      RowBox[{"gen1", ",", "18"}], "]"}], ",", "0", ",", "18", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", "6", "}"}], ",", 
+       RowBox[{"{", "9", "}"}], ",", 
+       RowBox[{"{", "14", "}"}], ",", 
+       RowBox[{"{", "11", "}"}], ",", 
+       RowBox[{"{", "16", "}"}], ",", 
+       RowBox[{"{", "1", "}"}], ",", 
+       RowBox[{"{", "12", "}"}], ",", 
+       RowBox[{"{", "15", "}"}], ",", 
+       RowBox[{"{", "2", "}"}], ",", 
+       RowBox[{"{", "17", "}"}], ",", 
+       RowBox[{"{", "4", "}"}], ",", 
+       RowBox[{"{", "7", "}"}], ",", 
+       RowBox[{"{", "18", "}"}], ",", 
+       RowBox[{"{", "3", "}"}], ",", 
+       RowBox[{"{", "8", "}"}], ",", 
+       RowBox[{"{", "5", "}"}], ",", 
+       RowBox[{"{", "10", "}"}], ",", 
+       RowBox[{"{", "13", "}"}]}], "}"}], ",", 
+     RowBox[{"{", "0", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g3", "=", 
+   RowBox[{"genLevi", "[", 
+    RowBox[{"70", ",", "0", ",", 
+     RowBox[{"genPerm", "[", 
+      RowBox[{"gen2", ",", "18"}], "]"}], ",", "0", ",", "18", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", "6", "}"}], ",", 
+       RowBox[{"{", "9", "}"}], ",", 
+       RowBox[{"{", "14", "}"}], ",", 
+       RowBox[{"{", "11", "}"}], ",", 
+       RowBox[{"{", "16", "}"}], ",", 
+       RowBox[{"{", "1", "}"}], ",", 
+       RowBox[{"{", "12", "}"}], ",", 
+       RowBox[{"{", "15", "}"}], ",", 
+       RowBox[{"{", "2", "}"}], ",", 
+       RowBox[{"{", "17", "}"}], ",", 
+       RowBox[{"{", "4", "}"}], ",", 
+       RowBox[{"{", "7", "}"}], ",", 
+       RowBox[{"{", "18", "}"}], ",", 
+       RowBox[{"{", "3", "}"}], ",", 
+       RowBox[{"{", "8", "}"}], ",", 
+       RowBox[{"{", "5", "}"}], ",", 
+       RowBox[{"{", "10", "}"}], ",", 
+       RowBox[{"{", "13", "}"}]}], "}"}], ",", 
+     RowBox[{"{", "0", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g4", "=", 
+   RowBox[{"genLevi", "[", 
+    RowBox[{"105", ",", "0", ",", 
+     RowBox[{"genPerm", "[", 
+      RowBox[{"gen3", ",", "18"}], "]"}], ",", "0", ",", "18", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", "6", "}"}], ",", 
+       RowBox[{"{", "9", "}"}], ",", 
+       RowBox[{"{", "14", "}"}], ",", 
+       RowBox[{"{", "11", "}"}], ",", 
+       RowBox[{"{", "16", "}"}], ",", 
+       RowBox[{"{", "1", "}"}], ",", 
+       RowBox[{"{", "12", "}"}], ",", 
+       RowBox[{"{", "15", "}"}], ",", 
+       RowBox[{"{", "2", "}"}], ",", 
+       RowBox[{"{", "17", "}"}], ",", 
+       RowBox[{"{", "4", "}"}], ",", 
+       RowBox[{"{", "7", "}"}], ",", 
+       RowBox[{"{", "18", "}"}], ",", 
+       RowBox[{"{", "3", "}"}], ",", 
+       RowBox[{"{", "8", "}"}], ",", 
+       RowBox[{"{", "5", "}"}], ",", 
+       RowBox[{"{", "10", "}"}], ",", 
+       RowBox[{"{", "13", "}"}]}], "}"}], ",", 
+     RowBox[{"{", "0", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Graphics", "[", 
+  RowBox[{"{", 
+   RowBox[{"g1", ",", "g2", ",", "g3", ",", "g4"}], "}"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.821365951590753*^9, 3.82136602730227*^9}, {
+   3.821366081053102*^9, 3.821366255509224*^9}, {3.821366290688579*^9, 
+   3.821366352166473*^9}, {3.821366638640592*^9, 3.821366645389448*^9}, 
+   3.821367002079157*^9, {3.821367243679433*^9, 3.821367406193624*^9}, {
+   3.821367474226911*^9, 3.821367787821718*^9}},
+ CellLabel->"In[64]:=",ExpressionUUID->"8dc27da6-2b67-4cd3-b0ab-4111cd8a7086"],
+
+Cell[BoxData[
+ GraphicsBox[{{{
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{(-10) Sin[Rational[1, 18] Pi], 10 
+         Cos[Rational[1, 18] Pi]}, {-1.7364817766693033`, 9.84807753012208}]],
+       InsetBox["1", 
+       NCache[{(-12) Sin[Rational[1, 18] Pi], 12 
+         Cos[Rational[1, 18] Pi]}, {-2.083778132003164, 
+        11.817693036146496`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        1.7364817766693033`, 9.84807753012208}]], 
+      InsetBox["1", 
+       NCache[{12 Sin[Rational[1, 18] Pi], 12 Cos[Rational[1, 18] Pi]}, {
+        2.083778132003164, 11.817693036146496`}]], 
+      InsetBox["2", 
+       NCache[{14 Sin[Rational[1, 18] Pi], 14 Cos[Rational[1, 18] Pi]}, {
+        2.4310744873370247`, 13.787308542170912`}]], 
+      InsetBox["5", 
+       NCache[{16 Sin[Rational[1, 18] Pi], 16 Cos[Rational[1, 18] Pi]}, {
+        2.7783708426708853`, 15.756924048195328`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{5, 5 3^Rational[1, 2]}, {5, 8.660254037844386}]], 
+      InsetBox["2", 
+       NCache[{6, 6 3^Rational[1, 2]}, {6, 10.392304845413264`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        7.66044443118978, 6.4278760968653925`}]], 
+      InsetBox["2", 
+       NCache[{12 Cos[Rational[2, 9] Pi], 12 Sin[Rational[2, 9] Pi]}, {
+        9.192533317427737, 7.713451316238471}]], 
+      InsetBox["3", 
+       NCache[{14 Cos[Rational[2, 9] Pi], 14 Sin[Rational[2, 9] Pi]}, {
+        10.724622203665692`, 8.999026535611549}]], 
+      InsetBox["6", 
+       NCache[{16 Cos[Rational[2, 9] Pi], 16 Sin[Rational[2, 9] Pi]}, {
+        12.256711089903648`, 10.284601754984628`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        9.396926207859085, 3.420201433256687}]], 
+      InsetBox["3", 
+       NCache[{12 Cos[Rational[1, 9] Pi], 12 Sin[Rational[1, 9] Pi]}, {
+        11.276311449430901`, 4.104241719908025}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], PointBox[{10, 0}], 
+      InsetBox["3", {12, 0}], InsetBox["4", {14, 0}], InsetBox["1", {16, 0}]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        9.396926207859085, -3.420201433256687}]], 
+      InsetBox["4", 
+       NCache[{12 Cos[Rational[1, 9] Pi], (-12) Sin[Rational[1, 9] Pi]}, {
+        11.276311449430901`, -4.104241719908025}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        7.66044443118978, -6.4278760968653925`}]], 
+      InsetBox["4", 
+       NCache[{12 Cos[Rational[2, 9] Pi], (-12) Sin[Rational[2, 9] Pi]}, {
+        9.192533317427737, -7.713451316238471}]], 
+      InsetBox["5", 
+       NCache[{14 Cos[Rational[2, 9] Pi], (-14) Sin[Rational[2, 9] Pi]}, {
+        10.724622203665692`, -8.999026535611549}]], 
+      InsetBox["8", 
+       NCache[{16 Cos[Rational[2, 9] Pi], (-16) Sin[Rational[2, 9] Pi]}, {
+        12.256711089903648`, -10.284601754984628`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{5, (-5) 3^Rational[1, 2]}, {5, -8.660254037844386}]], 
+      InsetBox["5", 
+       NCache[{6, (-6) 3^Rational[1, 2]}, {6, -10.392304845413264`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        1.7364817766693033`, -9.84807753012208}]], 
+      InsetBox["5", 
+       NCache[{12 Sin[Rational[1, 18] Pi], (-12) Cos[Rational[1, 18] Pi]}, {
+        2.083778132003164, -11.817693036146496`}]], 
+      InsetBox["6", 
+       NCache[{14 Sin[Rational[1, 18] Pi], (-14) Cos[Rational[1, 18] Pi]}, {
+        2.4310744873370247`, -13.787308542170912`}]], 
+      InsetBox["9", 
+       NCache[{16 Sin[Rational[1, 18] Pi], (-16) Cos[Rational[1, 18] Pi]}, {
+        2.7783708426708853`, -15.756924048195328`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{(-10) Sin[Rational[1, 18] Pi], (-10) 
+         Cos[Rational[1, 18] 
+           Pi]}, {-1.7364817766693033`, -9.84807753012208}]], 
+      InsetBox["6", 
+       NCache[{(-12) Sin[Rational[1, 18] Pi], (-12) 
+         Cos[Rational[1, 18] 
+           Pi]}, {-2.083778132003164, -11.817693036146496`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{-5, (-5) 3^Rational[1, 2]}, {-5, -8.660254037844386}]],
+       InsetBox["6", 
+       NCache[{-6, (-6) 3^Rational[1, 2]}, {-6, -10.392304845413264`}]], 
+      InsetBox["7", 
+       NCache[{-7, (-7) 3^Rational[1, 2]}, {-7, -12.12435565298214}]], 
+      InsetBox["4", 
+       NCache[{-8, (-8) 3^Rational[1, 2]}, {-8, -13.856406460551018`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{(-10) Cos[Rational[2, 9] Pi], (-10) 
+         Sin[Rational[2, 9] Pi]}, {-7.66044443118978, -6.4278760968653925`}]],
+       InsetBox["7", 
+       NCache[{(-12) Cos[Rational[2, 9] Pi], (-12) 
+         Sin[Rational[2, 9] Pi]}, {-9.192533317427737, -7.713451316238471}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{(-10) Cos[Rational[1, 9] Pi], (-10) 
+         Sin[Rational[1, 9] Pi]}, {-9.396926207859085, -3.420201433256687}]], 
+      InsetBox["7", 
+       NCache[{(-12) Cos[Rational[1, 9] Pi], (-12) 
+         Sin[Rational[1, 9] 
+           Pi]}, {-11.276311449430901`, -4.104241719908025}]], 
+      InsetBox["8", 
+       NCache[{(-14) Cos[Rational[1, 9] Pi], (-14) 
+         Sin[Rational[1, 9] 
+           Pi]}, {-13.155696691002717`, -4.788282006559362}]], 
+      InsetBox["2", 
+       NCache[{(-16) Cos[Rational[1, 9] Pi], (-16) 
+         Sin[Rational[1, 9] 
+           Pi]}, {-15.035081932574535`, -5.472322293210699}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], PointBox[{-10, 0}], 
+      InsetBox["8", {-12, 0}]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{(-10) Cos[Rational[1, 9] Pi], 10 
+         Sin[Rational[1, 9] Pi]}, {-9.396926207859085, 3.420201433256687}]], 
+      InsetBox["8", 
+       NCache[{(-12) Cos[Rational[1, 9] Pi], 12 
+         Sin[Rational[1, 9] Pi]}, {-11.276311449430901`, 4.104241719908025}]],
+       InsetBox["9", 
+       NCache[{(-14) Cos[Rational[1, 9] Pi], 14 
+         Sin[Rational[1, 9] Pi]}, {-13.155696691002717`, 4.788282006559362}]],
+       InsetBox["3", 
+       NCache[{(-16) Cos[Rational[1, 9] Pi], 16 
+         Sin[Rational[1, 9] Pi]}, {-15.035081932574535`, 
+        5.472322293210699}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{(-10) Cos[Rational[2, 9] Pi], 10 
+         Sin[Rational[2, 9] Pi]}, {-7.66044443118978, 6.4278760968653925`}]], 
+      InsetBox["9", 
+       NCache[{(-12) Cos[Rational[2, 9] Pi], 12 
+         Sin[Rational[2, 9] Pi]}, {-9.192533317427737, 
+        7.713451316238471}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{-5, 5 3^Rational[1, 2]}, {-5, 8.660254037844386}]], 
+      InsetBox["9", 
+       NCache[{-6, 6 3^Rational[1, 2]}, {-6, 10.392304845413264`}]], 
+      InsetBox["1", 
+       NCache[{-7, 7 3^Rational[1, 2]}, {-7, 12.12435565298214}]], 
+      InsetBox["7", 
+       NCache[{-8, 8 3^Rational[1, 2]}, {-8, 13.856406460551018`}]]}}, 
+    {GrayLevel[0], 
+     LineBox[NCache[{{(-10) Sin[Rational[1, 18] Pi], 10 
+         Cos[Rational[1, 18] Pi]}, {
+        10 Sin[Rational[1, 18] Pi], 10 
+         Cos[Rational[1, 18] Pi]}}, {{-1.7364817766693033`, 
+       9.84807753012208}, {1.7364817766693033`, 9.84807753012208}}]], 
+     LineBox[NCache[{{
+        10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        5, 5 3^Rational[1, 2]}}, {{1.7364817766693033`, 9.84807753012208}, {
+        5, 8.660254037844386}}]], 
+     LineBox[NCache[{{5, 5 3^Rational[1, 2]}, {
+        10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}}, {{
+        5, 8.660254037844386}, {7.66044443118978, 6.4278760968653925`}}]], 
+     LineBox[NCache[{{10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}}, {{
+       7.66044443118978, 6.4278760968653925`}, {9.396926207859085, 
+       3.420201433256687}}]], 
+     LineBox[NCache[{{10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        10, 0}}, {{9.396926207859085, 3.420201433256687}, {10, 0}}]], 
+     LineBox[NCache[{{10, 0}, {
+        10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}}, {{10, 0}, {
+        9.396926207859085, -3.420201433256687}}]], 
+     LineBox[NCache[{{
+        10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}}, {{
+       9.396926207859085, -3.420201433256687}, {
+       7.66044443118978, -6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        5, (-5) 3^Rational[1, 2]}}, {{
+        7.66044443118978, -6.4278760968653925`}, {5, -8.660254037844386}}]], 
+     LineBox[NCache[{{5, (-5) 3^Rational[1, 2]}, {
+        10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}}, {{
+        5, -8.660254037844386}, {1.7364817766693033`, -9.84807753012208}}]], 
+     LineBox[NCache[{{
+        10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {(-10) 
+         Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}}, {{
+       1.7364817766693033`, -9.84807753012208}, {-1.7364817766693033`, \
+-9.84807753012208}}]], 
+     LineBox[NCache[{{(-10) Sin[Rational[1, 18] Pi], (-10) 
+         Cos[Rational[1, 18] Pi]}, {-5, (-5) 
+         3^Rational[
+           1, 2]}}, {{-1.7364817766693033`, -9.84807753012208}, {-5, \
+-8.660254037844386}}]], 
+     LineBox[NCache[{{-5, (-5) 3^Rational[1, 2]}, {(-10) 
+         Cos[Rational[2, 9] Pi], (-10) 
+         Sin[Rational[2, 9] 
+           Pi]}}, {{-5, -8.660254037844386}, {-7.66044443118978, \
+-6.4278760968653925`}}]], 
+     LineBox[NCache[{{(-10) Cos[Rational[2, 9] Pi], (-10) 
+         Sin[Rational[2, 9] Pi]}, {(-10) Cos[Rational[1, 9] Pi], (-10) 
+         Sin[Rational[1, 9] 
+           Pi]}}, {{-7.66044443118978, -6.4278760968653925`}, \
+{-9.396926207859085, -3.420201433256687}}]], 
+     LineBox[NCache[{{(-10) Cos[Rational[1, 9] Pi], (-10) 
+         Sin[Rational[1, 9] Pi]}, {-10, 
+        0}}, {{-9.396926207859085, -3.420201433256687}, {-10, 0}}]], 
+     LineBox[NCache[{{-10, 
+        0}, {(-10) Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}}, {{-10,
+         0}, {-9.396926207859085, 3.420201433256687}}]], 
+     LineBox[NCache[{{(-10) Cos[Rational[1, 9] Pi], 10 
+         Sin[Rational[1, 9] Pi]}, {(-10) Cos[Rational[2, 9] Pi], 10 
+         Sin[Rational[2, 9] Pi]}}, {{-9.396926207859085, 
+       3.420201433256687}, {-7.66044443118978, 6.4278760968653925`}}]], 
+     LineBox[NCache[{{(-10) Cos[Rational[2, 9] Pi], 10 
+         Sin[Rational[2, 9] Pi]}, {-5, 5 
+         3^Rational[1, 2]}}, {{-7.66044443118978, 
+        6.4278760968653925`}, {-5, 8.660254037844386}}]], 
+     LineBox[NCache[{{-5, 5 3^Rational[1, 2]}, {(-10) Sin[Rational[1, 18] Pi],
+          10 Cos[Rational[1, 18] Pi]}}, {{-5, 
+         8.660254037844386}, {-1.7364817766693033`, 9.84807753012208}}]]}, 
+    {RGBColor[0, 1, 0], 
+     LineBox[NCache[{{(-10) Sin[Rational[1, 18] Pi], 10 
+         Cos[Rational[1, 18] Pi]}, {10, 0}}, {{-1.7364817766693033`, 
+        9.84807753012208}, {10, 0}}]], 
+     LineBox[NCache[{{
+        10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        5, (-5) 3^Rational[1, 2]}}, {{1.7364817766693033`, 
+        9.84807753012208}, {5, -8.660254037844386}}]], 
+     LineBox[NCache[{{
+        5, 5 3^Rational[1, 2]}, {(-10) Cos[Rational[1, 9] Pi], (-10) 
+         Sin[Rational[1, 9] Pi]}}, {{
+        5, 8.660254037844386}, {-9.396926207859085, -3.420201433256687}}]], 
+     LineBox[NCache[{{
+        10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {(-10) 
+         Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}}, {{
+       7.66044443118978, 
+       6.4278760968653925`}, {-1.7364817766693033`, -9.84807753012208}}]], 
+     LineBox[NCache[{{
+        10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {(-10) 
+         Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}}, {{
+       9.396926207859085, 3.420201433256687}, {-9.396926207859085, 
+       3.420201433256687}}]], 
+     LineBox[NCache[{{10, 
+        0}, {(-10) Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}}, {{
+        10, 0}, {-1.7364817766693033`, 9.84807753012208}}]], 
+     LineBox[NCache[{{
+        10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {-5, (-5) 
+         3^Rational[1, 2]}}, {{
+        9.396926207859085, -3.420201433256687}, {-5, -8.660254037844386}}]], 
+     LineBox[NCache[{{
+        10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {-10, 
+        0}}, {{7.66044443118978, -6.4278760968653925`}, {-10, 0}}]], 
+     LineBox[NCache[{{5, (-5) 3^Rational[1, 2]}, {
+        10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}}, {{
+        5, -8.660254037844386}, {1.7364817766693033`, 9.84807753012208}}]], 
+     LineBox[NCache[{{
+        10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {(-10) 
+         Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}}, {{
+       1.7364817766693033`, -9.84807753012208}, {-7.66044443118978, 
+       6.4278760968653925`}}]], 
+     LineBox[NCache[{{(-10) Sin[Rational[1, 18] Pi], (-10) 
+         Cos[Rational[1, 18] Pi]}, {
+        10 Cos[Rational[2, 9] Pi], 10 
+         Sin[Rational[2, 9] 
+           Pi]}}, {{-1.7364817766693033`, -9.84807753012208}, {
+       7.66044443118978, 6.4278760968653925`}}]], 
+     LineBox[NCache[{{-5, (-5) 3^Rational[1, 2]}, {
+        10 Cos[Rational[1, 9] Pi], (-10) 
+         Sin[Rational[1, 9] Pi]}}, {{-5, -8.660254037844386}, {
+        9.396926207859085, -3.420201433256687}}]], 
+     LineBox[NCache[{{(-10) Cos[Rational[2, 9] Pi], (-10) 
+         Sin[Rational[2, 9] Pi]}, {-5, 5 
+         3^Rational[1, 2]}}, {{-7.66044443118978, -6.4278760968653925`}, {-5, 
+         8.660254037844386}}]], 
+     LineBox[NCache[{{(-10) Cos[Rational[1, 9] Pi], (-10) 
+         Sin[Rational[1, 9] Pi]}, {
+        5, 5 3^Rational[1, 2]}}, {{-9.396926207859085, -3.420201433256687}, {
+        5, 8.660254037844386}}]], 
+     LineBox[NCache[{{-10, 0}, {
+        10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}}, {{-10, 
+        0}, {7.66044443118978, -6.4278760968653925`}}]], 
+     LineBox[NCache[{{(-10) Cos[Rational[1, 9] Pi], 10 
+         Sin[Rational[1, 9] Pi]}, {
+        10 Cos[Rational[1, 9] Pi], 10 
+         Sin[Rational[1, 9] Pi]}}, {{-9.396926207859085, 3.420201433256687}, {
+       9.396926207859085, 3.420201433256687}}]], 
+     LineBox[NCache[{{(-10) Cos[Rational[2, 9] Pi], 10 
+         Sin[Rational[2, 9] Pi]}, {
+        10 Sin[Rational[1, 18] Pi], (-10) 
+         Cos[Rational[1, 18] Pi]}}, {{-7.66044443118978, 
+       6.4278760968653925`}, {1.7364817766693033`, -9.84807753012208}}]], 
+     LineBox[NCache[{{-5, 5 3^Rational[1, 2]}, {(-10) 
+         Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}}, {{-5, 
+         8.660254037844386}, {-7.66044443118978, -6.4278760968653925`}}]]}}, {{
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        35 - 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        33.2635182233307, 9.84807753012208}]], 
+      InsetBox["1", 
+       NCache[{35 - 12 Sin[Rational[1, 18] Pi], 12 Cos[Rational[1, 18] Pi]}, {
+        32.91622186799684, 11.817693036146496`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        35 + 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        36.7364817766693, 9.84807753012208}]], 
+      InsetBox["1", 
+       NCache[{35 + 12 Sin[Rational[1, 18] Pi], 12 Cos[Rational[1, 18] Pi]}, {
+        37.08377813200316, 11.817693036146496`}]], 
+      InsetBox["2", 
+       NCache[{35 + 14 Sin[Rational[1, 18] Pi], 14 Cos[Rational[1, 18] Pi]}, {
+        37.43107448733703, 13.787308542170912`}]], 
+      InsetBox["5", 
+       NCache[{35 + 16 Sin[Rational[1, 18] Pi], 16 Cos[Rational[1, 18] Pi]}, {
+        37.77837084267089, 15.756924048195328`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{40, 5 3^Rational[1, 2]}, {40, 8.660254037844386}]], 
+      InsetBox["2", 
+       NCache[{41, 6 3^Rational[1, 2]}, {41, 10.392304845413264`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        35 - 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        25.603073792140915`, -3.420201433256687}]], 
+      InsetBox["2", 
+       NCache[{35 - 12 Cos[Rational[1, 9] Pi], (-12) 
+         Sin[Rational[1, 9] Pi]}, {23.7236885505691, -4.104241719908025}]], 
+      InsetBox["3", 
+       NCache[{35 - 14 Cos[Rational[1, 9] Pi], (-14) 
+         Sin[Rational[1, 9] Pi]}, {21.844303308997283`, -4.788282006559362}]],
+       InsetBox["6", 
+       NCache[{35 - 16 Cos[Rational[1, 9] Pi], (-16) 
+         Sin[Rational[1, 9] Pi]}, {
+        19.964918067425465`, -5.472322293210699}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        35 - 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        27.33955556881022, -6.4278760968653925`}]], 
+      InsetBox["3", 
+       NCache[{35 - 12 Cos[Rational[2, 9] Pi], (-12) 
+         Sin[Rational[2, 9] Pi]}, {25.80746668257226, -7.713451316238471}]]}, 
+     
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{30, 5 3^Rational[1, 2]}, {30, 8.660254037844386}]], 
+      InsetBox["3", 
+       NCache[{29, 6 3^Rational[1, 2]}, {29, 10.392304845413264`}]], 
+      InsetBox["4", 
+       NCache[{28, 7 3^Rational[1, 2]}, {28, 12.12435565298214}]], 
+      InsetBox["1", 
+       NCache[{27, 8 3^Rational[1, 2]}, {27, 13.856406460551018`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        35 - 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        27.33955556881022, 6.4278760968653925`}]], 
+      InsetBox["4", 
+       NCache[{35 - 12 Cos[Rational[2, 9] Pi], 12 Sin[Rational[2, 9] Pi]}, {
+        25.80746668257226, 7.713451316238471}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        35 + 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        36.7364817766693, -9.84807753012208}]], 
+      InsetBox["4", 
+       NCache[{35 + 12 Sin[Rational[1, 18] Pi], (-12) 
+         Cos[Rational[1, 18] Pi]}, {
+        37.08377813200316, -11.817693036146496`}]], 
+      InsetBox["5", 
+       NCache[{35 + 14 Sin[Rational[1, 18] Pi], (-14) 
+         Cos[Rational[1, 18] Pi]}, {
+        37.43107448733703, -13.787308542170912`}]], 
+      InsetBox["8", 
+       NCache[{35 + 16 Sin[Rational[1, 18] Pi], (-16) 
+         Cos[Rational[1, 18] Pi]}, {
+        37.77837084267089, -15.756924048195328`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{40, (-5) 3^Rational[1, 2]}, {40, -8.660254037844386}]],
+       InsetBox["5", 
+       NCache[{41, (-6) 3^Rational[1, 2]}, {41, -10.392304845413264`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        35 + 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        42.66044443118978, -6.4278760968653925`}]], 
+      InsetBox["5", 
+       NCache[{35 + 12 Cos[Rational[2, 9] Pi], (-12) 
+         Sin[Rational[2, 9] Pi]}, {44.19253331742774, -7.713451316238471}]], 
+      InsetBox["6", 
+       NCache[{35 + 14 Cos[Rational[2, 9] Pi], (-14) 
+         Sin[Rational[2, 9] Pi]}, {45.72462220366569, -8.999026535611549}]], 
+      InsetBox["9", 
+       NCache[{35 + 16 Cos[Rational[2, 9] Pi], (-16) 
+         Sin[Rational[2, 9] Pi]}, {
+        47.256711089903646`, -10.284601754984628`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], PointBox[{25, 0}], 
+      InsetBox["6", {23, 0}]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        35 - 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        25.603073792140915`, 3.420201433256687}]], 
+      InsetBox["6", 
+       NCache[{35 - 12 Cos[Rational[1, 9] Pi], 12 Sin[Rational[1, 9] Pi]}, {
+        23.7236885505691, 4.104241719908025}]], 
+      InsetBox["7", 
+       NCache[{35 - 14 Cos[Rational[1, 9] Pi], 14 Sin[Rational[1, 9] Pi]}, {
+        21.844303308997283`, 4.788282006559362}]], 
+      InsetBox["4", 
+       NCache[{35 - 16 Cos[Rational[1, 9] Pi], 16 Sin[Rational[1, 9] Pi]}, {
+        19.964918067425465`, 5.472322293210699}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        35 + 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        44.39692620785908, 3.420201433256687}]], 
+      InsetBox["7", 
+       NCache[{35 + 12 Cos[Rational[1, 9] Pi], 12 Sin[Rational[1, 9] Pi]}, {
+        46.2763114494309, 4.104241719908025}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        35 + 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        42.66044443118978, 6.4278760968653925`}]], 
+      InsetBox["7", 
+       NCache[{35 + 12 Cos[Rational[2, 9] Pi], 12 Sin[Rational[2, 9] Pi]}, {
+        44.19253331742774, 7.713451316238471}]], 
+      InsetBox["8", 
+       NCache[{35 + 14 Cos[Rational[2, 9] Pi], 14 Sin[Rational[2, 9] Pi]}, {
+        45.72462220366569, 8.999026535611549}]], 
+      InsetBox["2", 
+       NCache[{35 + 16 Cos[Rational[2, 9] Pi], 16 Sin[Rational[2, 9] Pi]}, {
+        47.256711089903646`, 10.284601754984628`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        35 - 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        33.2635182233307, -9.84807753012208}]], 
+      InsetBox["8", 
+       NCache[{35 - 12 Sin[Rational[1, 18] Pi], (-12) 
+         Cos[Rational[1, 18] Pi]}, {
+        32.91622186799684, -11.817693036146496`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{30, (-5) 3^Rational[1, 2]}, {30, -8.660254037844386}]],
+       InsetBox["8", 
+       NCache[{29, (-6) 3^Rational[1, 2]}, {29, -10.392304845413264`}]], 
+      InsetBox["9", 
+       NCache[{28, (-7) 3^Rational[1, 2]}, {28, -12.12435565298214}]], 
+      InsetBox["3", 
+       NCache[{27, (-8) 3^Rational[1, 2]}, {27, -13.856406460551018`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        35 + 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        44.39692620785908, -3.420201433256687}]], 
+      InsetBox["9", 
+       NCache[{35 + 12 Cos[Rational[1, 9] Pi], (-12) 
+         Sin[Rational[1, 9] Pi]}, {46.2763114494309, -4.104241719908025}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], PointBox[{45, 0}], 
+      InsetBox["9", {47, 0}], InsetBox["1", {49, 0}], 
+      InsetBox["7", {51, 0}]}}, 
+    {GrayLevel[0], 
+     LineBox[NCache[{{
+        35 - 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        35 + 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}}, {{
+       33.2635182233307, 9.84807753012208}, {36.7364817766693, 
+       9.84807753012208}}]], 
+     LineBox[NCache[{{
+        35 + 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        40, 5 3^Rational[1, 2]}}, {{36.7364817766693, 9.84807753012208}, {
+        40, 8.660254037844386}}]], 
+     LineBox[NCache[{{40, 5 3^Rational[1, 2]}, {
+        35 - 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}}, {{
+        40, 8.660254037844386}, {25.603073792140915`, -3.420201433256687}}]], 
+     LineBox[NCache[{{
+        35 - 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        35 - 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}}, {{
+       25.603073792140915`, -3.420201433256687}, {
+       27.33955556881022, -6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        35 - 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        30, 5 3^Rational[1, 2]}}, {{
+        27.33955556881022, -6.4278760968653925`}, {30, 8.660254037844386}}]], 
+     LineBox[
+      NCache[{{30, 5 3^Rational[1, 2]}, {
+        35 - 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}}, {{
+        30, 8.660254037844386}, {27.33955556881022, 6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        35 - 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        35 + 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}}, {{
+       27.33955556881022, 6.4278760968653925`}, {
+       36.7364817766693, -9.84807753012208}}]], 
+     LineBox[NCache[{{
+        35 + 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        40, (-5) 3^Rational[1, 2]}}, {{36.7364817766693, -9.84807753012208}, {
+        40, -8.660254037844386}}]], 
+     LineBox[NCache[{{40, (-5) 3^Rational[1, 2]}, {
+        35 + 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}}, {{
+        40, -8.660254037844386}, {42.66044443118978, -6.4278760968653925`}}]],
+      LineBox[NCache[{{
+        35 + 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {25, 
+        0}}, {{42.66044443118978, -6.4278760968653925`}, {25, 0}}]], 
+     LineBox[NCache[{{25, 0}, {
+        35 - 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}}, {{25, 
+        0}, {25.603073792140915`, 3.420201433256687}}]], 
+     LineBox[NCache[{{
+        35 - 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        35 + 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}}, {{
+       25.603073792140915`, 3.420201433256687}, {44.39692620785908, 
+       3.420201433256687}}]], 
+     LineBox[NCache[{{
+        35 + 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        35 + 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}}, {{
+       44.39692620785908, 3.420201433256687}, {42.66044443118978, 
+       6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        35 + 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        35 - 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}}, {{
+       42.66044443118978, 6.4278760968653925`}, {
+       33.2635182233307, -9.84807753012208}}]], 
+     LineBox[NCache[{{
+        35 - 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        30, (-5) 3^Rational[1, 2]}}, {{33.2635182233307, -9.84807753012208}, {
+        30, -8.660254037844386}}]], 
+     LineBox[NCache[{{30, (-5) 3^Rational[1, 2]}, {
+        35 + 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}}, {{
+        30, -8.660254037844386}, {44.39692620785908, -3.420201433256687}}]], 
+     LineBox[NCache[{{
+        35 + 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {45, 
+        0}}, {{44.39692620785908, -3.420201433256687}, {45, 0}}]], 
+     LineBox[NCache[{{45, 0}, {
+        35 - 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}}, {{45, 
+        0}, {33.2635182233307, 9.84807753012208}}]]}, 
+    {RGBColor[0, 1, 0], 
+     LineBox[NCache[{{
+        35 - 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        30, 5 3^Rational[1, 2]}}, {{33.2635182233307, 9.84807753012208}, {
+        30, 8.660254037844386}}]], 
+     LineBox[NCache[{{
+        35 + 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        40, (-5) 3^Rational[1, 2]}}, {{36.7364817766693, 9.84807753012208}, {
+        40, -8.660254037844386}}]], 
+     LineBox[NCache[{{40, 5 3^Rational[1, 2]}, {
+        35 + 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}}, {{
+        40, 8.660254037844386}, {42.66044443118978, 6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        35 - 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {25, 
+        0}}, {{25.603073792140915`, -3.420201433256687}, {25, 0}}]], 
+     LineBox[NCache[{{
+        35 - 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        30, (-5) 3^Rational[1, 2]}}, {{
+        27.33955556881022, -6.4278760968653925`}, {30, -8.660254037844386}}]],
+      LineBox[NCache[{{30, 5 3^Rational[1, 2]}, {
+        35 - 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}}, {{
+        30, 8.660254037844386}, {33.2635182233307, 9.84807753012208}}]], 
+     LineBox[NCache[{{
+        35 - 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        35 - 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}}, {{
+       27.33955556881022, 6.4278760968653925`}, {25.603073792140915`, 
+       3.420201433256687}}]], 
+     LineBox[NCache[{{
+        35 + 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        35 - 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}}, {{
+       36.7364817766693, -9.84807753012208}, {
+       33.2635182233307, -9.84807753012208}}]], 
+     LineBox[NCache[{{40, (-5) 3^Rational[1, 2]}, {
+        35 + 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}}, {{
+        40, -8.660254037844386}, {36.7364817766693, 9.84807753012208}}]], 
+     LineBox[NCache[{{
+        35 + 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        35 + 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}}, {{
+       42.66044443118978, -6.4278760968653925`}, {
+       44.39692620785908, -3.420201433256687}}]], 
+     LineBox[NCache[{{25, 0}, {
+        35 - 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}}, {{25, 
+        0}, {25.603073792140915`, -3.420201433256687}}]], 
+     LineBox[NCache[{{
+        35 - 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        35 - 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}}, {{
+       25.603073792140915`, 3.420201433256687}, {27.33955556881022, 
+       6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        35 + 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {45, 
+        0}}, {{44.39692620785908, 3.420201433256687}, {45, 0}}]], 
+     LineBox[NCache[{{
+        35 + 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        40, 5 3^Rational[1, 2]}}, {{42.66044443118978, 6.4278760968653925`}, {
+        40, 8.660254037844386}}]], 
+     LineBox[NCache[{{
+        35 - 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        35 + 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}}, {{
+       33.2635182233307, -9.84807753012208}, {
+       36.7364817766693, -9.84807753012208}}]], 
+     LineBox[NCache[{{30, (-5) 3^Rational[1, 2]}, {
+        35 - 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}}, {{
+        30, -8.660254037844386}, {27.33955556881022, -6.4278760968653925`}}]],
+      LineBox[NCache[{{
+        35 + 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        35 + 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}}, {{
+       44.39692620785908, -3.420201433256687}, {
+       42.66044443118978, -6.4278760968653925`}}]], 
+     LineBox[NCache[{{45, 0}, {
+        35 + 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}}, {{45, 
+        0}, {44.39692620785908, 3.420201433256687}}]]}}, {{
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        70 - 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        68.26351822333069, 9.84807753012208}]], 
+      InsetBox["1", 
+       NCache[{70 - 12 Sin[Rational[1, 18] Pi], 12 Cos[Rational[1, 18] Pi]}, {
+        67.91622186799684, 11.817693036146496`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], PointBox[{80, 0}], 
+      InsetBox["1", {82, 0}], InsetBox["2", {84, 0}], InsetBox["5", {86, 0}]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        70 + 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        79.39692620785908, 3.420201433256687}]], 
+      InsetBox["2", 
+       NCache[{70 + 12 Cos[Rational[1, 9] Pi], 12 Sin[Rational[1, 9] Pi]}, {
+        81.2763114494309, 4.104241719908025}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        70 + 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        77.66044443118977, 6.4278760968653925`}]], 
+      InsetBox["2", 
+       NCache[{70 + 12 Cos[Rational[2, 9] Pi], 12 Sin[Rational[2, 9] Pi]}, {
+        79.19253331742773, 7.713451316238471}]], 
+      InsetBox["3", 
+       NCache[{70 + 14 Cos[Rational[2, 9] Pi], 14 Sin[Rational[2, 9] Pi]}, {
+        80.72462220366569, 8.999026535611549}]], 
+      InsetBox["6", 
+       NCache[{70 + 16 Cos[Rational[2, 9] Pi], 16 Sin[Rational[2, 9] Pi]}, {
+        82.25671108990365, 10.284601754984628`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{75, 5 3^Rational[1, 2]}, {75, 8.660254037844386}]], 
+      InsetBox["3", 
+       NCache[{76, 6 3^Rational[1, 2]}, {76, 10.392304845413264`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        70 + 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        71.73648177666931, 9.84807753012208}]], 
+      InsetBox["3", 
+       NCache[{70 + 12 Sin[Rational[1, 18] Pi], 12 Cos[Rational[1, 18] Pi]}, {
+        72.08377813200316, 11.817693036146496`}]], 
+      InsetBox["4", 
+       NCache[{70 + 14 Sin[Rational[1, 18] Pi], 14 Cos[Rational[1, 18] Pi]}, {
+        72.43107448733703, 13.787308542170912`}]], 
+      InsetBox["1", 
+       NCache[{70 + 16 Sin[Rational[1, 18] Pi], 16 Cos[Rational[1, 18] Pi]}, {
+        72.77837084267088, 15.756924048195328`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{75, (-5) 3^Rational[1, 2]}, {75, -8.660254037844386}]],
+       InsetBox["4", 
+       NCache[{76, (-6) 3^Rational[1, 2]}, {76, -10.392304845413264`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        70 + 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        77.66044443118977, -6.4278760968653925`}]], 
+      InsetBox["4", 
+       NCache[{70 + 12 Cos[Rational[2, 9] Pi], (-12) 
+         Sin[Rational[2, 9] Pi]}, {79.19253331742773, -7.713451316238471}]], 
+      InsetBox["5", 
+       NCache[{70 + 14 Cos[Rational[2, 9] Pi], (-14) 
+         Sin[Rational[2, 9] Pi]}, {80.72462220366569, -8.999026535611549}]], 
+      InsetBox["8", 
+       NCache[{70 + 16 Cos[Rational[2, 9] Pi], (-16) 
+         Sin[Rational[2, 9] Pi]}, {
+        82.25671108990365, -10.284601754984628`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        70 + 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        79.39692620785908, -3.420201433256687}]], 
+      InsetBox["5", 
+       NCache[{70 + 12 Cos[Rational[1, 9] Pi], (-12) 
+         Sin[Rational[1, 9] Pi]}, {81.2763114494309, -4.104241719908025}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{65, (-5) 3^Rational[1, 2]}, {65, -8.660254037844386}]],
+       InsetBox["5", 
+       NCache[{64, (-6) 3^Rational[1, 2]}, {64, -10.392304845413264`}]], 
+      InsetBox["6", 
+       NCache[{63, (-7) 3^Rational[1, 2]}, {63, -12.12435565298214}]], 
+      InsetBox["9", 
+       NCache[{62, (-8) 3^Rational[1, 2]}, {62, -13.856406460551018`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[
+       NCache[{70 - 10 Sin[Rational[1, 18] Pi], (-10) 
+         Cos[Rational[1, 18] Pi]}, {68.26351822333069, -9.84807753012208}]], 
+      InsetBox["6", 
+       NCache[{70 - 12 Sin[Rational[1, 18] Pi], (-12) 
+         Cos[Rational[1, 18] Pi]}, {
+        67.91622186799684, -11.817693036146496`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        70 + 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        71.73648177666931, -9.84807753012208}]], 
+      InsetBox["6", 
+       NCache[{70 + 12 Sin[Rational[1, 18] Pi], (-12) 
+         Cos[Rational[1, 18] Pi]}, {
+        72.08377813200316, -11.817693036146496`}]], 
+      InsetBox["7", 
+       NCache[{70 + 14 Sin[Rational[1, 18] Pi], (-14) 
+         Cos[Rational[1, 18] Pi]}, {
+        72.43107448733703, -13.787308542170912`}]], 
+      InsetBox["4", 
+       NCache[{70 + 16 Sin[Rational[1, 18] Pi], (-16) 
+         Cos[Rational[1, 18] Pi]}, {
+        72.77837084267088, -15.756924048195328`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        70 - 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        62.33955556881022, 6.4278760968653925`}]], 
+      InsetBox["7", 
+       NCache[{70 - 12 Cos[Rational[2, 9] Pi], 12 Sin[Rational[2, 9] Pi]}, {
+        60.80746668257226, 7.713451316238471}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        70 - 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        60.60307379214092, 3.420201433256687}]], 
+      InsetBox["7", 
+       NCache[{70 - 12 Cos[Rational[1, 9] Pi], 12 Sin[Rational[1, 9] Pi]}, {
+        58.7236885505691, 4.104241719908025}]], 
+      InsetBox["8", 
+       NCache[{70 - 14 Cos[Rational[1, 9] Pi], 14 Sin[Rational[1, 9] Pi]}, {
+        56.84430330899728, 4.788282006559362}]], 
+      InsetBox["2", 
+       NCache[{70 - 16 Cos[Rational[1, 9] Pi], 16 Sin[Rational[1, 9] Pi]}, {
+        54.964918067425465`, 5.472322293210699}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], PointBox[{60, 0}], 
+      InsetBox["8", {58, 0}]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        70 - 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        60.60307379214092, -3.420201433256687}]], 
+      InsetBox["8", 
+       NCache[{70 - 12 Cos[Rational[1, 9] Pi], (-12) 
+         Sin[Rational[1, 9] Pi]}, {58.7236885505691, -4.104241719908025}]], 
+      InsetBox["9", 
+       NCache[{70 - 14 Cos[Rational[1, 9] Pi], (-14) 
+         Sin[Rational[1, 9] Pi]}, {56.84430330899728, -4.788282006559362}]], 
+      InsetBox["3", 
+       NCache[{70 - 16 Cos[Rational[1, 9] Pi], (-16) 
+         Sin[Rational[1, 9] Pi]}, {
+        54.964918067425465`, -5.472322293210699}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        70 - 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        62.33955556881022, -6.4278760968653925`}]], 
+      InsetBox["9", 
+       NCache[{70 - 12 Cos[Rational[2, 9] Pi], (-12) 
+         Sin[Rational[2, 9] Pi]}, {
+        60.80746668257226, -7.713451316238471}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{65, 5 3^Rational[1, 2]}, {65, 8.660254037844386}]], 
+      InsetBox["9", 
+       NCache[{64, 6 3^Rational[1, 2]}, {64, 10.392304845413264`}]], 
+      InsetBox["1", 
+       NCache[{63, 7 3^Rational[1, 2]}, {63, 12.12435565298214}]], 
+      InsetBox["7", 
+       NCache[{62, 8 3^Rational[1, 2]}, {62, 13.856406460551018`}]]}}, 
+    {GrayLevel[0], 
+     LineBox[NCache[{{
+        70 - 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {80, 
+        0}}, {{68.26351822333069, 9.84807753012208}, {80, 0}}]], 
+     LineBox[NCache[{{80, 0}, {
+        70 + 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}}, {{80, 
+        0}, {79.39692620785908, 3.420201433256687}}]], 
+     LineBox[NCache[{{
+        70 + 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        70 + 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}}, {{
+       79.39692620785908, 3.420201433256687}, {77.66044443118977, 
+       6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        70 + 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        75, 5 3^Rational[1, 2]}}, {{77.66044443118977, 6.4278760968653925`}, {
+        75, 8.660254037844386}}]], 
+     LineBox[NCache[{{75, 5 3^Rational[1, 2]}, {
+        70 + 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}}, {{
+        75, 8.660254037844386}, {71.73648177666931, 9.84807753012208}}]], 
+     LineBox[NCache[{{
+        70 + 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        75, (-5) 3^Rational[1, 2]}}, {{71.73648177666931, 9.84807753012208}, {
+        75, -8.660254037844386}}]], 
+     LineBox[NCache[{{75, (-5) 3^Rational[1, 2]}, {
+        70 + 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}}, {{
+        75, -8.660254037844386}, {77.66044443118977, -6.4278760968653925`}}]],
+      LineBox[NCache[{{
+        70 + 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        70 + 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}}, {{
+       77.66044443118977, -6.4278760968653925`}, {
+       79.39692620785908, -3.420201433256687}}]], 
+     LineBox[NCache[{{
+        70 + 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        65, (-5) 3^Rational[1, 2]}}, {{
+        79.39692620785908, -3.420201433256687}, {65, -8.660254037844386}}]], 
+     LineBox[NCache[{{65, (-5) 3^Rational[1, 2]}, {
+        70 - 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}}, {{
+        65, -8.660254037844386}, {68.26351822333069, -9.84807753012208}}]], 
+     LineBox[NCache[{{
+        70 - 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        70 + 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}}, {{
+       68.26351822333069, -9.84807753012208}, {
+       71.73648177666931, -9.84807753012208}}]], 
+     LineBox[NCache[{{
+        70 + 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        70 - 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}}, {{
+       71.73648177666931, -9.84807753012208}, {62.33955556881022, 
+       6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        70 - 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        70 - 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}}, {{
+       62.33955556881022, 6.4278760968653925`}, {60.60307379214092, 
+       3.420201433256687}}]], 
+     LineBox[NCache[{{
+        70 - 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {60, 
+        0}}, {{60.60307379214092, 3.420201433256687}, {60, 0}}]], 
+     LineBox[
+      NCache[{{60, 0}, {
+        70 - 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}}, {{60, 
+        0}, {60.60307379214092, -3.420201433256687}}]], 
+     LineBox[NCache[{{
+        70 - 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        70 - 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}}, {{
+       60.60307379214092, -3.420201433256687}, {
+       62.33955556881022, -6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        70 - 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        65, 5 3^Rational[1, 2]}}, {{
+        62.33955556881022, -6.4278760968653925`}, {65, 8.660254037844386}}]], 
+     LineBox[NCache[{{65, 5 3^Rational[1, 2]}, {
+        70 - 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}}, {{
+        65, 8.660254037844386}, {68.26351822333069, 9.84807753012208}}]]}, 
+    {RGBColor[0, 1, 0], 
+     LineBox[NCache[{{
+        70 - 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        70 + 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}}, {{
+       68.26351822333069, 9.84807753012208}, {71.73648177666931, 
+       9.84807753012208}}]], 
+     LineBox[NCache[{{80, 0}, {
+        70 + 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}}, {{80, 
+        0}, {79.39692620785908, -3.420201433256687}}]], 
+     LineBox[NCache[{{
+        70 + 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        70 - 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}}, {{
+       79.39692620785908, 3.420201433256687}, {60.60307379214092, 
+       3.420201433256687}}]], 
+     LineBox[NCache[{{
+        70 + 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        70 - 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}}, {{
+       77.66044443118977, 6.4278760968653925`}, {
+       68.26351822333069, -9.84807753012208}}]], 
+     LineBox[NCache[{{75, 5 3^Rational[1, 2]}, {
+        70 - 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}}, {{
+        75, 8.660254037844386}, {60.60307379214092, -3.420201433256687}}]], 
+     LineBox[NCache[{{
+        70 + 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        70 - 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}}, {{
+       71.73648177666931, 9.84807753012208}, {68.26351822333069, 
+       9.84807753012208}}]], 
+     LineBox[NCache[{{75, (-5) 3^Rational[1, 2]}, {
+        70 + 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}}, {{
+        75, -8.660254037844386}, {71.73648177666931, -9.84807753012208}}]], 
+     LineBox[NCache[{{
+        70 + 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {60, 
+        0}}, {{77.66044443118977, -6.4278760968653925`}, {60, 0}}]], 
+     LineBox[NCache[{{
+        70 + 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {80, 
+        0}}, {{79.39692620785908, -3.420201433256687}, {80, 0}}]], 
+     LineBox[NCache[{{65, (-5) 3^Rational[1, 2]}, {
+        70 - 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}}, {{
+        65, -8.660254037844386}, {62.33955556881022, -6.4278760968653925`}}]],
+      LineBox[NCache[{{
+        70 - 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        70 + 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}}, {{
+       68.26351822333069, -9.84807753012208}, {77.66044443118977, 
+       6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        70 + 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        75, (-5) 3^Rational[1, 2]}}, {{
+        71.73648177666931, -9.84807753012208}, {75, -8.660254037844386}}]], 
+     LineBox[NCache[{{
+        70 - 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        65, 5 3^Rational[1, 2]}}, {{62.33955556881022, 6.4278760968653925`}, {
+        65, 8.660254037844386}}]], 
+     LineBox[NCache[{{
+        70 - 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        70 + 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}}, {{
+       60.60307379214092, 3.420201433256687}, {79.39692620785908, 
+       3.420201433256687}}]], 
+     LineBox[NCache[{{60, 0}, {
+        70 + 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}}, {{60, 
+        0}, {77.66044443118977, -6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        70 - 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        75, 5 3^Rational[1, 2]}}, {{60.60307379214092, -3.420201433256687}, {
+        75, 8.660254037844386}}]], 
+     LineBox[
+      NCache[{{70 - 10 Cos[Rational[2, 9] Pi], (-10) 
+         Sin[Rational[2, 9] Pi]}, {65, (-5) 3^Rational[1, 2]}}, {{
+        62.33955556881022, -6.4278760968653925`}, {65, -8.660254037844386}}]],
+      LineBox[NCache[{{65, 5 3^Rational[1, 2]}, {
+        70 - 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}}, {{
+        65, 8.660254037844386}, {62.33955556881022, 
+        6.4278760968653925`}}]]}}, {{
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{110, 5 3^Rational[1, 2]}, {110, 8.660254037844386}]], 
+      InsetBox["1", 
+       NCache[{111, 6 3^Rational[1, 2]}, {111, 10.392304845413264`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        105 + 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        106.73648177666931`, 9.84807753012208}]], 
+      InsetBox["1", 
+       NCache[{105 + 12 Sin[Rational[1, 18] Pi], 12 
+         Cos[Rational[1, 18] Pi]}, {107.08377813200316`, 
+        11.817693036146496`}]], 
+      InsetBox["2", 
+       NCache[{105 + 14 Sin[Rational[1, 18] Pi], 14 
+         Cos[Rational[1, 18] Pi]}, {107.43107448733703`, 
+        13.787308542170912`}]], 
+      InsetBox["5", 
+       NCache[{105 + 16 Sin[Rational[1, 18] Pi], 16 
+         Cos[Rational[1, 18] Pi]}, {107.77837084267088`, 
+        15.756924048195328`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        105 - 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        103.26351822333069`, 9.84807753012208}]], 
+      InsetBox["2", 
+       NCache[{105 - 12 Sin[Rational[1, 18] Pi], 12 
+         Cos[Rational[1, 18] Pi]}, {102.91622186799684`, 
+        11.817693036146496`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], PointBox[{115, 0}], 
+      InsetBox["2", {117, 0}], InsetBox["3", {119, 0}], 
+      InsetBox["6", {121, 0}]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        105 + 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        114.39692620785908`, 3.420201433256687}]], 
+      InsetBox["3", 
+       NCache[{105 + 12 Cos[Rational[1, 9] Pi], 12 Sin[Rational[1, 9] Pi]}, {
+        116.2763114494309, 4.104241719908025}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        105 + 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        112.66044443118977`, 6.4278760968653925`}]], 
+      InsetBox["3", 
+       NCache[{105 + 12 Cos[Rational[2, 9] Pi], 12 Sin[Rational[2, 9] Pi]}, {
+        114.19253331742773`, 7.713451316238471}]], 
+      InsetBox["4", 
+       NCache[{105 + 14 Cos[Rational[2, 9] Pi], 14 Sin[Rational[2, 9] Pi]}, {
+        115.72462220366569`, 8.999026535611549}]], 
+      InsetBox["1", 
+       NCache[{105 + 16 Cos[Rational[2, 9] Pi], 16 Sin[Rational[2, 9] Pi]}, {
+        117.25671108990365`, 10.284601754984628`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        105 - 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        103.26351822333069`, -9.84807753012208}]], 
+      InsetBox["4", 
+       NCache[{105 - 12 Sin[Rational[1, 18] Pi], (-12) 
+         Cos[Rational[1, 18] Pi]}, {
+        102.91622186799684`, -11.817693036146496`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        105 + 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        106.73648177666931`, -9.84807753012208}]], 
+      InsetBox["4", 
+       NCache[{105 + 12 Sin[Rational[1, 18] Pi], (-12) 
+         Cos[Rational[1, 18] Pi]}, {
+        107.08377813200316`, -11.817693036146496`}]], 
+      InsetBox["5", 
+       NCache[{105 + 14 Sin[Rational[1, 18] Pi], (-14) 
+         Cos[Rational[1, 18] Pi]}, {
+        107.43107448733703`, -13.787308542170912`}]], 
+      InsetBox["8", 
+       NCache[{105 + 16 Sin[Rational[1, 18] Pi], (-16) 
+         Cos[Rational[1, 18] Pi]}, {
+        107.77837084267088`, -15.756924048195328`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{110, (-5) 3^Rational[1, 2]}, {
+        110, -8.660254037844386}]], 
+      InsetBox["5", 
+       NCache[{111, (-6) 3^Rational[1, 2]}, {111, -10.392304845413264`}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        105 + 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        112.66044443118977`, -6.4278760968653925`}]], 
+      InsetBox["5", 
+       NCache[{
+        105 + 12 Cos[Rational[2, 9] Pi], (-12) Sin[Rational[2, 9] Pi]}, {
+        114.19253331742773`, -7.713451316238471}]], 
+      InsetBox["6", 
+       NCache[{105 + 14 Cos[Rational[2, 9] Pi], (-14) 
+         Sin[Rational[2, 9] Pi]}, {115.72462220366569`, -8.999026535611549}]],
+       InsetBox["9", 
+       NCache[{105 + 16 Cos[Rational[2, 9] Pi], (-16) 
+         Sin[Rational[2, 9] Pi]}, {
+        117.25671108990365`, -10.284601754984628`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        105 + 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        114.39692620785908`, -3.420201433256687}]], 
+      InsetBox["6", 
+       NCache[{105 + 12 Cos[Rational[1, 9] Pi], (-12) 
+         Sin[Rational[1, 9] Pi]}, {
+        116.2763114494309, -4.104241719908025}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{100, (-5) 3^Rational[1, 2]}, {
+        100, -8.660254037844386}]], 
+      InsetBox["6", 
+       NCache[{99, (-6) 3^Rational[1, 2]}, {99, -10.392304845413264`}]], 
+      InsetBox["7", 
+       NCache[{98, (-7) 3^Rational[1, 2]}, {98, -12.12435565298214}]], 
+      InsetBox["4", 
+       NCache[{97, (-8) 3^Rational[1, 2]}, {97, -13.856406460551018`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        105 - 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        97.33955556881023, -6.4278760968653925`}]], 
+      InsetBox["7", 
+       NCache[{105 - 12 Cos[Rational[2, 9] Pi], (-12) 
+         Sin[Rational[2, 9] Pi]}, {
+        95.80746668257227, -7.713451316238471}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{100, 5 3^Rational[1, 2]}, {100, 8.660254037844386}]], 
+      InsetBox["7", 
+       NCache[{99, 6 3^Rational[1, 2]}, {99, 10.392304845413264`}]], 
+      InsetBox["8", 
+       NCache[{98, 7 3^Rational[1, 2]}, {98, 12.12435565298214}]], 
+      InsetBox["2", 
+       NCache[{97, 8 3^Rational[1, 2]}, {97, 13.856406460551018`}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        105 - 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        97.33955556881023, 6.4278760968653925`}]], 
+      InsetBox["8", 
+       NCache[{105 - 12 Cos[Rational[2, 9] Pi], 12 Sin[Rational[2, 9] Pi]}, {
+        95.80746668257227, 7.713451316238471}]]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        105 - 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        95.60307379214092, 3.420201433256687}]], 
+      InsetBox["8", 
+       NCache[{105 - 12 Cos[Rational[1, 9] Pi], 12 Sin[Rational[1, 9] Pi]}, {
+        93.7236885505691, 4.104241719908025}]], 
+      InsetBox["9", 
+       NCache[{105 - 14 Cos[Rational[1, 9] Pi], 14 Sin[Rational[1, 9] Pi]}, {
+        91.84430330899728, 4.788282006559362}]], 
+      InsetBox["3", 
+       NCache[{105 - 16 Cos[Rational[1, 9] Pi], 16 Sin[Rational[1, 9] Pi]}, {
+        89.96491806742546, 5.472322293210699}]]}, 
+     {RGBColor[1., 0., 0.], AbsolutePointSize[10], PointBox[{95, 0}], 
+      InsetBox["9", {93, 0}]}, 
+     {RGBColor[0., 0., 1.], AbsolutePointSize[10], 
+      PointBox[NCache[{
+        105 - 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        95.60307379214092, -3.420201433256687}]], 
+      InsetBox["9", 
+       NCache[{105 - 12 Cos[Rational[1, 9] Pi], (-12) 
+         Sin[Rational[1, 9] Pi]}, {93.7236885505691, -4.104241719908025}]], 
+      InsetBox["1", 
+       NCache[{105 - 14 Cos[Rational[1, 9] Pi], (-14) 
+         Sin[Rational[1, 9] Pi]}, {91.84430330899728, -4.788282006559362}]], 
+      InsetBox["7", 
+       NCache[{105 - 16 Cos[Rational[1, 9] Pi], (-16) 
+         Sin[Rational[1, 9] Pi]}, {89.96491806742546, -5.472322293210699}]]}}, 
+    {GrayLevel[0], 
+     LineBox[NCache[{{110, 5 3^Rational[1, 2]}, {
+        105 + 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}}, {{
+        110, 8.660254037844386}, {106.73648177666931`, 9.84807753012208}}]], 
+     LineBox[NCache[{{
+        105 + 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        105 - 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}}, {{
+       106.73648177666931`, 9.84807753012208}, {103.26351822333069`, 
+       9.84807753012208}}]], 
+     LineBox[NCache[{{
+        105 - 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {115, 
+        0}}, {{103.26351822333069`, 9.84807753012208}, {115, 0}}]], 
+     LineBox[
+      NCache[{{115, 0}, {
+        105 + 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}}, {{115, 
+        0}, {114.39692620785908`, 3.420201433256687}}]], 
+     LineBox[NCache[{{
+        105 + 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        105 + 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}}, {{
+       114.39692620785908`, 3.420201433256687}, {112.66044443118977`, 
+       6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        105 + 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        105 - 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}}, {{
+       112.66044443118977`, 6.4278760968653925`}, {
+       103.26351822333069`, -9.84807753012208}}]], 
+     LineBox[NCache[{{
+        105 - 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        105 + 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}}, {{
+       103.26351822333069`, -9.84807753012208}, {
+       106.73648177666931`, -9.84807753012208}}]], 
+     LineBox[NCache[{{
+        105 + 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        110, (-5) 3^Rational[1, 2]}}, {{
+        106.73648177666931`, -9.84807753012208}, {110, -8.660254037844386}}]],
+      LineBox[NCache[{{110, (-5) 3^Rational[1, 2]}, {
+        105 + 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}}, {{
+        110, -8.660254037844386}, {
+        112.66044443118977`, -6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        105 + 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        105 + 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}}, {{
+       112.66044443118977`, -6.4278760968653925`}, {
+       114.39692620785908`, -3.420201433256687}}]], 
+     LineBox[NCache[{{
+        105 + 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        100, (-5) 3^Rational[1, 2]}}, {{
+        114.39692620785908`, -3.420201433256687}, {
+        100, -8.660254037844386}}]], 
+     LineBox[NCache[{{100, (-5) 3^Rational[1, 2]}, {
+        105 - 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}}, {{
+        100, -8.660254037844386}, {
+        97.33955556881023, -6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        105 - 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        100, 5 3^Rational[1, 2]}}, {{
+        97.33955556881023, -6.4278760968653925`}, {100, 8.660254037844386}}]],
+      LineBox[NCache[{{100, 5 3^Rational[1, 2]}, {
+        105 - 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}}, {{
+        100, 8.660254037844386}, {97.33955556881023, 6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        105 - 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        105 - 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}}, {{
+       97.33955556881023, 6.4278760968653925`}, {95.60307379214092, 
+       3.420201433256687}}]], 
+     LineBox[NCache[{{
+        105 - 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {95, 
+        0}}, {{95.60307379214092, 3.420201433256687}, {95, 0}}]], 
+     LineBox[NCache[{{95, 0}, {
+        105 - 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}}, {{95,
+         0}, {95.60307379214092, -3.420201433256687}}]], 
+     LineBox[NCache[{{
+        105 - 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        110, 5 3^Rational[1, 2]}}, {{95.60307379214092, -3.420201433256687}, {
+        110, 8.660254037844386}}]]}, 
+    {RGBColor[0, 1, 0], 
+     LineBox[NCache[{{110, 5 3^Rational[1, 2]}, {
+        105 + 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}}, {{
+        110, 8.660254037844386}, {112.66044443118977`, 
+        6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        105 + 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        110, (-5) 3^Rational[1, 2]}}, {{106.73648177666931`, 
+        9.84807753012208}, {110, -8.660254037844386}}]], 
+     LineBox[NCache[{{
+        105 - 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}, {
+        100, 5 3^Rational[1, 2]}}, {{103.26351822333069`, 9.84807753012208}, {
+        100, 8.660254037844386}}]], 
+     LineBox[NCache[{{115, 0}, {
+        105 + 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}}, {{
+        115, 0}, {114.39692620785908`, -3.420201433256687}}]], 
+     LineBox[NCache[{{
+        105 + 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        105 - 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}}, {{
+       114.39692620785908`, 3.420201433256687}, {95.60307379214092, 
+       3.420201433256687}}]], 
+     LineBox[NCache[{{
+        105 + 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        110, 5 3^Rational[1, 2]}}, {{112.66044443118977`, 
+        6.4278760968653925`}, {110, 8.660254037844386}}]], 
+     LineBox[NCache[{{
+        105 - 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        100, (-5) 3^Rational[1, 2]}}, {{
+        103.26351822333069`, -9.84807753012208}, {100, -8.660254037844386}}]],
+      LineBox[NCache[{{
+        105 + 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}, {
+        105 - 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}}, {{
+       106.73648177666931`, -9.84807753012208}, {97.33955556881023, 
+       6.4278760968653925`}}]], 
+     LineBox[NCache[{{110, (-5) 3^Rational[1, 2]}, {
+        105 + 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}}, {{
+        110, -8.660254037844386}, {106.73648177666931`, 9.84807753012208}}]], 
+     LineBox[NCache[{{
+        105 + 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {95, 
+        0}}, {{112.66044443118977`, -6.4278760968653925`}, {95, 0}}]], 
+     LineBox[NCache[{{
+        105 + 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {115, 
+        0}}, {{114.39692620785908`, -3.420201433256687}, {115, 0}}]], 
+     LineBox[NCache[{{100, (-5) 3^Rational[1, 2]}, {
+        105 - 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}}, {{
+        100, -8.660254037844386}, {103.26351822333069`, -9.84807753012208}}]],
+      LineBox[NCache[{{
+        105 - 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}, {
+        105 - 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}}, {{
+       97.33955556881023, -6.4278760968653925`}, {
+       95.60307379214092, -3.420201433256687}}]], 
+     LineBox[NCache[{{100, 5 3^Rational[1, 2]}, {
+        105 - 10 Sin[Rational[1, 18] Pi], 10 Cos[Rational[1, 18] Pi]}}, {{
+        100, 8.660254037844386}, {103.26351822333069`, 9.84807753012208}}]], 
+     LineBox[NCache[{{
+        105 - 10 Cos[Rational[2, 9] Pi], 10 Sin[Rational[2, 9] Pi]}, {
+        105 + 10 Sin[Rational[1, 18] Pi], (-10) Cos[Rational[1, 18] Pi]}}, {{
+       97.33955556881023, 6.4278760968653925`}, {
+       106.73648177666931`, -9.84807753012208}}]], 
+     LineBox[NCache[{{
+        105 - 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}, {
+        105 + 10 Cos[Rational[1, 9] Pi], 10 Sin[Rational[1, 9] Pi]}}, {{
+       95.60307379214092, 3.420201433256687}, {114.39692620785908`, 
+       3.420201433256687}}]], 
+     LineBox[NCache[{{95, 0}, {
+        105 + 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}}, {{95,
+         0}, {112.66044443118977`, -6.4278760968653925`}}]], 
+     LineBox[NCache[{{
+        105 - 10 Cos[Rational[1, 9] Pi], (-10) Sin[Rational[1, 9] Pi]}, {
+        105 - 10 Cos[Rational[2, 9] Pi], (-10) Sin[Rational[2, 9] Pi]}}, {{
+       95.60307379214092, -3.420201433256687}, {
+       97.33955556881023, -6.4278760968653925`}}]]}}},
+  ImageSize->{1155.9999999999982`, Automatic}]], "Output",
+ CellChangeTimes->{
+  3.821366298971401*^9, 3.821366353736277*^9, 3.821366648435931*^9, {
+   3.821367396740893*^9, 3.8213674077732277`*^9}, 3.8213674825862627`*^9, {
+   3.821367586752667*^9, 3.8213676047418947`*^9}, {3.821367725111578*^9, 
+   3.821367763327125*^9}, 3.8213677934244223`*^9},
+ CellLabel->"Out[71]=",ExpressionUUID->"da05aafb-b213-482d-81e5-ffaebba12033"]
+}, Open  ]]
+},
+WindowSize->{1920, 1136},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
+FrontEndVersion->"12.1 for Linux x86 (64-bit) (March 18, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"d9410ae9-0552-4368-a3cf-31b590dd0d1c"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 36850, 825, 5545, "Input",ExpressionUUID->"1e7d049f-74f8-4913-9565-f93f8cf06e5c"],
+Cell[37411, 847, 5318, 146, 366, "Input",ExpressionUUID->"82d41f42-37c0-457c-abd2-42e000421b53"],
+Cell[42732, 995, 3848, 106, 366, "Input",ExpressionUUID->"a7badfbb-0afd-4922-a450-49f2027e58c2"],
+Cell[46583, 1103, 305, 7, 45, "Input",ExpressionUUID->"8afa90bb-752f-481d-984d-5c2c975c7634"],
+Cell[46891, 1112, 22138, 542, 846, "Input",ExpressionUUID->"f08b8932-ef68-4c7e-bb05-63780897f09c"],
+Cell[CellGroupData[{
+Cell[69054, 1658, 6035, 169, 270, "Input",ExpressionUUID->"8dc27da6-2b67-4cd3-b0ab-4111cd8a7086"],
+Cell[75092, 1829, 62851, 1211, 496, "Output",ExpressionUUID->"da05aafb-b213-482d-81e5-ffaebba12033"]
+}, Open  ]]
+}
+]
+*)
+
