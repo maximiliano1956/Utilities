@@ -3,8 +3,6 @@
 #include <string.h>
 #include <signal.h>
 
-#include "dlx.h"
-
 #define OPZN	"-n="
 #define OPZB	"-b="
 #define OPZT	"-t="
