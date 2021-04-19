@@ -1,0 +1,35 @@
+L'implicazione (=>) di un espressione matematica in un altra e' vera quando si passa dalla prima espressione alla seconda
+mediante un passaggio matematico corretto:
+
+esempio:	x=y => f(x)=f(y)  dove la f e' una qualunque funzione di x. qui l'implicazione e' vera.
+                x=y => f(x)=g(y)  qui l'implicazione e' falsa se f<>g
+
+Notare che se A => B e' vera allora e' vera anche not(B) => not(A) cioe' le 2 proposizioni sono equivalenti:
+
+A => B  <=>  not(B) => not(A)
+
+Si verifica facilmente che se A e' vera e A => B e' vera allora e' vera anche B
+cioe' che (A and A => B)  => B
+Cioe' se l'implicazione e' vera non e' possibile dedurre il falso dal vero.
+Quindi con passaggi matematici corretti da una proposizione vera si ottiene un'altra proposizione vera
+D'altra parte se l'implicazione e' vera e da una proposizione ne ottengo una palesemente falsa allora
+la proposizione di partenza e' falsa.
+
+Ci sono dunque 2 tipi fondamentali di dimostrazione in matematica: il "modus ponens" e il "modus tollens".
+
+Il "modus ponens" consiste nel partire da una proposizione che si sa' essere vera (un assioma o un teorema)
+per derivare mediante una catena di implicazioni corrette la verita' della proposizione che si vuole dimostrare
+
+Il "modus tollens" (la cosidetta' dimostrazione per assurdo) comporta di avere come proposizione di partenza
+la negazione della proposizione da dimostrare per poi ottenere con una catena di implicazioni vere una
+proposizione palesemente falsa. Questo comporta che la negazione della proposizione da dimostrare e' falsa
+e quindi che la proposizione da dimostrare e' vera.
+
+
+Se A e' falsa da un'implicazione vera puo' derivare una proposizione B che puo' essere falsa ma anche vera:
+insomma non si puo' fare nessuna ipotesi su una proposizione derivata da una proposizione falsa.
+
+Vediamo un esempio:
+
+-2 = 2 e' falsa ma applicando una funzione quadratica si ottiene: (-2)^2 = 2^2 cioe' 4=4 che e' vera mentre
+                   applicando una funzione di traslazione si ottiene (-2) - 1 = 2 - 1 cioe' -3=1 che e' falsa

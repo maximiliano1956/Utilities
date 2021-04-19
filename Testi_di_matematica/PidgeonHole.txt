@@ -1,0 +1,51 @@
+Il principio del PidgeonHole e' molto semplice.
+
+Supponiamo di avere m oggetti e n scatole con m>n
+
+Allora se sistemo ogni oggetto in una scatola qualunque sicuramente ce ne dovra' essere almeno una con piu' di un oggetto.
+
+Questo semplice principio ha applicazioni sorprendenti.
+
+Esempi:
+
+1)
+Supponiano di essere nel piano (RxR) e di colorare ogni punto di rosso o di blu in una qualunque maniera.
+Allora data una qualunque distanza d>0 esistera' sempre una coppia di punti distanti d che hanno lo stesso colore.
+
+La dimostrazione e' semplice:
+
+Consideriamo un qualunque triangolo equilatero di lato d posizionato in un punto qualunque del piano.
+Chiamiamo a b c i suoi vertici. Essendo i vertici di un triangolo equilatero, ogni coppia possibile di punti (a,b) (a,c) (b,c)
+si trovera' a distanza d. Poiche' ho solo 2 colori per i 3 punti vi sara' sicuramente una coppia di punti con lo stesso colore.
+
+2)
+Dato un numero naturale qualunque n esistera' sempre un suo multiplo con cifre pari a 0 o 1.
+
+Infatti: scegliamo n+1 numeri naturali cosi': 1 11 111 1111 11111 111111 ....
+
+Essendo piu' di n ce ne saranno 2 che divisi per n daranno lo stesso resto,cioe' tali che la differenza e' multiplo di n.
+Ma tale numero e' sicuramente costituito da tutti 0 e 1. CVD
+
+3) Supponiamo che un uomo genericamente abbia meno di 150000 capelli in testa.
+   Allora in una citta' di 150000 abitanti ci sono sicuramente almeno 2 uomini con lo stesso numero di capelli.
+
+
+In termini insiemistici il principio viene cosi' descritto:
+
+Supponiamo di avere un insieme A finito e di avere una funzione f di A in se' stesso:  f:A->A
+
+Allora se la funzione e' iniettiva e' anche suriettiva e viceversa.
+Insomma basta avere una sola proprieta' che si ha anche l'altra (per cui la funzione diventa biettiva in entrambi i casi)
+
+Questo e' vero solo se A e' finito!!!
+
+Se A e' infinito e' facile trovare dei contro-esempi:
+
+1) Supponiamo f:N->N   f(n)=2*n
+   Questa funzione e' chiaramente iniettiva:  f(n1)=f(n2) ==> 2*n1=2*n2 ==> n1=n2
+   ma non e' assolutamente suriettiva: tutti i numeri naturali dispari non fanno parte dell'immagine della funzione
+
+2) Supponiamo f:C->C   f(z)=z^2
+   Questa funzione e' suriettiva:
+   dato un qualunque numero complesso c l'equazione z^2=c ammette sempre 2 soluzioni (eventualmente coincidenti)
+   ma non e' assolutamente iniettiva (es: f(2)=f(-2)=4)

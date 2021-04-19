@@ -1,0 +1,159 @@
+Questo teorema fornisce una condizione necessaria e sufficiente per la primalita' di un numero intero n>1 :
+
+n intero positivo maggiore di 1 e' primo se e solo se      (n-1)! mod n = -1
+
+Dimostriamo prima che se (n-1)! mod n = -1 allora n e' primo
+
+Per assurdo supponiamo che sia  (n-1)! mod n = -1 e che n non sia primo.
+
+Otteniamo (n-1)! + 1 mod n = 0 ovvero che (n-1)! + 1 e' multiplo di n.
+Quindi esistera' un intero k tale che:
+
+(n-1)! + 1 = k*n. Se n non e' primo potremo scrivere n=a*b con a e b minori di n e diversi da 1.
+
+Questo pero' porta ad una contraddizione poiche' (n-1)! + 1 = 1*2*3*4*...*(n-2)*(n-1) + 1 non e' multiplo di nessun intero
+minore di n (da' come resto sempre 1), mentre la parte destra e' k*n = k*(a*b) ed e' multiplo sia di a che di b che sono 2 interi
+minori di n. Percio' se (n-1)! mod n = -1 n deve essere primo. CVD
+
+
+Ora dimostriamo che se n e' primo allora e' (n-1)! mod n = -1
+
+
+Sia A l'insieme dei numeri da 1 a n-1 con n>2 e supponiamo di introdurre come operazione binaria la moltiplicazione modulo n.
+
+Ovvero a.b = a*b-[a*b/n]*n dove [] e' la parte intera. In pratica si moltiplicano i 2 operandi poi si considera
+il resto della divisione per n del risultato. E'chiaro che l'operazione dara' un risultato intero compreso tra 0 e n-1 inclusi
+
+Noi pero' vogliamo che il risultato dell'operazione sia comunque un elemento di A
+Cioe' noi vogliamo escludere che a.b sia uguale a 0 poiche' in tal caso l'operazione non sarebbe possibile ovvero mi darebbe un
+risultato esterno ad A.
+
+E' necessario quindi che a.b non sia mai multiplo di n (in tal caso infatti il resto della divisione per n sarebbe zero)
+
+Ora questo avviene se n e' primo!
+
+Infatti la definizione classica di numero primo e' che abbia come divisore solo 1 e se' stesso.
+Ma la vera definizione (da cui in Z deriva quella ora detta) e' questa:
+
+un numero n e' primo quando:
+
+Scelti a e b qualunque diversi da 0:
+n|a*b => n|a or n|b cioe' e' primo se essendo divisore del prodotto a*b deve dividere uno dei 2 fattori.
+
+Questo equivale a dire che se n e' primo e non e' divisore ne' di a ne' di b non potra' mai essere divisore di a*b.
+
+Ora scegliendo a e b nel nostro insieme (numeri interi da 1 a n-1)
+n non potra' dividere ne' a ne' b (essendo a<n e b<n) quindi se n e' primo non potra' mai dividere a*b
+quindi se n e' primo il resto della divisione di a*b per n non potra' mai essere zero.
+
+Quindi a.b=0 non ha soluzioni per elementi di A. L'unica possibilita' e' che sia a=0 o b=0 ma essi non sono elementi di a
+
+Quindi se n e' primo combinando con la nostra operazione binaria (moltiplicazione modulo n)
+2 elementi qualunque di A ottengo come risultato sicuramente un elemento di A.
+L'operazione e' come si dice interna.
+
+Quindi abbiamo definito quanto meno un magma.
+
+In realta' vediamo subito che l'operazione gode anche di altre proprieta':
+
+1) E' associativa: bisogna dimostrare che (a.b).c = a.(b.c) per a,b,c qualunque.
+2) Esiste l'elemento neutro: e' chiaramente 1 lo stesso della moltiplicazione ordinaria
+   Infatti a.1 = 1.a = a essendo a*1 = 1*a = a
+3) E' commutativa: a.b = b.a essendo a*b = b*a
+
+Quindi abbiamo a che fare con quello che viene detto un MONOIDE commutativo.
+
+In realta' e' qualcosa di piu': infatti abbiamo detto che essendo n primo il prodotto a.b non potra' mai essere zero.
+Questo comporta ulteriori proprieta'.
+
+Infatti: fissiamo un a qualunque e consideriamo la funzione f:A->A f(x)=a.x=x.a
+
+Questa funzione e' iniettiva: infatti f(x1) = f(x2) => a.x1 = a.x2 => a.x1 - a.x2 = 0 => a.(x1-x2) = 0
+ma se n e' primo l'unica possibilita' per ottenere 0 e' che un operando valga 0.
+Deve percio' essere (essendo a<>0 appartenendo ad A) x1-x2=0 cioe' x1=x2.
+Quindi come detto la f e' iniettiva.
+Ma per il principio del pidegeon-hole essendo definita su un insieme A finito sara' anche suriettiva.
+Sara' cioe' biunivoca cioe' invertibile.
+
+Questo significa che l'equazione y=f(x) ammette sempre un'univoca soluzione indipendentemente dalla scelta di y
+(x = f^-1(y)).
+In particolare se si sceglie y=1 avro' l'equazione a.x = x.a = 1.
+In tal caso la soluzione dell'equazione e' quello che viene detto l'elemento inverso di a.
+
+Quindi ogni elemento di A e' dotato di inverso.
+
+Quindi se n e' primo la struttura algebrica corrispondente e' un gruppo abeliano.
+
+D'ora in poi chiamiamo n con la lettera p (poiche' e' primo)
+
+Ora vogliamo trovare quali elementi coincidono con il proprio inverso.
+
+Bisogna risolvere l'equazione:   x.x=1
+
+x^2-1=0 da cui (x-1).(x+1)=0 ma essendo p primo l'unica possibilita' e' che un fattore sia zero:
+Quindi si hanno solo le 2 soluzioni x=1 e x=-1 (che equivale a p-1)
+
+Infatti: 1.1 = 1 e (p-1).(p-1) = p.(p-1) - (p-1) = 1
+
+Quindi 1 ha per inverso 1 e (p-1) ha per inverso (p-1).
+
+Quindi ci sono 2 elementi (1 e p-1) che coincidono con il proprio inverso.
+Ne rimangono p-1-2=p-3 che e' pari essendo p dispari
+
+Questi p-3 valori possono essere suddivisi in tante coppie ogni elemento accoppiato col suo inverso.
+
+Moltiplicando tutti gli elementi fra di loro si ottiene proprio (p-1)!
+Se ordiniamo gli elementi mettendo come primi 2 quelli che coincidono col proprio inverso e poi gli altri
+accoppiati come descritto prima si avra':
+
+(p-1)! = 1.(p-1).a.a^-1.b.b^-1...   ma ogni coppia a.a^-1 e' uguale a 1 da cui:
+
+(p-1)! = 1.(p-1).1.1.1.1 ....
+
+Quindi (p-1)! = p-1
+
+Caso particolare p=2
+In tal caso 1 e p-1 coincidono poiche' il gruppo abeliano ha un solo elemento (l'elemento neutro 1)
+qui: (p-1)! = 1! = 1 = (2-1) = p-1 anche in questo caso.
+
+Questo e' il teorema di Wilson: p e' primo se e solo se (p-1)! modulo p = (p-1) = -1
+
+
+Vediamo se p non e' primo ... chiamiamolo n (n=4,6,8,9,10,12, ....):
+
+Si hanno 2 casi:
+
+1) n e' scomponibile come prodotto a*b con a<>b con a e b diversi da 1.
+   Poiche' e' n=a*b sara' a<n e b<n. Quindi nel prodotto (n-1)! incontreremo ad un certo punto sia a che b;
+   in tal caso avremo percio' (n-1)! modulo n = 0
+
+2) n e' esprimibile come una potenza intera maggiore di 1 di una base maggiore di 1  quindi sara' n=a^b a<>1 b<>1
+
+   In tal caso se b>2 avro'  n = a*a*a*.... = a * (a*a..) = a * b e ricadiamo nel caso precedente
+   avremo percio' di nuovo (n-1)! modulo n = 0
+
+   Resta percio' il caso n=a^2 con a<>1
+
+   Se n>2*a nel prodotto (n-1)! incontrero' prima 2*a poi a
+   e quindi avro' come fattore a^2 da cui di nuovo (n-1)! modulo n = 0
+
+   Rimane da considerare il caso n=a^2 con n<=2*a; cio' avviene se a^2<=2*a cioe' se a^2-2*a<=0
+
+   Ma questo (lo si vede facilmente) avviene solo per a=2:
+
+   a=2   a^2=4   2*a=4   cioe' a^2=2*a
+
+   a=3   a^2=9   2*a=6   quindi a^2>2*a
+
+   per valori crescenti di a il gap tra il quadrato e il doppio aumenta.
+
+   Quindi anche nel caso n=a^2 se a>2  avremo (n-1)! modulo n = 0
+
+   Nel caso n=2^2=4 abbiamo (4-1)! = 6 che modulo 4 da' 2 (non e' 0 ma non e' neanche n-1=3)
+   per cui il teorema di Wilson e' valido anche in questo caso.
+
+
+Ricapitolando: dato n intero maggiore di 1 si ha che n e' primo se e solo se (n-1)! modulo n = -1
+
+In piu' si potra' dire che se n non e' primo ed e' maggiore di 4 avremo sempre (n-1)! modulo n = 0
+Mentre per n=4 avremo (4-1)! modulo 4 = 2 che non contraddice il teorema di Wilson
