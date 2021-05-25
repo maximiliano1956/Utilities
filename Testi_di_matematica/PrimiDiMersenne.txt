@@ -1,0 +1,358 @@
+I primi di Mersenne sono numeri primi del tipo 2^n-1 con n numero naturale.
+
+Chiediamoci inizialmente le condizioni necessarie affinche' l'espressione m^n-1 (m,n naturali) possa essere un numero primo.
+
+Si vede subito che se m>2 il numero m^n-1 non potra' MAI essere primo.
+
+Questo perche' vale l'identita': m^n-1 = (m-1)*(m^(n-1)+m^(n-2)+...+m^2+m+1) per cui se m>2 il fattore (m-1) e' diverso di 1.
+Quindi condizione necessaria affinche' m^n-1 possa essere primo e' che sia m=2.
+
+Quindi consideriamo 2^n-1. Se n non e' primo potremo scrivere n=a*b con a,b diversi da 1.
+
+Ma allora 2^n-1 = 2^(a*b)-1 = (2^a)^b-1 = c^b-1 con c<>2 per cui ricadiamo nel caso precedente.
+
+Per cui condizione necessaria affinche' 2^n-1 sia primo e' che anche n sia primo.
+
+Quindi un primo di Mersenne e' del tipo 2^p-1 con p primo.
+
+Naturalmente p primo e' condizione necessaria ma non sufficiente affinche' 2^p-1 sia primo.
+
+Cio' significa che se p non e' primo certamente 2^p-1 non e' primo.
+Se invece p e' primo ci saranno casi in cui 2^p-1 e' primo e casi in cui 2^p-1 non sara' primo
+
+Nessuno ha dimostrato che i numeri primi di Mersenne siano infiniti
+
+I numeri primi di Mersenne sono in corrispondenza biunivoca con i numeri perfetti pari:
+
+supponiamo di avere un numero intero A del tipo M*2^(n-1) con M primo dispari.
+
+I divisori di A saranno: 1,2,4,8,...,2^(n-1),M,M*2,M*4,M*8,...,M*2^(n-3),M*2^(n-2) escludendo A stesso.
+
+A e' un numero perfetto se 1+2+4+8+...+2^(n-1)+M+M*2+M*4+M*8+...+M*2^(n-3)+M*2^(n-2)=M*2^(n-1)
+
+Cioe' se (1+M)*Somma(k,0,n-2)[2^k]+2^(n-1)=M*2^(n-1)
+
+Ovvero se (1+M)*(2^(n-1)-1)+2^(n-1)=M*2^(n-1) ==>
+2^(n-1)-1 + M*2^(n-1) - M + 2^(n-1) = M*2^(n-1) ==> M = 2^(n-1) + 2^(n-1) - 1 ==> M=2^n-1
+
+Quindi il numero perfetto e' (2^n-1)*2^(n-1)   con 2^n-1 primo di Mersenne
+
+Esempio:	n=2	3*2=6	infatti   1+2+3=6
+		n=3	7*4=28	infatti   1+2+4+7+14=28
+		n=5	31*16= .....
+
+Si dimostra che questa formula fornisce TUTTI i numeri perfetti pari.
+Nessuno ha mai trovato un numero perfetto dispari.
+
+Per testare la primalita' di un primo di Mersenne in maniera deterministica
+esiste un particolare algoritmo,l'algoritmo di Lucas-Lehmer.
+
+Normalmente per valutare la primalita' di un numero n bisogna maneggiare numeri dell'ordine almeno di n stesso.
+Se n e' molto grande questo e' un problema che rende inapplicabili i normali algoritmi deterministici.
+
+L'algoritmo di Lucas-Lehmer ha il vantaggio che per valutare la primalita' di 2^p-1 maneggia numeri limitati al valore di p.
+Questo algoritmo e' molto efficiente per cui testare la primalita' di un primo di Mersenne risulta molto piu' agevole di testare
+la primalita' di un numero qualunque.
+
+Questo spiega perche' i numeri primi piu' grandi che sono al momento stati trovati sono primi di Mersenne.
+
+I numeri naturali del tipo 2^n-1 sono detti numeri di Mersenne
+I numeri primi del tipo 2^p-1 (p primo) come gia' detto sono i primi di Mersenne.
+
+Il primo di Mersenne corrispondente al primo p viene indicato come Mp.
+
+Supponiamo per ipotesi che Mp sia un primo di Mersenne.
+
+Allora potremo definire il campo Z/MpZ dove e' definita l'aritmetica modulo Mp.
+
+Ora consideriamo l'anello dei polimomi Z/MpZ[x] dove gli elementi dell'anello sono i polimoni a coefficienti in Z/ZMp
+
+Noi sappiamo che se I[x] e' un ideale massimale dell'anello, il quoziente Z/MpZ[x] / I[x] e' un campo.
+
+Sappiamo anche che I[x] e' un ideale massimale se e solo se e' un polinomio irriducibile.
+
+Consideriamo percio' l'ideale principale dato dal generatore <x^2-3> (Dovendo essere 3 un elemento di Z/MpZ dovra' essere p>2)
+
+Dimostriamo ora che x^2-3 e' sempre un polinomio irriducibile per un qualunque Mp (p>2)
+
+Ricordiamo la legge di reciprocita' dei residui quadratici:
+
+Supponiamo P e Q numeri primi dispari.
+
+Sappiamo che un numero primo dividendolo per 4 deve per forza dare come resto 1 o 3
+(Se desse resto 0 sarebbe divisibile per 4 e se desse resto 2 sarebbe divisibile per 2)
+
+Quindi i 2 numeri P e Q saranno esprimibili come 4K+1 o come 4K+3 (K qualunque).
+
+La legge di reciprocita' dei residui quadratici (di cui non diamo dimostrazione) dice cosi':
+
+consideriamo le 2 equazione quadratiche modulari:
+
+x^2=P modulo Q
+x^2=Q modulo P
+
+Se almeno uno tra P e Q e' del tipo 4K+1 allora si hanno 2 casi possibili:
+
+A) Entrambe le equazioni ammettono soluzione
+B) Nessuna delle 2 equazioni ammette soluzione
+
+Se invece ne' P ne' Q sono del tipo 4K+3 (ovvero sono entrambi del tipo 4K+3) si hanno i 2 casi possibili:
+
+A) La prima equazione ha soluzione ma la seconda no
+B) La prima equazione non ha soluzione ma la seconda si
+
+Definendo il simbolo di Legendre (P Q) pari a 1 se l'equazione X^2=P modulo Q ha soluzione e -1 se non ha soluzione
+la legge si puo' esprimere elegantemente cosi':
+
+(P Q) * (Q P) = (-1)^{[(P-1)*(Q-1)]/4}
+
+Infatti se ad es. P = 4K+1 allora (P-1) e' divisibile per 4 da cui , essendo Q-1 sicuramente pari l'esponente di -1 e' pari
+e quindi in tal caso e' sicuramente (P Q)*(Q P) = 1 da cui 2 possibilita':
+a) (P Q)=1 e (Q P)=1		entrambe le equazioni hanno soluzione
+b) (P Q)=-1 e (Q P)=-1		nessuna equazione ha soluzione
+
+Se invece P=4K1+3 Q=4K2+3 sara' : [(P-1)*(Q-1)]/4 = [(4K1+2)*4K2+2)]/4 = (16*K1*K2+8*(K1+K2)+4)/4 = 4*K1*K2+2(K1+K2)+1 che e' dispari.
+Conseguentemente sara' (P Q)*(Q P) = -1 da cui 2 possibilita':
+a) (P Q)=1 e (Q P)=-1		la prima equazione ha soluzione e la seconda no
+b) (P Q)=-1 e (Q P)=1		la prima equazione non ha soluzione e la seconda si
+
+CVD
+
+Allora ci interessa l'equazione modulare X^2=3 modulo Mp
+
+Valutiamo l'equazione duale:
+
+x^2=Mp modulo 3. Ovvero: x^2 = 2^p - 1
+
+Ma una soluzione e' sicuramente x = 2^[(p+1)/2]
+Infatti in tal caso: x^2 = 2^(p+1) allora x^2-Mp = 2^(p+1) - (2^p - 1) = 2^p + 1 (essendo 2^p+2^p=2^(p+1))
+
+Ora 2^p - 1 e 2^p + 1 sono 2 dispari consecutivi. Compreso tra essi c'e' 2^p che non e' divisibile per 3.
+Quindi e' del tipo 3K+1 o 3K+2 ; pero' non puo' essere 3K+1 poiche' altrimento 2^p-1 sarebbe 3K e quindi non primo.
+Percio' 2^p e' del tipo 3K+2, 2^p-1 e' del tipo 3K+1 e quindi 2^p+1 deve essere del tipo 3K+3 quindi DIVISIBILE per 3
+
+Quindi x=2^[(p+1)/2] e' sicuramente soluzione dell'equazione x^2=2^p-1 modulo 3
+
+Ora consideriamo i 2 primi 3 e Mp.
+
+Il primo e' sicuramente del tipo 4K+3
+Per quanto riguarda il primo di Mersenne se fosse 2^p-1=4K+1 avremmo 2^p=4K+2 da cui 2^(p-1)=2K+1 dispari ma cio' e' impossibile
+Percio' anche Mp deve essere del tipo 4K+3.
+
+Quindi per il principio di reciprocita' avendo l'equazione x^2=Mp modulo 3 soluzione
+l'equazione duale x^2=3 modulo Mp NON AVRA' SOLUZIONE.
+
+Quindi il polinomio x^2-3 e' irriducibile in Z/MpZ[x]
+
+e quindi il quoziente Z/MpZ[x] / <x^2-3> e' UN CAMPO!!
+
+Tutto questo equivale a definire la moltiplicazione polinomiale in Z/MpZ[x] modulo il polinomio x^2-3
+(Cioe' si moltiplicano i polinomi e si prende il resto della divisione del risultato per X^2-3)
+Essendo x^2-3 irriducibile non troveremo mai 2 polinomi che moltiplicati tra di loro danno un multiplo di x^2-3
+ovvero 0 modulo x^2-3.
+Quindi questo anello e' un dominio di integrita' finito e quindi e' un campo.
+
+E' chiaro che facendo cosi' otterro' sempre polinomi al massimo di grado pari al grado dell'ideale <x^2-3> - 1
+quindi in questo caso avro' polinomi di grado 1 (cioe' lineari)
+
+Quindi un generico elemento del campo sara' del tipo a+b*x con a,b appartenenti a Z/MpZ e tenendo conto che x^2=3
+
+Questo equivale ad ampliare il campo Z/MpZ con un simbolo esterno che chiameremo guarda caso sqr(3) che avra' la proprieta'
+di avere come quadrato 3.
+Questo campo lo si indica con il simbolo Z/MpZ[sqr(3)] e il generico elemento sara' del tipo:
+
+a+b*sqr(3) a,b in Z/MpZ
+
+Questa definizione e' piu' semplice in quanto vengono naturali le regole di addizione e moltiplicazione:
+
+Se A=a+b*sqr(3) e B=c+d*sqr(3) allora:
+
+A+B = (a+b*sqr(3)) + (c+d*sqr(3)) = (a+c) + (b+d)*sqr(3)
+
+A*B = (a+b*sqr(3)) * (c+d*sqr(3)) = a*c + a*d*sqr(3) + b*c*sqr(3) + 3*b*d = (a*c+3*b*d) + (a*d+b*c)*sqr(3)
+
+Oppure indicando l'elemento a+b*sqr(3) con la coppia ordinata (a,b) le regole sono:
+
+(a,b) + (c,d) = (a + c,b + d)
+(a,b) * (c,d) = (a * c + 3 * b * d,a * d + b * c)
+
+con a,b,c,d in Z/MpZ
+
+Elemento neutro del + : (0,0)
+
+Allora (a,b)+(inv(a),inv(b)) = (0,0) da cui inv(a)=-a e inv(b)=-b Infatti (a,b)+(-a,-b)=(a+(-a),b+(-b))=(0,0)
+
+Elemento neutro del * : (1,0)
+
+Allora (a,b)*(a^-1,b^-1)=(1,0) da cui:
+
+a*a^-1+3*b*b^-1=1
+a*b^-1+b*a^-1=0 da cui b^-1=(-b/a)*a^-1 e sostituendo nella prima:
+
+a*a^-1-(3*b^2/a)*a^-1=1 da cui a^-1=a/(a^2-3*b^2) b^-1=-b/(a^2-3*b^2)
+
+L'ordine del campo Z/MpZ[sqr(3)] e' Mp^2 poiche' in a+b*sqr(3) a e b possono assumere ciascuno Mp valori (da 0 a Mp-1).
+
+L'ordine del gruppo additivo associato e' anch'esso Mp^2 mentre l'ordine del campo moltiplicativo associato e' Mp^2-1
+poiche' bisogna escludere lo 0 (a=b=0)
+
+La caratteristica del campo Z/MpZ[sqr(3)] e' Mp (poiche' i coefficienti variano in Z/MpZ).
+
+Essendo un campo, e' valido l'automorfismo di Frobenius:
+
+(A+B)^Mp = A^Mp+Br^Mp
+(A*B)^Mp = A^Mp*B^Mp
+
+dove A,B sono 2 elementi del campo.
+Scegliendo A=a e B=b*sqr(3) dalla prima si ha:
+
+(a+b*sqr(3))^Mp = a^Mp+(b*sqr(3))^Mp e applicando la seconda:
+
+(a+b*sqr(3))^Mp = a^Mp+b^Mp*(sqr(3)^Mp)
+
+Ma per il piccolo teorema di Fermat e' sempre A^Mp=A per qualunque elemento del gruppo moltiplicativo Z/MpZ, percio':
+
+(a+b*sqr(3))^Mp = a+b*(sqr(3)^Mp)
+
+Sempre per il piccolo teorema di Fermat e':
+
+3^(Mp-1)=1 e poiche' in Z/MpZ ogni elemento e' generatore del gruppo moltiplicativo Z/MpZ avremo:
+
+3^((Mp-1)/2)=-1 (abbiamo preso le radici quadrate di entrambe i membri) (deve valere -1 e non 1 essendo 3 un generatore)
+
+da cui sqr(3)^(Mp-1)=-1 da cui sqr(3)^Mp=-sqr(3)
+
+Quindi avremo (a+b*sqr(3))^Mp = a-b*sqr(3)
+
+Moltiplicando ambo i membri per (a+b*sqr(3)) avremo:
+
+(a+b*sqr(3))^(Mp+1) = a^2-3*(b^2) da cui:
+
+(a+b*sqr(3))^(2*(Mp+1)/2) = a^2-3*(b^2) da cui:
+
+((a+b*sqr(3))*(a+b*sqr(3)))^((Mp+1)/2) = a^2-3*(b^2) da cui:
+
+(a^2+2*a*b*sqr(3)+3*b^2)^((Mp+1)/2) = a^2-3*(b^2)
+
+Ponendo a=1 e b=1 abbiamo:
+
+(4+2*sqr(3))^((Mp+1)/2) = -2 da cui
+
+(2+sqr(3))^((Mp+1)/2) = -1 da cui (2+sqr(3))^(Mp+1) = 1
+
+Ponendo a=1 e b=-1 abbiamo:
+
+(4-2*sqr(3))^((Mp+1)/2) = -2 da cui
+
+(2-sqr(3))^((Mp+1)/2) = -1 da cui (2-sqr(3))^(Mp+1) = 1
+
+Quindi 2+sqr(3) e 2-sqr(3) hanno ordine (Mp+1) nel gruppo moltiplicativo Z/MpZ[sqr(3)]
+(Ricordiamo che questo gruppo moltiplicativo ha ordine Mp^2-1 che e' uguale a (Mp-1)*(Mp+1)
+ e quindi l'ordine di 2 +/- sqr(3) che e' Mp+1 ne e' un divisore come deve appunto essere per il teorema di Lagrange)
+
+Notiamo anche che (2+sqr(3))*(2-sqr(3))=4-3=1 quindi 2+sqr(3) e' l'inverso di 2-sqr(3) e viceversa
+
+Poniamo Om1=2+sqr(3) e Om2=2-sqr(3)
+
+Allora avremo:
+
+1) Om1*Om2=1 cioe' Om1=Om2^-1
+2) Om1 e Om2 soddisfano l'equazione modulare x^(Mp+1)=1
+
+Consideriamo ora l'espressione:
+
+S(k)=Om1^(2^k)+Om2^(2^k) per k=0,1,2,...  da cui:
+
+S(k)^2 = (Om1^(2^k)+Om2^(2^k))^2 = Om1^(2^(k+1))+Om2^(2^(k+1))+2*(Om1*Om2)^(2^k)=Om1^(2^(k+1))+Om2^(2^(k+1))+2 (essendo Om1*Om2=1)
+da cui:
+
+S(k)^2=S(k+1)+2 cioe':
+
+S(k+1) = S(k)^2 - 2   Essendo S(0)= Om1+Om2 = 4
+
+Ne consegue che la successione assume tutti valori privi del termine sqr(3)
+
+Calcoliamo ora [Om1^((Mp+1)/4))+Om2^((Mp+1)/4))]^2=Om1^((Mp+1)/2))+Om2^((Mp+1)/2))+2*(Om1*Om2)^((Mp+1)/4))=(-1)+(-1)+2=0
+
+Conseguentemente Om1^((Mp+1)/4))+Om2^((Mp+1)/4))=0 cioe': Om1^(2^(p-2))+Om2^(2^(p-2))=0
+
+Ovvero:  S(p-2)=0
+
+Quindi data la successione definita dalla ricorsione:
+
+S(0)=4 S(k+1)=S(k)^2-2 per k=1,2,... con valori in Z/MpZ se Mp numero di Mersenne e' primo allora si avra' S(p-2)=0 (in Z/MpZ)
+
+Questa e' una condizione necessaria affinche Mp numero di Mersenne sia primo. (Ricordiamo p>2)
+Quindi se NON e' verificata Mp non e' primo
+Se e' verificata non si puo' dire niente (al momento ma vedremo poi che e' anche condizione sufficiente)
+
+Quindi basta ricavare i vari valori della successione S(k) fino al valore k=p-2 e controllare che il valore ottenuto
+sia multiplo di Mp.
+
+Oppure ANCORA MEGLIO ad ogni calcolo di S(k) ridurre il valore nel range 0/Mp-1 (prendendo il resto della divisione per Mp)
+(In questo modo i valori maneggiati sono limitati a Mp-1)
+
+Quindi come si vede per vedere se Mp=2^p-1 non e' primo basta calcolare p-3 valori della successione
+
+L'ordine del numero dei valori da calcolare e' paragonabile al log in base 2 del numero da controllare e questo rende il
+test di Lucas-Lehmer estremamente vantaggioso.
+
+Esempi:
+
+Mp = 2^3-1=7 quindi p=3
+Allora S(0)=4 S(1)=4*4-2=14 che e' multiplo di 7 quindi non si puo' dire che 3 non e' primo
+
+Mp = 2^4-1=15 quindi p=4
+Allora S(0)=4 S(1)=4*4-2=14 S(2)=14*14-2=194 che non e' multiplo di 15 e infatti 15 non e' primo
+
+Mp = 2^5-1=31 quindi p=5
+Allora S(0)=4 S(1)=4*4-2=14 S(2)=14*14-2=194=8 S(3)=8*8-2=62 che e' multiplo di 31 quindi non si puo' dire che 5 non e' primo
+
+Mp = 2^6-1=63 quindi p=6
+Allora S(0)=4 S(1)=4*4-2=14 S(2)=14*14-2=194=5 S(3)=5*5-2=23 S(4)=23*23-2=527 che non e' multiplo di 63 e infatti 6 non e' primo
+
+Mp = 2^7-1=127 quindi p=7
+Allora S(0)=4 S(1)=4*4-2=14 S(2)=14*14-2=194=67 S(3)=67*67-2=4487=42 S(4)=42*42-2=1762=111 S(5)=111*111-2=12319
+che e' multiplo di 127 (127*97=12319) quindi non si puo' dire che 127 non e' primo
+
+etc...
+
+
+Ora vediamo che la condizione e' anche sufficiente.
+
+Supponiamo si avere la successione S(k) e che sia:
+
+Om1^(2^(p-2))+Om2^(2^(p-2))=K*Mp
+
+Moltiplicando ambro i membri per Om1^(2^(p-2)) avremo:	Om1^(2^(p-1))+(Om1*Om2)^(2^(p-2))=K*Mp*Om1^(2^(p-2)) cioe':
+
+(1)	Om1^(2^(p-1))=K*Mp*Om1^(2^(p-2))-1 e elevando al quadrato entrambi i membri:
+
+(2)	Om1^(2^p)=(K*Mp*Om1^(2^(p-2))-1)^2
+
+Ora supponiamo per assurdo Mp non primo: sia q un suo fattore primo minore di sqr(Mp)
+
+Consideriamo l'anello Z/qZ[sqr(3)]
+
+Si parla di anello poiche' non e' detto che l'equazione modulare x^2=3 modulo q non abbia soluzioni per qualunque q
+(Ovvero il l'ideale <x^2-3> potrebbe non essere massimale in Z/qZ[x])
+
+Comunque consideriamo il gruppo moltiplicativo Z/qZ[sqr(3)] dato dagli elementi a+b*sqr(3) (con a e b in Z/qZ) dotati di inverso
+rispetto all'operazione *
+
+Questo gruppo avra' al massimo q^2-1 elementi
+
+Le 2 equazioni (1) e (2) valutate modulo q diventano rispettivamente:
+
+Om1^(2^(p-1))=-1
+Om1^(2^p)=(-1)^2=1
+
+Percio' Om1 in Z/qZ[sqr(3)] ha ordine 2^p
+
+Allora l'ordine di Om1 in Z/qZ[sqr(3)] sara' minore o uguale a q^2-1 che e' minore di Mp (avendo scelto q<sqr(Mp)) che e' 2^p-1
+
+Quindi sara':	2^p<=q^2-1<Mp=2^p-1 che e' palesemente impossibile.
+
+Da cui Mp deve essere primo. CVD
+
+Quindi il criterio di Lucas-Lehmer e' necessario e sufficiente per la primalita' di Mp
