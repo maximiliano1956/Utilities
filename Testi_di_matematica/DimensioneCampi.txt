@@ -1,0 +1,61 @@
+Ricordiamo che il quoziente di una anello commutativo con un suo ideale massimale e' un campo.
+
+Consideriamo allora R[x] cioe' l'anello commutativo dei polinomi a coefficienti reali.
+
+Qui gli ideali massimali hanno come generatori i polinomi irriducibili ovvero i polinomi
+non fattorizzabili.
+
+Tutti i polinomi di grado 1 sono irriducibili e il quoziente e' R (campo di dimensione 1)
+
+Per quanto riguarda il grado 2 ad esempio il polinomio x^2+1=0 e' irriducibile in quanto
+ammettendo 2 radici +i e -i complesse coniugate e' scomponibile in (x+i)*(x-i).
+La fattorizzazione e' in monomi che non appartengono a R[x]
+
+Il quoziente R[x] / <x^2+1> e' dato dai monomi lineari a+b*x (a e b reali)
+e la moltiplicazione avviene tra i monomi tenendo presente che x^2+1=0
+
+Ovvero ed e' la stessa cosa si introduce un simbolo esterno che chiameremo i
+tale da soddisfare i^2+1=0 e gli elementi del quoziente saranno del tipo a+b*i (a,b reali)
+e la moltiplicazione tra polinomi avviene tenendo conto che i^2=-1
+
+E' chiaro che il campo quoziente ottenuto ha dimensione 2 e non e' altro che il campo complesso.
+
+Ora analizziamo gli ideali massimali di grado da 3 in su.
+
+Si verifica facilmente che NON esistono ideali massimali di grado superiore a 2
+ovvero che NON esistono polinomi irriducibili di grado maggiore di 2.
+
+Infatti abbiamo 2 casi:
+
+1) polinomi di grado maggiore di 2 e dispari.
+   Sappiamo che in tal caso il polinomio ammette almeno una radice reale, chiamiamola alfa;
+   Ma allora il polinomio e' scomponibile in (x-alfa)*R(x) dove R(x) ha coefficienti in R
+   Quindi in tal caso il polinomio non e' irriducibile in R
+
+2) polinomi di grado maggiore di 2 e pari.
+
+   Se il polinomio ammette almeno una radice reale ricadiamo nel caso precedente
+
+   In caso contrario ammettera' coppie di radici complesse coniugate.
+
+   Sia z0=a+i*b e z1=a-i*b una coppia di queste radici.
+
+   Allora il polinomio di puo' esprimere come (x-z0)*(x-z1)*R(x)
+
+   ma (x-z0)*(x-z1) = x^2 - (z0+z1)*x + z0*z1 = x^2 - 2*a*x + (a^2+b^2) che e' un polinomio a coefficienti reali
+
+   D'altra parte R(x) sara' anch'esso scomponibile in prodotti di coppie di radici complesse coniugate.
+
+   Quindi alla fine il polinomio risulta scomponibile in polinomi di secondo grado a coefficienti in R
+   ciascuno di essi generato da monomi di coppie di radici complesse comniugate.
+
+   Quindi anche in tal caso il polinomio non e' irriducibile in R
+
+Quindi NON esistono campi di dimensione superiore a 2 in quanto non esistendo
+per gradi superiori polinomi massimali (cioe' irriducibili) il quoziente
+di R[x] per l'ideale generato dal polinomio non massimale e' ancora un anello ma non un campo
+
+
+
+
+
