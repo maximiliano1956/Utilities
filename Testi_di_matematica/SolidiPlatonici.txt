@@ -1,0 +1,73 @@
+Nel piano abbiamo i poligoni, che sono curve convesse costituite da una spezzata cioe' una successione di segmenti che si chiude.
+Letteralmente poligono significa "tanti angoli" e infatti il poligono e' caratterizzato da un'insieme di angoli interni.
+Quindi il poligono e' caratterizzato da lati (i segmenti della spezzata) e da angoli interni.
+Il numero minimo di lati di un poligono e' 3 mentre il numero massimo e' indefinito.
+
+Si dice poligono regolare un poligono che ha tutti gli angoli uguali (e conseguentemente ha uguali anche i lati).
+Se il numero dei lati tende a infinito il poligono regolare tende al cerchio circoscritto al poligono.
+Esistono infiniti poligoni regolari.
+
+Ora ricaviamo una formula che in base al numero dei lati ci fornisce il valore di ogno angolo interno.
+
+Sistemiamo il poligono regolare in modo da avere il primo lato parallelo all'asse X
+Potremo vedere questo primo lato come un vettore di angolazione zero.
+Muoviamoci in senso antiorario e passiamo al lato successivo. Il vettore subisce una rotazione in senso antiorario e passando
+ai vari lati successivi continuira' a ruotare della stessa quantita' fino a tornare alla fine a essere di nuovo parallelo all'asse X.
+
+Quindi se n e' il numero dei lati, alla fine dopo n step il vettore e' ruotato di 360 gradi.
+
+Quindi ogni step comporta una rotazione di 360/n gradi.
+
+L'angolo interno e' semplicemente il supplementare cioe' e' pari a 180-360/n = 180*(1-2/n)
+
+La somma degli n angoli interni e' pari a n*180*(1-2/n) = 180*(n-2)
+
+Vediamo i primi casi: il minimo valore di n e' 3:
+
+n=3		Angolo interno         180*(1-2/3) = 60			Triangolo equilatero
+		Somma angoli interni = 180*(3-2) = 180
+
+n=4		Angolo interno         180*(1-2/4) = 90			Quadrato
+		Somma angoli interni = 180*(4-2) = 360
+
+n=5		Angolo interno         180*(1-2/5) = 108		Pentagono regolare
+		Somma angoli interni = 180*(5-2) = 540
+
+n=6		Angolo interno         180*(1-2/6) = 120		Esagono regolare
+		Somma angoli interni = 180*(6-2) = 720
+
+
+Come la somma degli angoli interni parte da 180 per n=3 e ad ogni incremento di n si incrementa di 180 gradi.
+Quindi tende a infinito per n->infinito.
+
+Invece l'angolo interno parte da 60 gradi per n=3 , e' crescente al crescere di n e tende a 180 gradi per n->infinito.
+
+
+Passiamo ora ai poliedri (che significa tante facce)
+
+Sono superficie convesse chiuse costituite da facce piane
+
+I poliedri regolari sono poliedri che hanno tutte facce uguali e pari ad un poligono regolare.
+
+Ci sono 2 condizioni necessarie affinche' un poliedro regolare avente faccia a n lati possa esistere:
+
+1) In ogni vertice devono convergere almeno 3 facce
+2) La somma degli angoli di ogni faccia che converge nel vertice deve essere inferiore a 360 gradi.
+
+La seconda condizione ci dice che dovra' essere 3*(angolo interno)<360 gradi cioe' (angolo interno) < 120 gradi.
+Infatti se l'angolo e' pari o superiore a 120 gradi supponendo di avere il minimo possibile di facce convergenti (che e' 3)
+si ha gia' 360 o di piu'
+
+Da cui le facce utilizzabili saranno solo il triangolo equilatero il quadrato e il pentagono (l'esagono ha un angolo interno pari a 120)
+
+
+Per il triangolo equilatero posso avere 3 4 o 5 facce convergenti in un vertice (da 6 in su no poiche' 6*60 da' gia' 360)
+In corrispondenza ho il tetraedro (4 facce triangolari) l'ottaedro (8 facce triangolari) l'icosaedro (20 facce triangolari)
+
+Per il quadrato posso avere solo 3 facce (da 4 in su no poiche' 4*90 da' gia' 360)
+In corrispondenza ho l'esaedro (6 facce quadrate) (cioe' il cubo)
+
+Per il pentagono posso avere solo 3 facce (da 4 in su no poiche' 4*108 supera 360)
+In corrispondenza ho il dodeacaedro (12 facce pentagonali)
+
+Quindi i poliedri regolari possibili sono solo 5 e sono detti SOLIDI PLATONICI.
