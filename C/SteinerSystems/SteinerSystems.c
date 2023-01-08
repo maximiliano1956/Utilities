@@ -318,7 +318,7 @@ int allocMem(char *strerr) {
 		return(1);
 	}
 
-	MatDlx=(unsigned int *)allocVectChar((tnb*bt*2)*sizeof(unsigned int));
+	MatDlx=(unsigned short *)allocVectChar((tnb*bt*2)*sizeof(unsigned short));
 	if (MatDlx==NULL) {
 		strcpy(strerr,"MatDlx");
 		return(1);
@@ -715,7 +715,7 @@ int search(void) {
 			fwrite(&comb_bn.numc,sizeof(unsigned int),1,fp);
 			for (unsigned int nr=0;nr<tnb;nr++)
 				fwrite(comb_bn.combnz[nr],b,1,fp);
-			fwrite(MatDlx,(tnb*bt*2)*sizeof(unsigned int),1,fp);
+			fwrite(MatDlx,(tnb*bt*2)*sizeof(unsigned short),1,fp);
 			fclose(fp);
 		}
 		else
