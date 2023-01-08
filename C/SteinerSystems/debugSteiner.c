@@ -33,7 +33,7 @@ char filename[512];		// nome file snapshot
 char *soluz;                    // Vettore dinamico contenente le soluzioni trovate
 unsigned int nsol;              // nr soluzioni trovate
 MATRIX comb_bn;                 // Combinazioni (b,n)
-unsigned int *MatDlx;		// Vettore dinamico sparso utilizzata nell'algoritmo DLX
+unsigned short *MatDlx;		// Vettore dinamico sparso utilizzata nell'algoritmo DLX
 
 
 /*						*/
@@ -463,7 +463,7 @@ int main(char argc, char *argv[]) {
 			fclose(fp);
 			exit(1);
 		}
-		if ((MatDlx=(unsigned int *)allocVectChar((tnb*bt*2)*sizeof(unsigned int)))==NULL) {
+		if ((MatDlx=(unsigned short *)allocVectChar((tnb*bt*2)*sizeof(unsigned short)))==NULL) {
 			printf("Non riesco ad allocare MatDlx\n");
 			cleanUp();
 			fclose(fp);
@@ -484,7 +484,7 @@ int main(char argc, char *argv[]) {
 				fclose(fp);
 				exit(1);
 			}
-		if ((nbyr=fread(MatDlx,(bt*tnb*2)*sizeof(unsigned int),1,fp))==0) {
+		if ((nbyr=fread(MatDlx,(bt*tnb*2)*sizeof(unsigned short),1,fp))==0) {
 			printf("Lettura dato MatDlx errata\n");
 			cleanUp();
 			fclose(fp);
