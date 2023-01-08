@@ -35,7 +35,7 @@ MATRIX comb_tb;			// Combinazioni (t,b)
 char *ind;			// Vettore dinamico utilizzato nella generazione delle configurazioni
 char *set;			// Vettore dinamico utilizzato nella generazione delle configurazioni
 char *soluz;			// Vettore dinamico contenente le soluzioni trovate
-unsigned int *MatDlx;		// Vettore dinamico utilizzata nell'algoritmo DLX
+unsigned short *MatDlx;		// Vettore dinamico utilizzata nell'algoritmo DLX
 
 int **set_tb;			// Matrice dinamica contenente gli indici alla lista delle configurazioni (t,n)
   
