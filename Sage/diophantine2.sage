@@ -98,7 +98,7 @@ P1=E(f3(E1.xy()),f4(E1.xy()))
 #
 # loop nt tentativi
 #
-for nt in range(1,nt+1):
+for nt1 in range(1,nt+1):
 #
 # aggiunge P1 ad ogni loop
 # ottenendo multipli successivi di P1
@@ -131,7 +131,7 @@ for nt in range(1,nt+1):
 #
 # stampa numero iterazione e terna a,b,c positiva
 #
-        print(nt)
+        print(nt1)
         print(x)
         print(y)
         print(z)
