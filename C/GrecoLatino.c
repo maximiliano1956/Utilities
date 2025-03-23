@@ -236,7 +236,7 @@ void Stampa(QUADRATO q) {
 int main(int argc, char* argv[]) {
 	int ns;
 
-	n = 7;							// Dimensione del quadrato
+	n = 3;							// Dimensione del quadrato
 
 // Controllo sul valore di n
 	if (n <= 0)
