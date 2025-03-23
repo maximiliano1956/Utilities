@@ -140,10 +140,10 @@ void Search(int r, int c) {
 
 		if (r == n) {					// test se ultimo simbolo
 										// depositato
-									Stampa(Quadrato);
-		printf("Soluzione nr. %d\n", numsol + 1);	// e l'ordinale
+		Stampa(Quadrato);
+		numsol++;        // Aggiorna nr. soluzioni
+		printf("Soluzione nr. %d\n", numsol);	// e l'ordinale
 		printf("\n");
-			numsol++;					// Aggiorna nr. soluzioni
 		}
 
 		Search(r, c);					// Ricerca la nuova casella
