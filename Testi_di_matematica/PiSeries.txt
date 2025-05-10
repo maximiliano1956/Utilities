@@ -1,0 +1,200 @@
+Vediamo di calcolare la seguente serie Sum[n,1,inf,a(n)/n] dove a(n) è una successione così fatta:
+
+n viene diviso per 2 fino ad ottenere un valore non più divisibile per 2.
+Questo valore viene ora diviso per 3 fino ad ottenere un valore non più divisibile per 3. Alla fine otterrò un divisore di n la cui scomposizione in fattori primi non comprende né il 2 né il 3.
+Questo valore ora viene diviso per 4 e ne viene considerato il resto. Tale resto potrà in teoria valere 0,1,2,3 ma non potrà essere né 0 né 2 poiché in tal caso il valore che ho diviso per 4 sarebbe quanto meno divisibile per 2.
+Perciò il resto è 1 o 3.
+Poniamo a(n)=1 se il resto è 1
+e a(n)=-1 se il resto è 3.
+Quindi se il resto è 1 sommeremo il termine della serie; se il resto è -1 sottrarremo il termine della serie.
+
+Sorprendentemente dimostreremo che la serie converge a π
+
+
+
+
+
+Iniziamo cercando di esprimere
+la funzione sin(x) come un prodotto infinito.
+Già sappiamo che possiamo sviluppare la funzione sin(x) in serie di potenze (Taylor o McLaurin).
+Troncando la serie abbiamo un' approssimazione di sin(x) mediante un polinomio di grado n.
+La funzione sin(x) è periodica e si azzera infinite volte a multipli interi di π.
+D'altra parte un polinomio di grado n avente n zeri x1..xn è esprimibile come C*(x-x0)*(x-x1)*...*(x-xn) dove C è una costante.
+Applicando tutto questo a sin(x) posso scrivere:
+
+sin(x)=C*x*(x-π)*(x+π)*(x-2π)*(x+2π)...*(x-kπ)*(x+kπ)... =
+C*x*(x^2-π^2)*(x^2-4*π^2)*..
+*(x^2-k^2*π^2)*...
+Ora calcoliamo C.
+Assumendo x!=0 dividiamo entrambi i membri per x:
+
+sin(x)/x=C*(x^2-π^2)*...
+
+Se faccio tendere x a zero:
+
+1=C*(-π^2)*(-4*π^2)*(-9*π^2)...
+
+da cui:
+
+C=1/[(-π^2)*(-4*π^2)*..] da cui
+
+sin(x)=x*(1-x^2/π^2)*(1-x^2/(4*π^2))*...
+
+Quindi sin(x)=x*Prod[k,1,inf,1-x^2/(k*π)^2]
+
+Adesso prendiamo i logaritmi di entrambi i membri:
+
+log sin(x)=log(x)+Sum[k,1,inf,log(1-x^2/(k*π)^2)]
+
+Deriviamo entrambi i membri:
+
+ctg(x)=1/x+Sum[k,1,inf,1/(1-x^2/(k*π)^2))*(-2*x/((k*π)^2)) =
+
+1/x-Sum[k,1,inf,2*x/(((k*π)^2)-x^2)]
+
+= 1/x-Sum[k,1,inf,1/(k*π-x)-1/(k*π+x)]
+
+Sia x=(a/b)*π con a,b interi diversi da zero.
+
+ctg((a/b)*π)=b/(a*π)-Sum[k,1,inf,1/((k*π)-(a/b)*π)-1/((k*π)+(a/b)*π)]=
+b/(a*π)-(b/π)*Sum[k,1,inf,1/(k*b-a)-1/(k*b+a)]=(b/π)*(1/a-Sum[k,1,inf,1/(k*b-a)-1/(k*b+a)]
+
+Quindi:
+
+Sum[k,1,inf,1/(k*b-a)-1/(k*b+a)] = 1/a-(π/b)*ctg((a/b)*π)
+
+Cioè:
+
++1/(   b -a) - 1/(   b +a)
++1/((2*b)-a) - 1/((2*b)+a)
++1/((3*b)-a) - 1/((3*b)+a)
++ .........................
+
+In pratica è una serie armonica dove a denominatore si considerano solo quei valori di n tali che n%b=b-a (termine sommato) o n%b=a (termine sottratto). I denominatori sono quindi in ordine crescente:
+b-a b+a 2b-a 2b+a 3b-a 3b+a
+Il denominatore n=a che da' effettivamente resto a non viene considerato in quanto la serie parte con un termine che viene sommato; poi si prosegue a segni alterni.
+Ebbene la serie converge al limite:
+1/a-(π/b)*ctg((π*a)/b) ovvero
+1/a-π/(b*tg((π*a)/b))
+
+Ritorniamo ora alla serie di partenza:
+Sum[n,1,inf,a(n)/n] che dimostreremo tendere a π
+
+Innanzitutto diciamo che la successione a(n) altro non è che una funzione aritmetica cioè una funzione che ha N come dominio e {-1,+1} come codominio.
+Nel nostro caso questa funzione risulta essere "completamente moltiplicativa". Ovvero che
+a(n*m)=a(n)*a(m) per qualunque valore di n e m.
+
+Infatti sia:
+n=(2^n1)*(3^n2)*(4*n3+n4)
+m=(2^m1)*(3^m2)*(4*m3+m4)
+con n4 e m4 uguali a 1 o 3
+
+Allora:
+(n4,m4)=(1,1) a(n)*a(m)=1*1=1
+(n4,m4)=(3,1) a(n)*a(m)=(-1)*1=-1
+(n4,m4)=(1,3) a(n)*a(m)=1*(-1)=-1
+(n4,m4)=(3,3) a(n)*a(m)=(-1)*(-1)=1
+
+n*m=(2^(n1+m1))*(3^(n2+m2))*(
+16*n3*m3+4*n3*m4+4*n4*m3+n4*m4)
+Ora ricordiamo che
+(a+b)%c=(a%c+b%c)%c allora i vari multipli di 4 hanno modulo 0.
+vediamo perciò (n4*m4) mod 4
+(n4,m4)=(1,1) (n4*m4) mod 4 = 1
+(n4,m4)=(3,1) (n4*m4) mod 4 = 3
+(n4,m4)=(1,3) (n4*m4) mod 4 = 3
+(n4,m4)=(3,3) (n4*m4) mod 4 = 1
+da cui:
+(n4,m4)=(1,1) a(n*m)=1
+(n4,m4)=(3,1) a(n*m)=-1
+(n4,m4)=(1,3) a(n*m)=-1
+(n4,m4)=(3,3) a(n*m)=1
+CVD
+
+Essendo a(n) completamente moltiplicativa è possibile esprimere la serie come prodotto di Eulero:
+
+Sum[n,1,inf,a(n)/n]=
+Prod[p,1/(1-a(p)/p)] dove p spazia nei primi (2,3,...)
+Esplicitiamo i primi 2 termini p=2 p=3 : poiché a(2)=1 a(3)=1
+avremo:
+Sum[n,1,inf,a(n)/n]=
+(1/(1-1/2))*(1/(1-1/3))*
+Prod[p,1/(1-a(p)/p)]
+con p primo > 3
+Allora:
+Sum[n,1,inf,a(n)/n]=
+3*Prod[p,1/(1-a(p)/p)]
+con p primo>3
+ma Prod[p,1/(1-a(p)/p)]
+con p primo>3 equivale alla serie iniziale nella quale si escludono tutti i valori di n che sono divisibili per 2 o 3
+
+Ora un numero naturale non divisibile per m si può esprimere come m*k+1 (k=0,1,..)
+Se vogliamo tutti i numeri naturali non divisibili per m
+avremo m*k+a con GCD(m,a)=1
+ovvero m e a devono essere coprimi tra di loro.
+Sicuramente tra i vari valori di a c'è a=1
+Dando ad a i possibili valori ottengo tutte le possibilità. Poi facendo variare k ottengo tutti i naturali non divisibili per m.
+Nel nostro caso vogliamo esprimere tutti i naturali non divisibile per 2 o 3.
+Basta considerare n=2*3*k+a
+con GCD(2*3,a)=1
+Quindi a=1 o a=5
+Allora ho n=6*k+1 e n=6*k+5
+Infatti k=0 n=1  n=5
+        k=1 n=7  n=11
+        k=2 n=13 n=17  etc...
+Siccome per sommare o sottrarre nella serie dobbiamo calcolare il resto della divisione per 4 risulta comodo che il termine che moltiplica k sia multiplo di 4. Basta considerare:
+2*3*2*k+a cioè
+12*k+a con GCD(12,a)=1
+percio' a=1 a=5 a=7 a=11
+
+Infatti k=0 n=1  n=5 n=7 n=11
+        k=1 n=13 n=17 n=19 n=23
+        k=2 n=25 n=29 n=31 n=35
+        etc...
+e (12*k+a)%4=a%4 si calcola agevolmente.
+
+Allora:
+Sum[n,1,inf,a(n)/n]=
+3*(Sum[n,0,inf,
+1/(12*n+1)+1/(12*n+5)
+-1/(12*n+7)-1/(12*n+11)])
+poiché 1%4=5%4=1 e 7%4=11%4=3
+
+Sum[n,1,inf,a(n)/n]=
+3*(Sum[n,0,inf,
+1/(12*n+1)-1/(12*(n+1)-1)+
+1/(12*n+5)-1/(12*(n+1)-5)])
+
+Sum[n,1,inf,a(n)/n]=
+3*(1+1/5-Sum[n,1,inf,
+1/(12*n-1)-1/(12*n+1)+
+1/(12*n-5)-1/(12*n+5)])
+
+Calcoliamo:
+
+Sum[n,1,inf,
+1/(12*n-1)-1/(12*n+1)]
+
+qui b=12 a=1
+
+1/a-(π/b)*ctg((a/b)*π)=
+1-(π/12)*ctg(π/12)=
+1-(π/12)*(2+sqr(3))
+
+Calcoliamo:
+
+Sum[n,1,inf,
+1/(12*n-5)-1/(12*n+5)]
+
+qui b=12 a=5
+
+1/a-(π/b)*ctg((a/b)*π)=
+1/5-(π/12)*ctg((5*π)/12)=
+1/5-(π/12)*(2-sqr(3))
+
+da cui:
+
+Sum[n,1,inf,a(n)/n]=
+3*[1+1/5-1+(π/12)*(2+sqr(3))-
+1/5+(π/12)*(2-sqr(3))]=
+3*((2*π)/12+(2*π)/12)=3*(π/3)=π  CVD
