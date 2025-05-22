@@ -1,0 +1,1 @@
+ffmpeg -framerate 1 -i bmove_solution_%03d.pgm klotski.gif
