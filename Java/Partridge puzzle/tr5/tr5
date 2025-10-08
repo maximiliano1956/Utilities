@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+javac tr5.java
+java tr5
