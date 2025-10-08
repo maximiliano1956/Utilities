@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+javac rn5.java
+java rn5
