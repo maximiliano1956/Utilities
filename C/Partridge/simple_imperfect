@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+./Partridge -ssq=1,1,2,2,3,3,4,5,5,7,11,11,12 -do2 -pname=simple_imperfect
