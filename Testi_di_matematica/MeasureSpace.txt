@@ -1,0 +1,113 @@
+Spazi misurabili e spazi di misura.
+
+Abbiamo:
+
+1) Un insieme X (detto DI SOSTEGNO)
+   i cui elementi vengono detti punti
+2) Una sigma-algebra su X :
+   
+   Questa sigma-algebra è un sottoinsieme non proprio non vuoto dell'insieme delle parti di X. Essendo non proprio potrà essere l'intero insieme delle parti,così come potrebbe contenere il solo insieme vuoto che è sottoinsieme di qualunque insieme.
+Un generico elemento della sigma-algebra è detto insieme misurabile.
+Affinché questa collezione di sottoinsiemi di X sia una sigma-algebra deve soddisfare a due proprietà:
+a) L'unione di due insiemi misurabili deve essere misurabile.
+Questo comporta che l'unione di una famiglia finita o numerabile di insiemi misurabili deve essere misurabile.
+b) Il complemento rispetto a X di un insieme misurabile deve essere misurabile.
+
+Da queste 2 proprietà si deduce:
+essendo la collezione di sottoinsiemi non vuota supponiamo che l'insieme A sia misurabile.
+Allora anche X\A sara' misurabile e quindi anche A U (X\A) = X è misurabile. Ma anche X\X = insieme vuoto sara' misurabile.
+Abbiamo dedotto che X e l'insieme vuoto sono misurabili.
+Poi se X\A é misurabile
+anche X\(X\A)=A é misurabile
+
+Poi.. se A e B sono misurabili anche  A U B é misurabile.
+Ma A U B = X\(X\(A U B))
+Perciò anche X\(A U B) é misurabile.
+Per De Morgan allora anche
+(X\A) intersezione (X\B) è misurabile
+Ma X\A e X\B sono misurabili.
+Quindi anche l'intersezione di 2 insiemi misurabili è misurabile.
+E lo sarà anche l'intersezione di una famiglia finita o infinita numerabile di insiemi numerabili.
+
+Quindi nell'ambito di una sigma-algebra è possibile effettuare qualunque operazione su misurabili (complemento,unione,intersezione) in una famiglia finita o infinita numerabile ottenendo un misurabile cioè rimanendo nell'ambito della sigma-algebra.
+Indichiamo con s la sigma-algebra.
+
+La coppia (X,s) è detto spazio misurabile.
+
+Ora definiamo una funzione di misura:
+
+Mu:s->R+
+
+Questa funzione associa ad ogni insieme misurabile un numero reale >=0 che costituisce la sua misura.
+
+La funzione Mu(x) deve godere della cosiddetta sigma-additivita' :
+
+Se A e B sono 2 insiemi misurabili disgiunti dovra' essere:
+
+Mu(A U B) = Mu(A) + Mu(B)
+
+La misura può essere vista come i concetti di lunghezza,area,volume etc...
+
+La terna (X,s,Mu) costituisce il cosiddetto spazio di misura.
+
+Deriviamo ora alcune proprietà.
+
+A U insieme vuoto = A
+
+Poiché A e l'insieme vuoto sono sicuramente disgiunti sara':
+
+Mu(A U insieme vuoto) = Mu(A)
+Mu(A) + Mu(insieme vuoto) = Mu(A)
+da cui Mu(insieme vuoto) = 0
+
+La misura dell'insieme vuoto é 0
+
+Sia ora A sottoinsieme di B. Allora:
+
+A U (A\B) = B da cui:
+
+Mu(A U (A\B)) = Mu(B) da cui:
+
+Mu(A) + Mu(A\B) = Mu(B)
+
+Poiché Mu(A\B) >= 0 allora:
+
+A sottoinsieme di B => Mu(A) <= Mu(B)
+
+Poiché è sempre A sottoinsieme di X
+sarà sempre Mu(A) <= Mu(X)
+
+Quindi le misure hanno come minimo lo zero (misura dell'insieme vuoto) e hanno come massimo la misura di X
+
+Uno spazio di misura molto importante è lo spazio delle probabilità.
+
+Qui ogni punto di X rappresenta un possibile esito di un esperimento aleatorio.
+Dato ad es. X={a,b,c} il nostro esperimento potrà dare come esito a o b o c. Potremo perciò definire una variabile aleatoria discreta x che potrà valore a o b o c.
+Qui lo spazio misurabile é l'intero insieme delle parti di X ed è detto spazio degli eventi.
+Ogni insieme misurabile è un evento la cui misura é la probabilità che l'evento si manifesti.
+L'evento E si manifesta quando x assume un valore che appartiene ad E.
+
+Perciò l'insieme vuoto non potrà mai manifestarsi. Esso è l'evento impossibile ed ha probabilità 0
+
+L'evento dato dall'intero insieme X e' invece l'evento certo.
+
+Nel caso della misura di probabilità viene fissato il valore dell'evento certo a 1.
+Quindi tutte le probabilità saranno comprese da 0 a 1 : dalla probabilità dell'evento impossibile a quella dell'evento certo.
+
+Vediamo ora che cos'è la misura di Lebesgue in R.
+
+Sia dato il segmento di estremi a<=b con gli estremi compresi o non compresi.
+La misura di Lebesgue di questo sottoinsieme di R è b-a.
+Si verifica che questa misura soddisfa le proprietà richieste. In più questa misura é invariante rispetto la traslazione: il segmento di estremi a+x e b+x ha per misura b+x-(a+x)=b-a
+
+Se a=b il segmento degenera in un punto che avrà misura b-a=0
+
+Quindi un punto isolato ha misura di Lebesgue 0.
+Anche un sottoinsieme di R costituito da un'infinità di punti isolati avrà musura 0 poiche' la misura totale é la somma delle misure di ogni punto e 0+0+0+.. un numero infinito di addendi da' comunque somma 0.
+Quindi ad es. la misura di Lebesgue dei razionali ha misura 0.
+
+Se siamo in ZF cioè se l'assioma di scelta non è valido si può dimostrare che qualunque sottoinsieme di R è misurabile secondo Lebesgue.
+Basta considerare un ricoprimento di segmenti e farli tendere al limite.
+Se invece siamo in ZFC si possono costruire vari esempi di sottoinsiemi di R per i quali non è possibile avere nessuna funzione di misura.
+L'insieme di Vitali è un esempio.
+
