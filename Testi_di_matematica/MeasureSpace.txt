@@ -10,7 +10,7 @@ Abbiamo:
 Un generico elemento della sigma-algebra è detto insieme misurabile.
 Affinché questa collezione di sottoinsiemi di X sia una sigma-algebra deve soddisfare a due proprietà:
 a) L'unione di due insiemi misurabili deve essere misurabile.
-Questo comporta che l'unione di una famiglia finita o numerabile di insiemi misurabili deve essere misurabile.
+Questo comporta che l'unione di una famiglia finita o infinita numerabile di insiemi misurabili deve essere misurabile.
 b) Il complemento rispetto a X di un insieme misurabile deve essere misurabile.
 
 Da queste 2 proprietà si deduce:
@@ -27,7 +27,7 @@ Per De Morgan allora anche
 (X\A) intersezione (X\B) è misurabile
 Ma X\A e X\B sono misurabili.
 Quindi anche l'intersezione di 2 insiemi misurabili è misurabile.
-E lo sarà anche l'intersezione di una famiglia finita o infinita numerabile di insiemi numerabili.
+E lo sarà anche l'intersezione di una famiglia finita o infinita numerabile di insiemi misurabili.
 
 Quindi nell'ambito di una sigma-algebra è possibile effettuare qualunque operazione su misurabili (complemento,unione,intersezione) in una famiglia finita o infinita numerabile ottenendo un misurabile cioè rimanendo nell'ambito della sigma-algebra.
 Indichiamo con s la sigma-algebra.
