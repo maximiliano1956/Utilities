@@ -145,7 +145,7 @@ void Search(int r, int c) {
 		printf("Soluzione nr. %d\n", numsol);	// e l'ordinale
 		printf("\n");
 		}
-
+		else
 		Search(r, c);					// Ricerca la nuova casella
 
 		TakeBack(&r,&c,ind);			// Annulla la mossa e passa
@@ -235,6 +235,7 @@ void Stampa(QUADRATO q) {
 
 int main(int argc, char* argv[]) {
 	int ns;
+	char c;
 
 	n = 3;
 
@@ -251,7 +252,7 @@ int main(int argc, char* argv[]) {
 
 	printf("\nAssuming n = %d\n",n);
 	printf("\nPremere un tasto ");
-	getchar();
+	c=getchar();
 
 	InitSearch();					// Init ricerca
 	Search(0, 0);					// La ricerca parte dalla casella
@@ -263,3 +264,4 @@ int main(int argc, char* argv[]) {
 
 	return(0);
 }
+
