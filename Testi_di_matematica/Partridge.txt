@@ -1,0 +1,124 @@
+Vediamo cosa si intende per serie telescopica.
+E' una serie che ha come termine k-esimo:
+a(k)-a(k+1) con a(k) successione generica.
+Ora se calcoliamo S=S(k,1,n-1,a(k)-a(k+1)) avremo:
+
+S=a(1)-a(2) + a(2)-a(3) + a(3)-a(4) + ...
+  a(n-2)-a(n-1) + a(n-1)-a(n)
+
+Come si vede tutti i termini intermedi si elidono e rimangono solo il primo e l' ultimo termine.
+
+Perciò S(k,1,n-1,a(k)-a(k+1)) = a(1)-a(n)
+
+Quindi invece di calcolare i singoli termini e sommarli possiamo calcolare la somma come semplice differenza tra il primo e l'ultimo termine.
+
+Vediamo una semplice applicazione:
+sia a(k)=-k^2
+Allora: a(k)-a(k+1) = (k+1)^2-k^2 da cui:
+S(k,1,n-1,a(k)-a(k+1)) = n^2-1
+ma (k+1)^2-k^2 = k^2+2k+1-k^2 = 2k+1
+Allora S(k,1,n-1,a(k)-a(k+1)) = S(k,1,n-1,2k+1) =
+S(k,1,n-1,2k)+S(k,1,n-1,1) =
+2S(k,1,n-1,k)+S(k,1,n-1,1) = n^2-1 da cui:
+S(k,1,n-1,k) = (n^2-1 - (n-1))/2 = (n^2-n)/2
+Sostituendo n a n-1:
+S(k,1,n,k) = ((n+1)^2-(n+1))/2 = (n^2+2n+1-n-1)/2
+ovvero:
+
+S(k,1,n,k) = (n^2+n)/2 = n(n+1)/2
+
+Altra applicazione:
+sia a(k)=-k^3
+Allora: a(k)-a(k+1) = (k+1)^3-k^3 da cui:
+S(k,1,n-1,a(k)-a(k+1)) = n^3-1
+ma (k+1)^3-k^3 = k^3+3k^2+3k+1-k^3 = 3k^2+3k+1
+Allora S(k,1,n-1,a(k)-a(k+1)) =
+S(k,1,n-1,3k^2+3k+1) = S(k,1,n-1,3k^2)+S(k,1,n-1,3k)+S(k,1,n-1,1) =
+3S(k,1,n-1,k^2)+3S(k,1,n-1,k)+S(k,1,n-1,1) = n^3-1
+da cui:
+S(k,1,n-1,k^2) = (n^3-1 - 3S(k,1,n-1,k) - S(k,1,n-1,1))/3
+da cui:
+S(k,1,n-1,k^2) = (n^3-1 - 3(n-1)n/2 - (n-1))/3
+Sostituendo n a n-1:
+S(k,1,n,k^2) = ((n+1)^3-1 - 3n(n+1)/2 - n)/3
+S(k,1,n,k^2) = (2((n+1)^3-1) - 3n(n+1) - 2n)/6
+S(k,1,n,k^2) =
+(2(n^3+3n^2+3n+1-1) - 3n^2-3n - 2n)/6
+S(k,1,n,k^2) = n(2(n^2+3n+3) - 3n-3 - 2)/6
+S(k,1,n,k^2) = n(2n^2+6n+6 - 3n-3 - 2)/6
+S(k,1,n,k^2) = n(2n^2+3n+1)/6
+S(k,1,n,k^2) = n(2n^2+3n+1)/6 = n(2n+1)(n+1)/6
+ovvero:
+
+S(k,1,n,k^2) = n(2n+1)(n+1)/6
+
+Altra applicazione:
+sia a(k)=-k^4
+Allora: a(k)-a(k+1) = (k+1)^4-k^4 da cui:
+S(k,1,n-1,a(k)-a(k+1)) = n^4-1
+ma (k+1)^4-k^4 =
+k^4+4k^3+6k^2+4k+1-k^4 = 4k^3+6k^2+4k+1
+Allora S(k,1,n-1,a(k)-a(k+1)) =
+S(k,1,n-1,4k^3+6k^2+4k+1) = S(k,1,n-1,4k^3) + S(k,1,n-1,6k^2)+S(k,1,n-1,4k)+S(k,1,n-1,1) =
+4S(k,1,n-1,k^3) + 6S(k,1,n-1,k^2) +
+4S(k,1,n-1,k)+S(k,1,n-1,1) = n^4-1
+da cui:
+S(k,1,n-1,k^3) = (n^4-1 - 6S(k,1,n-1,k^2) - 4S(k,1,n-1,k) - S(k,1,n-1,1))/4
+da cui:
+S(k,1,n-1,k^3) = (n^4-1 - (n-1)(2n-1)n -
+2(n-1)n - (n-1))/4
+Sostituendo n a n-1:
+S(k,1,n,k^3) = ((n+1)^4-1 - n(2n+1)(n+1) -
+2n(n+1) - n)/4
+S(k,1,n,k^3) = (n^4+4n^3+6n^2+4n+1-1 -
+(2n^2+n)(n+1) - (2n^2+2n) - n)/4
+S(k,1,n,k^3) = (n^4+4n^3+6n^2+4n-2n^3-2n^2-n^2-
+n-2n^2-2n-n)/4 =(n^4+2n^3+n^2)/4
+
+S(k,1,n,k^3) = n^2 (n^2+2n+1)/4
+S(k,1,n,k^3) = n^2 (n+1)^2)/4
+
+quindi:
+
+S(k,1,n,k^3) = n^2 (n+1)^2 /4
+
+Notiamo che:
+
+S(k,1,n,k^3) = n^2 (n+1)^2 /4 = (n(n+1)/2)^2
+
+ma questo significa che:
+
+1^3+2^3+3^3+...+(n-1)^3+n^3=(1+2+3+...+(n-1)+n)^2
+
+Ora poiché k^3=k*k^2 potremo scrivere:
+
+1*1^2+2*2^2+3*3^2+...n*n^2=(1+2+3+...n)^2
+
+A destra ho il quadrato del numero 1+2+3+...+n
+a sinistra ho la somma di tanti quadrati.
+precisamente 1+2+3+...+n quadrati rispettivamente di lato 1 2 3 ... n
+
+Ecco allora che nasce il Partridge puzzle.
+
+Riempire il quadrato di lato 1+2+3+...+n con
+i 1+2+3+..+n quadrati di lato rispettivamente
+1 2 3 ... n.
+
+Allora condizione necessaria perché ciò possa avvenire è l' uguaglianza delle aree e questo è garantito dalla formula ricavata prima.
+Però non basta: bisogna che anche geometricamente sia possibile.
+
+Ora il caso n=1 ha sicuramente soluzione ma si trova che per n da 2 a 7 non ci sono soluzioni.
+
+La prima soluzione si ha per n=8 (per valori superiori ci sono sempre soluzioni).
+8 è detto "Partridge Number".
+
+Quindi la minima soluzione corrisponde a riempire un quadrato di lato 1+2+3+4+5+6+7+8=36
+con 36 quadrati di 8 tipi diversi:
+1 di lato 1
+2 di lato 2
+3 di lato 3
+4 di lato 4
+5 di lato 5
+6 di lato 6
+7 di lato 7
+8 di lato 8
