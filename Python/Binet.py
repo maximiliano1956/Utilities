@@ -10,5 +10,5 @@ def f(k):
 
 n=10
 
-for i in range(0,11):
+for i in range(0,n+1):
     print("F(",i,")=",int(f(i)))
