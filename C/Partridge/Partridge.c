@@ -1125,7 +1125,7 @@ unsigned int WFSol(char *solname) {
 			int bd=field1[row][col];
 
 			if (col<size-1)
-				fprintf(fp,"%02d,",bd-2);
+				fprintf(fp,"%02d ",bd-2);
 			else
 				fprintf(fp,"%02d\n",bd-2);
 		}
