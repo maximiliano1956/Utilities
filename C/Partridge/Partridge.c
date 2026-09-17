@@ -1125,9 +1125,9 @@ unsigned int WFSol(char *solname) {
 			int bd=field1[row][col];
 
 			if (col<size-1)
-				fprintf(fp,"%02d ",bd-2);
+				fprintf(fp,"%02d ",bd-1);
 			else
-				fprintf(fp,"%02d\n",bd-2);
+				fprintf(fp,"%02d\n",bd-1);
 		}
 	fprintf(fp,"\n");
 
@@ -1427,9 +1427,9 @@ void show(unsigned int fv) {
 			int bd=field[row][col];
 
 			if (col<size-1)
-				printf("%02d,",bd-2);
+				printf("%02d,",bd);
 			else
-				printf("%02d\n",bd-2);
+				printf("%02d\n",bd);
 		}
 	printf("Elapsed=%f\n",elapsed());
 	printf("\n");
